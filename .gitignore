@@ -32,7 +32,6 @@ migrate_working_dir/
 /coverage/
 
 # Generated files
-*.g.dart
 *.freezed.dart
 
 # Symbolication related
