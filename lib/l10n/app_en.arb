@@ -1,0 +1,157 @@
+{
+  "@@locale": "en",
+  "appTitle": "PubPub",
+  "appDescription": "Cross-platform Pub mirror browser",
+  "navSearch": "Search",
+  "navFavorites": "Favorites",
+  "navSettings": "Settings",
+  "searchHint": "Search Flutter/Dart packages...",
+  "searchFailed": "Search failed, please check your network",
+  "searchEmpty": "Search for Flutter/Dart packages you need",
+  "searchNoResults": "No packages found",
+  "hotRecommend": "Hot Recommendations",
+  "retry": "Retry",
+  "install": "Install",
+  "terminal": "Terminal",
+  "readme": "README",
+  "loadingReadme": "Loading README...",
+  "about": "About",
+  "topics": "Topics",
+  "details": "Details",
+  "latestVersion": "Latest",
+  "publishDate": "Published",
+  "dartSdk": "Dart SDK",
+  "flutterSdk": "Flutter SDK",
+  "dependencyCount": "Dependencies",
+  "links": "Links",
+  "homepage": "Homepage",
+  "repository": "Repository",
+  "dependencies": "Dependencies",
+  "noDependencies": "No direct dependencies",
+  "versionHistory": "Version History",
+  "moreVersions": "{count} more historical versions...",
+  "@moreVersions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "latest": "latest",
+  "copied": "Copied",
+  "copiedToClipboard": "Code copied to clipboard",
+  "favoritesFolders": "Folders",
+  "noFavorites": "No favorites yet",
+  "noFavoritesHint": "Tap the heart icon in search results to favorite",
+  "emptyFolder": "\"{name}\" has no favorites",
+  "@emptyFolder": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "createFolder": "New Folder",
+  "folderName": "Folder name",
+  "create": "Create",
+  "rename": "Rename",
+  "delete": "Delete",
+  "renameFolder": "Rename Folder",
+  "deleteFolder": "Delete Folder",
+  "deleteFolderConfirm": "Delete \"{name}\"? Packages in it will be removed.",
+  "@deleteFolderConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "folderExists": "Folder already exists",
+  "removeFromFolder": "Remove from \"{folder}\"?",
+  "@removeFromFolder": {
+    "placeholders": {
+      "folder": {
+        "type": "String"
+      }
+    }
+  },
+  "removeFavorite": "Remove favorite",
+  "removeFavoriteConfirm": "Remove \"{name}\" from favorites?",
+  "@removeFavoriteConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "addToOtherFolders": "Add to other folders",
+  "selectFolder": "Select Folder",
+  "createAndAdd": "Create & Add",
+  "favoriteManaged": "Saved in: {folders}",
+  "@favoriteManaged": {
+    "placeholders": {
+      "folders": {
+        "type": "String"
+      }
+    }
+  },
+  "cancelAllFavorites": "Remove from all",
+  "pubMirror": "Pub Mirror",
+  "pubMirrorHint": "Switch to a new mirror source for searching packages",
+  "githubMirror": "GitHub Mirror",
+  "githubRawMirror": "GitHub Raw Mirror",
+  "githubMirrorHint": "Used for fetching package README, recommended to use mirror in China",
+  "appearance": "Appearance",
+  "theme": "Theme",
+  "themeSystem": "System",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "selectTheme": "Select Theme",
+  "themeColor": "Theme Color",
+  "data": "Data",
+  "clearCache": "Clear Cache",
+  "clearCacheSubtitle": "Clear all API cache data",
+  "clearCacheTitle": "Clear Cache",
+  "clearCacheConfirm": "Clear all API cache? Favorites and settings will not be cleared.",
+  "cacheCleared": "Cache cleared",
+  "aboutPubPub": "About PubPub",
+  "version": "Version {version}",
+  "@version": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "aboutTitle": "About",
+  "aboutDescription": "Cross-platform Pub mirror browser",
+  "features": "Features",
+  "featureSearch": "Package Search",
+  "featureSearchDesc": "Search via multiple Pub mirrors",
+  "featureDetail": "Package Details",
+  "featureDetailDesc": "Version, dependencies, README full display",
+  "featureFavorites": "Custom Collections",
+  "featureFavoritesDesc": "Create multiple folders to organize",
+  "featureTheme": "Theme Customization",
+  "featureThemeDesc": "10 theme colors + dark mode",
+  "featureLayout": "Responsive Layout",
+  "featureLayoutDesc": "Mobile/Desktop adaptive",
+  "techStack": "Tech Stack",
+  "linksTitle": "Links",
+  "githubRepo": "GitHub Repository",
+  "pubDev": "pub.dev",
+  "flutterOfficial": "Flutter Official",
+  "tdesign": "TDesign Flutter",
+  "license": "License",
+  "licenseApache": "Apache License 2.0",
+  "copyright": "Copyright © 2026 PubPub Contributors",
+  "madeWith": "Made with ❤️ using Flutter",
+  "loading": "Loading...",
+  "error": "Error",
+  "success": "Success",
+  "ok": "OK",
+  "yes": "Yes",
+  "no": "No"
+}
