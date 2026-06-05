@@ -45,7 +45,7 @@ jobs:
         run: flutter test
 
   build-windows:
-    name: 构建 Windows
+    name: Windows
     runs-on: windows-latest
     needs: [analyze, test]
     steps:
@@ -65,14 +65,60 @@ jobs:
       - name: 构建
         run: flutter build windows
 
+      - name: 打包
+        run: |
+          cd build/windows/x64/runner/Release
+          7z a -tzip ../../../pubpub-windows.zip .
+
       - name: 上传产物
         uses: actions/upload-artifact@v4
         with:
-          name: windows-build
-          path: build/windows/x64/runner/Release/
+          name: pubpub-windows
+          path: build/pubpub-windows.zip
+
+  build-android:
+    name: Android
+    runs-on: ubuntu-latest
+    needs: [analyze, test]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.41.x'
+          channel: stable
+
+      - name: 安装依赖
+        run: flutter pub get
+
+      - name: 生成代码
+        run: flutter pub run build_runner build
+
+      - name: 构建 APK
+        run: flutter build apk --split-per-abi
+
+      - name: 构建 App Bundle
+        run: flutter build appbundle
+
+      - name: 上传 APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: pubpub-android-apk
+          path: build/app/outputs/flutter-apk/*.apk
+
+      - name: 上传 AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: pubpub-android-aab
+          path: build/app/outputs/bundle/release/*.aab
 
   build-web:
-    name: 构建 Web
+    name: Web
     runs-on: ubuntu-latest
     needs: [analyze, test]
     steps:
@@ -90,10 +136,82 @@ jobs:
         run: flutter pub run build_runner build
 
       - name: 构建
-        run: flutter build web
+        run: flutter build web --release
+
+      - name: 打包
+        run: |
+          cd build/web
+          7z a -tzip ../../pubpub-web.zip .
 
       - name: 上传产物
         uses: actions/upload-artifact@v4
         with:
-          name: web-build
-          path: build/web/
+          name: pubpub-web
+          path: build/pubpub-web.zip
+
+  build-linux:
+    name: Linux
+    runs-on: ubuntu-latest
+    needs: [analyze, test]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.41.x'
+          channel: stable
+
+      - name: 安装依赖
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build libgtk-3-dev
+          flutter pub get
+
+      - name: 生成代码
+        run: flutter pub run build_runner build
+
+      - name: 构建
+        run: flutter build linux
+
+      - name: 打包
+        run: |
+          cd build/linux/x64/release/bundle
+          tar -czf ../../../../../pubpub-linux.tar.gz .
+
+      - name: 上传产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: pubpub-linux
+          path: build/pubpub-linux.tar.gz
+
+  build-macos:
+    name: macOS
+    runs-on: macos-latest
+    needs: [analyze, test]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.41.x'
+          channel: stable
+
+      - name: 安装依赖
+        run: flutter pub get
+
+      - name: 生成代码
+        run: flutter pub run build_runner build
+
+      - name: 构建
+        run: flutter build macos
+
+      - name: 打包
+        run: |
+          cd build/macos/Build/Products/Release
+          zip -r ../../../../../pubpub-macos.zip .
+
+      - name: 上传产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: pubpub-macos
+          path: build/pubpub-macos.zip
