@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*'
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build-windows:
     name: Windows
@@ -27,15 +30,13 @@ jobs:
         run: flutter build windows
 
       - name: 打包
-        run: |
-          cd build/windows/x64/runner/Release
-          7z a -tzip ../../../pubpub-windows.zip .
+        run: Compress-Archive -Path build\windows\x64\runner\Release\* -DestinationPath pubpub-windows.zip
 
       - name: 上传产物
         uses: actions/upload-artifact@v4
         with:
           name: pubpub-windows
-          path: build/pubpub-windows.zip
+          path: pubpub-windows.zip
 
   build-android:
     name: Android
@@ -98,15 +99,13 @@ jobs:
         run: flutter build web --release
 
       - name: 打包
-        run: |
-          cd build/web
-          7z a -tzip ../../pubpub-web.zip .
+        run: cd build/web && zip -r ../../pubpub-web.zip . && cd ../..
 
       - name: 上传产物
         uses: actions/upload-artifact@v4
         with:
           name: pubpub-web
-          path: build/pubpub-web.zip
+          path: pubpub-web.zip
 
   build-linux:
     name: Linux
@@ -132,15 +131,13 @@ jobs:
         run: flutter build linux
 
       - name: 打包
-        run: |
-          cd build/linux/x64/release/bundle
-          tar -czf ../../../../../pubpub-linux.tar.gz .
+        run: cd build/linux/x64/release/bundle && tar -czf ../../../../../pubpub-linux.tar.gz . && cd ../../../../..
 
       - name: 上传产物
         uses: actions/upload-artifact@v4
         with:
           name: pubpub-linux
-          path: build/pubpub-linux.tar.gz
+          path: pubpub-linux.tar.gz
 
   build-macos:
     name: macOS
@@ -163,15 +160,13 @@ jobs:
         run: flutter build macos
 
       - name: 打包
-        run: |
-          cd build/macos/Build/Products/Release
-          zip -r ../../../../../pubpub-macos.zip .
+        run: cd build/macos/Build/Products/Release && zip -r ../../../../../pubpub-macos.zip . && cd ../../../../..
 
       - name: 上传产物
         uses: actions/upload-artifact@v4
         with:
           name: pubpub-macos
-          path: build/pubpub-macos.zip
+          path: pubpub-macos.zip
 
   release:
     name: 创建 Release
@@ -182,6 +177,9 @@ jobs:
     steps:
       - name: 下载所有产物
         uses: actions/download-artifact@v4
+
+      - name: 列出文件
+        run: find . -type f -name "*.zip" -o -name "*.apk" -o -name "*.aab" -o -name "*.tar.gz" 2>/dev/null
 
       - name: 创建 GitHub Release
         uses: softprops/action-gh-release@v1
