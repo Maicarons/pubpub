@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../services/update_service.dart';
 
 /// 关于页面
 class AboutPage extends StatelessWidget {
@@ -58,7 +59,7 @@ class AboutPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
-                    'v1.0.0',
+                    'v${UpdateService.currentVersion}',
                     style: TextStyle(
                       fontSize: 12,
                       color:
@@ -67,6 +68,17 @@ class AboutPage extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+          const SizedBox(height: 24),
+
+          // 检查更新按钮
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              onPressed: () => _checkForUpdate(context),
+              icon: const Icon(Icons.system_update),
+              label: const Text('检查更新'),
             ),
           ),
           const SizedBox(height: 32),
@@ -84,6 +96,8 @@ class AboutPage extends StatelessWidget {
                   TDIcons.heart, '自定义收藏夹', '创建多个收藏夹分类管理'),
               _buildFeatureItem(
                   TDIcons.sunny, '主题定制', '10 种主题色 + 深色模式'),
+              _buildFeatureItem(
+                  TDIcons.translate, '自动翻译', 'OpenAI 兼容 API 翻译简介/README'),
               _buildFeatureItem(
                   TDIcons.refresh, '响应式布局', '移动端/桌面端自适应'),
             ],
@@ -114,8 +128,8 @@ class AboutPage extends StatelessWidget {
                 context,
                 icon: TDIcons.logo_github,
                 title: 'GitHub 仓库',
-                subtitle: 'github.com/your-username/pubpub',
-                url: 'https://github.com/your-username/pubpub',
+                subtitle: 'github.com/Maicarons/pubpub',
+                url: 'https://github.com/Maicarons/pubpub',
               ),
               _buildLinkItem(
                 context,
@@ -172,6 +186,46 @@ class AboutPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _checkForUpdate(BuildContext context) async {
+    // 显示加载中
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(
+        child: Card(
+          child: Padding(
+            padding: EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(height: 16),
+                Text('正在检查更新...'),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    final info = await UpdateService.checkForUpdate();
+
+    if (context.mounted) {
+      Navigator.pop(context); // 关闭加载对话框
+
+      if (info != null) {
+        UpdateService.showUpdateDialog(info);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('当前已是最新版本'),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    }
   }
 
   Widget _buildSection(

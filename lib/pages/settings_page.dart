@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 import '../controllers/settings_controller.dart';
+import '../services/update_service.dart';
 import 'about_page.dart';
 
 /// Pub 镜像源列表
@@ -95,7 +96,7 @@ class SettingsPage extends StatelessWidget {
             ListTile(
               leading: const Icon(TDIcons.info_circle),
               title: const Text('关于 PubPub'),
-              subtitle: const Text('版本 1.0.0'),
+              subtitle: Text('版本 ${UpdateService.currentVersion}'),
               trailing: const Icon(TDIcons.chevron_right),
               onTap: () => Get.to(() => const AboutPage()),
             ),
