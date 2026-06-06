@@ -37,7 +37,7 @@ class PubPubApp extends StatelessWidget {
     return Obx(() {
       final isDark = settingsCtrl.themeMode.value == ThemeMode.dark;
       return TDTheme(
-        data: tdTheme,
+        data: isDark ? tdTheme.dark ?? tdTheme : tdTheme,
         systemData: isDark ? darkTheme : lightTheme,
         child: GetMaterialApp(
         title: 'PubPub',
