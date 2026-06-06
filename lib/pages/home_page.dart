@@ -9,8 +9,36 @@ import '../widgets/package_card.dart';
 import '../widgets/loading_widget.dart';
 
 /// 主页内容（独立于布局脚手架，供移动/桌面复用）
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final ScrollController _scrollController = ScrollController();
+  bool _showBackTop = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    final show = _scrollController.offset > 300;
+    if (show != _showBackTop) {
+      setState(() => _showBackTop = show);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,26 +130,42 @@ class HomePage extends StatelessWidget {
               );
             }
 
-            return Column(
+            return Stack(
               children: [
-                // 推荐标签
-                if (searchCtrl.isRecommended.value)
-                  Container(
-                    width: double.infinity,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    child: Text(
-                      context.l10n.hotRecommend,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: tdTheme.textColorSecondary,
+                Column(
+                  children: [
+                    // 推荐标签
+                    if (searchCtrl.isRecommended.value)
+                      Container(
+                        width: double.infinity,
+                        padding:
+                            const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        child: Text(
+                          context.l10n.hotRecommend,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: tdTheme.textColorSecondary,
+                          ),
+                        ),
                       ),
+                    Expanded(
+                      child: _buildResultList(searchCtrl, layoutCtrl),
+                    ),
+                  ],
+                ),
+                // 回到顶部按钮
+                if (_showBackTop)
+                  Positioned(
+                    right: 16,
+                    bottom: 16,
+                    child: TDBackTop(
+                      controller: _scrollController,
+                      theme: TDTheme.of(context).brandNormalColor == tdTheme.brandNormalColor
+                          ? TDBackTopTheme.light
+                          : TDBackTopTheme.light,
                     ),
                   ),
-                Expanded(
-                  child: _buildResultList(searchCtrl, layoutCtrl),
-                ),
               ],
             );
           }),
@@ -150,6 +194,7 @@ class HomePage extends StatelessWidget {
     if (isDesktop) {
       // 桌面端网格布局
       return GridView.builder(
+        controller: _scrollController,
         padding: const EdgeInsets.all(16),
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 360,
@@ -175,6 +220,7 @@ class HomePage extends StatelessWidget {
 
     // 移动端列表布局
     return ListView.separated(
+      controller: _scrollController,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       itemCount: searchCtrl.searchResults.length +
           (searchCtrl.hasNextPage.value ? 1 : 0),
