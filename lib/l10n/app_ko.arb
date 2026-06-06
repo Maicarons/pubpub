@@ -1,0 +1,163 @@
+{
+  "@@locale": "ko",
+  "appTitle": "PubPub",
+  "appDescription": "크로스 플랫폼 Pub 미러 브라우저",
+  "navSearch": "검색",
+  "navFavorites": "즐겨찾기",
+  "navSettings": "설정",
+  "searchHint": "Flutter/Dart 패키지 검색...",
+  "searchFailed": "검색 실패, 네트워크를 확인하세요",
+  "searchEmpty": "필요한 Flutter/Dart 패키지를 검색하세요",
+  "searchNoResults": "패키지를 찾을 수 없습니다",
+  "hotRecommend": "인기 추천",
+  "retry": "재시도",
+  "install": "설치",
+  "terminal": "터미널",
+  "readme": "README",
+  "loadingReadme": "README 로딩 중...",
+  "about": "정보",
+  "topics": "토픽",
+  "details": "상세정보",
+  "language": "언어",
+  "selectLanguage": "언어 선택",
+  "languageSystem": "시스템",
+  "checkUpdate": "업데이트 확인",
+  "autoTranslate": "자동 번역",
+  "autoTranslateDesc": "OpenAI 호환 API 번역",
+  "latestVersion": "최신",
+  "publishDate": "발행일",
+  "dartSdk": "Dart SDK",
+  "flutterSdk": "Flutter SDK",
+  "dependencyCount": "의존성",
+  "links": "링크",
+  "homepage": "홈페이지",
+  "repository": "저장소",
+  "dependencies": "의존성",
+  "noDependencies": "직접 의존성 없음",
+  "versionHistory": "버전 기록",
+  "moreVersions": "{count}개의 이전 버전...",
+  "@moreVersions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "latest": "최신",
+  "copied": "복사됨",
+  "copiedToClipboard": "클립보드에 복사되었습니다",
+  "favoritesFolders": "폴더",
+  "noFavorites": "아직 즐겨찾기가 없습니다",
+  "noFavoritesHint": "검색 결과에서 하트 아이콘을 눌러 즐겨찾기에 추가하세요",
+  "emptyFolder": "\"{name}\"에 즐겨찾기가 없습니다",
+  "@emptyFolder": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "createFolder": "새 폴더",
+  "folderName": "폴더 이름",
+  "create": "생성",
+  "rename": "이름 변경",
+  "delete": "삭제",
+  "renameFolder": "폴더 이름 변경",
+  "deleteFolder": "폴더 삭제",
+  "deleteFolderConfirm": "\"{name}\"을(를) 삭제하시겠습니까? 포함된 패키지가 제거됩니다.",
+  "@deleteFolderConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cancel": "취소",
+  "confirm": "확인",
+  "folderExists": "폴더가 이미 존재합니다",
+  "removeFromFolder": "\"{folder}\"에서 제거하시겠습니까?",
+  "@removeFromFolder": {
+    "placeholders": {
+      "folder": {
+        "type": "String"
+      }
+    }
+  },
+  "removeFavorite": "즐겨찾기 제거",
+  "removeFavoriteConfirm": "\"{name}\"을(를) 즐겨찾기에서 제거하시겠습니까?",
+  "@removeFavoriteConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "addToOtherFolders": "다른 폴더에 추가",
+  "selectFolder": "폴더 선택",
+  "createAndAdd": "생성 후 추가",
+  "favoriteManaged": "저장 위치: {folders}",
+  "@favoriteManaged": {
+    "placeholders": {
+      "folders": {
+        "type": "String"
+      }
+    }
+  },
+  "cancelAllFavorites": "모두 제거",
+  "pubMirror": "Pub 미러",
+  "pubMirrorHint": "패키지 검색을 위한 새 미러 소스로 전환",
+  "githubMirror": "GitHub 미러",
+  "githubRawMirror": "GitHub Raw 미러",
+  "githubMirrorHint": "패키지 README 가져오기용, 중국에서는 미러 사용 권장",
+  "appearance": "외관",
+  "theme": "테마",
+  "themeSystem": "시스템",
+  "themeLight": "라이트",
+  "themeDark": "다크",
+  "selectTheme": "테마 선택",
+  "themeColor": "테마 색상",
+  "data": "데이터",
+  "clearCache": "캐시 삭제",
+  "clearCacheSubtitle": "모든 API 캐시 데이터 삭제",
+  "clearCacheTitle": "캐시 삭제",
+  "clearCacheConfirm": "모든 API 캐시를 삭제하시겠습니까? 즐겨찾기와 설정은 삭제되지 않습니다.",
+  "cacheCleared": "캐시가 삭제되었습니다",
+  "aboutPubPub": "PubPub 정보",
+  "version": "버전 {version}",
+  "@version": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "aboutTitle": "정보",
+  "aboutDescription": "크로스 플랫폼 Pub 미러 브라우저",
+  "features": "기능",
+  "featureSearch": "패키지 검색",
+  "featureSearchDesc": "여러 Pub 미러를 통한 검색",
+  "featureDetail": "패키지 상세정보",
+  "featureDetailDesc": "버전, 의존성, README 전체 표시",
+  "featureFavorites": "사용자 정의 컬렉션",
+  "featureFavoritesDesc": "여러 폴더를 만들어 정리",
+  "featureTheme": "테마 사용자 정의",
+  "featureThemeDesc": "10가지 테마 색상 + 다크 모드",
+  "featureLayout": "반응형 레이아웃",
+  "featureLayoutDesc": "모바일/데스크톱 자동 적응",
+  "techStack": "기술 스택",
+  "linksTitle": "링크",
+  "githubRepo": "GitHub 저장소",
+  "pubDev": "pub.dev",
+  "flutterOfficial": "Flutter 공식",
+  "tdesign": "TDesign Flutter",
+  "license": "라이선스",
+  "licenseApache": "Apache License 2.0",
+  "copyright": "Copyright © 2026 PubPub Contributors",
+  "madeWith": "Flutter로 ❤️을 담아 제작",
+  "loading": "로딩 중...",
+  "error": "오류",
+  "success": "성공",
+  "ok": "확인",
+  "yes": "예",
+  "no": "아니오"
+}

@@ -1,0 +1,163 @@
+{
+  "@@locale": "hi",
+  "appTitle": "PubPub",
+  "appDescription": "क्रॉस-प्लेटफॉर्म Pub मिरर ब्राउज़र",
+  "navSearch": "खोजें",
+  "navFavorites": "पसंदीदा",
+  "navSettings": "सेटिंग्स",
+  "searchHint": "Flutter/Dart पैकेज खोजें...",
+  "searchFailed": "खोज विफल, अपना नेटवर्क जांचें",
+  "searchEmpty": "अपने जरूरी Flutter/Dart पैकेज खोजें",
+  "searchNoResults": "कोई पैकेज नहीं मिला",
+  "hotRecommend": "लोकप्रिय सिफारिशें",
+  "retry": "पुनः प्रयास करें",
+  "install": "इंस्टॉल करें",
+  "terminal": "टर्मिनल",
+  "readme": "README",
+  "loadingReadme": "README लोड हो रहा है...",
+  "about": "के बारे में",
+  "topics": "विषय",
+  "details": "विवरण",
+  "language": "भाषा",
+  "selectLanguage": "भाषा चुनें",
+  "languageSystem": "सिस्टम",
+  "checkUpdate": "अपडेट जांचें",
+  "autoTranslate": "स्वचालित अनुवाद",
+  "autoTranslateDesc": "OpenAI संगत API अनुवाद",
+  "latestVersion": "नवीनतम",
+  "publishDate": "प्रकाशित",
+  "dartSdk": "Dart SDK",
+  "flutterSdk": "Flutter SDK",
+  "dependencyCount": "निर्भरताएं",
+  "links": "लिंक",
+  "homepage": "होमपेज",
+  "repository": "रिपॉजिटरी",
+  "dependencies": "निर्भरताएं",
+  "noDependencies": "कोई प्रत्यक्ष निर्भरता नहीं",
+  "versionHistory": "संस्करण इतिहास",
+  "moreVersions": "{count} पुराने संस्करण...",
+  "@moreVersions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "latest": "नवीनतम",
+  "copied": "कॉपी किया गया",
+  "copiedToClipboard": "कोड क्लिपबोर्ड पर कॉपी किया गया",
+  "favoritesFolders": "फ़ोल्डर",
+  "noFavorites": "अभी तक कोई पसंदीदा नहीं",
+  "noFavoritesHint": "पसंदीदा में जोड़ने के लिए खोज परिणामों में हार्ट आइकन टैप करें",
+  "emptyFolder": "\"{name}\" में कोई पसंदीदा नहीं",
+  "@emptyFolder": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "createFolder": "नया फ़ोल्डर",
+  "folderName": "फ़ोल्डर का नाम",
+  "create": "बनाएं",
+  "rename": "नाम बदलें",
+  "delete": "हटाएं",
+  "renameFolder": "फ़ोल्डर का नाम बदलें",
+  "deleteFolder": "फ़ोल्डर हटाएं",
+  "deleteFolderConfirm": "\"{name}\" हटाएं? इसमें शामिल पैकेज हटा दिए जाएंगे।",
+  "@deleteFolderConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cancel": "रद्द करें",
+  "confirm": "पुष्टि करें",
+  "folderExists": "फ़ोल्डर पहले से मौजूद है",
+  "removeFromFolder": "\"{folder}\" से हटाएं?",
+  "@removeFromFolder": {
+    "placeholders": {
+      "folder": {
+        "type": "String"
+      }
+    }
+  },
+  "removeFavorite": "पसंदीदा हटाएं",
+  "removeFavoriteConfirm": "\"{name}\" को पसंदीदा से हटाएं?",
+  "@removeFavoriteConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "addToOtherFolders": "अन्य फ़ोल्डर में जोड़ें",
+  "selectFolder": "फ़ोल्डर चुनें",
+  "createAndAdd": "बनाएं और जोड़ें",
+  "favoriteManaged": "सहेजा गया: {folders}",
+  "@favoriteManaged": {
+    "placeholders": {
+      "folders": {
+        "type": "String"
+      }
+    }
+  },
+  "cancelAllFavorites": "सभी से हटाएं",
+  "pubMirror": "Pub मिरर",
+  "pubMirrorHint": "पैकेज खोजने के लिए नए मिरर सोर्स पर स्विच करें",
+  "githubMirror": "GitHub मिरर",
+  "githubRawMirror": "GitHub Raw मिरर",
+  "githubMirrorHint": "पैकेज README प्राप्त करने के लिए, चीन में मिरर उपयोग करने की सिफारिश",
+  "appearance": "दिखावट",
+  "theme": "थीम",
+  "themeSystem": "सिस्टम",
+  "themeLight": "लाइट",
+  "themeDark": "डार्क",
+  "selectTheme": "थीम चुनें",
+  "themeColor": "थीम रंग",
+  "data": "डेटा",
+  "clearCache": "कैश साफ़ करें",
+  "clearCacheSubtitle": "सभी API कैश डेटा साफ़ करें",
+  "clearCacheTitle": "कैश साफ़ करें",
+  "clearCacheConfirm": "सभी API कैश साफ़ करें? पसंदीदा और सेटिंग्स साफ़ नहीं होंगी।",
+  "cacheCleared": "कैश साफ़ किया गया",
+  "aboutPubPub": "PubPub के बारे में",
+  "version": "संस्करण {version}",
+  "@version": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "aboutTitle": "के बारे में",
+  "aboutDescription": "क्रॉस-प्लेटफॉर्म Pub मिरर ब्राउज़र",
+  "features": "विशेषताएं",
+  "featureSearch": "पैकेज खोज",
+  "featureSearchDesc": "कई Pub मिरर के माध्यम से खोजें",
+  "featureDetail": "पैकेज विवरण",
+  "featureDetailDesc": "संस्करण, निर्भरताएं, README पूर्ण प्रदर्शन",
+  "featureFavorites": "कस्टम संग्रह",
+  "featureFavoritesDesc": "व्यवस्थित करने के लिए कई फ़ोल्डर बनाएं",
+  "featureTheme": "थीम अनुकूलन",
+  "featureThemeDesc": "10 थीम रंग + डार्क मोड",
+  "featureLayout": "रिस्पॉन्सिव लेआउट",
+  "featureLayoutDesc": "मोबाइल/डेस्कटॉप अनुकूली",
+  "techStack": "टेक स्टैक",
+  "linksTitle": "लिंक",
+  "githubRepo": "GitHub रिपॉजिटरी",
+  "pubDev": "pub.dev",
+  "flutterOfficial": "Flutter आधिकारिक",
+  "tdesign": "TDesign Flutter",
+  "license": "लाइसेंस",
+  "licenseApache": "Apache License 2.0",
+  "copyright": "Copyright © 2026 PubPub Contributors",
+  "madeWith": "Flutter के साथ ❤️ से बनाया गया",
+  "loading": "लोड हो रहा है...",
+  "error": "त्रुटि",
+  "success": "सफल",
+  "ok": "ठीक है",
+  "yes": "हाँ",
+  "no": "नहीं"
+}

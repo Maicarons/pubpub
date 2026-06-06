@@ -1,0 +1,163 @@
+{
+  "@@locale": "ar",
+  "appTitle": "PubPub",
+  "appDescription": "متصفح مرايا Pub متعدد المنصات",
+  "navSearch": "بحث",
+  "navFavorites": "المفضلة",
+  "navSettings": "الإعدادات",
+  "searchHint": "البحث عن حزم Flutter/Dart...",
+  "searchFailed": "فشل البحث، تحقق من شبكتك",
+  "searchEmpty": "ابحث عن حزم Flutter/Dart التي تحتاجها",
+  "searchNoResults": "لم يتم العثور على حزم",
+  "hotRecommend": "توصيات شائعة",
+  "retry": "إعادة المحاولة",
+  "install": "تثبيت",
+  "terminal": "الطرفية",
+  "readme": "README",
+  "loadingReadme": "جاري تحميل README...",
+  "about": "حول",
+  "topics": "المواضيع",
+  "details": "التفاصيل",
+  "language": "اللغة",
+  "selectLanguage": "اختر اللغة",
+  "languageSystem": "النظام",
+  "checkUpdate": "التحقق من التحديثات",
+  "autoTranslate": "ترجمة تلقائية",
+  "autoTranslateDesc": "ترجمة عبر API متوافقة مع OpenAI",
+  "latestVersion": "الأحدث",
+  "publishDate": "تاريخ النشر",
+  "dartSdk": "Dart SDK",
+  "flutterSdk": "Flutter SDK",
+  "dependencyCount": "التبعيات",
+  "links": "الروابط",
+  "homepage": "الصفحة الرئيسية",
+  "repository": "المستودع",
+  "dependencies": "التبعيات",
+  "noDependencies": "لا تبعيات مباشرة",
+  "versionHistory": "سجل الإصدارات",
+  "moreVersions": "{count} إصدارات سابقة...",
+  "@moreVersions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "latest": "الأحدث",
+  "copied": "تم النسخ",
+  "copiedToClipboard": "تم نسخ الكود إلى الحافظة",
+  "favoritesFolders": "المجلدات",
+  "noFavorites": "لا توجد مفضلات بعد",
+  "noFavoritesHint": "اضغط على أيقونة القلب في نتائج البحث للمفضلة",
+  "emptyFolder": "\"{name}\" لا توجد مفضلات",
+  "@emptyFolder": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "createFolder": "مجلد جديد",
+  "folderName": "اسم المجلد",
+  "create": "إنشاء",
+  "rename": "إعادة تسمية",
+  "delete": "حذف",
+  "renameFolder": "إعادة تسمية المجلد",
+  "deleteFolder": "حذف المجلد",
+  "deleteFolderConfirm": "حذف \"{name}\"؟ ستتم إزالة الحزم الموجودة فيه.",
+  "@deleteFolderConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cancel": "إلغاء",
+  "confirm": "تأكيد",
+  "folderExists": "المجلد موجود بالفعل",
+  "removeFromFolder": "إزالة من \"{folder}\"؟",
+  "@removeFromFolder": {
+    "placeholders": {
+      "folder": {
+        "type": "String"
+      }
+    }
+  },
+  "removeFavorite": "إزالة من المفضلة",
+  "removeFavoriteConfirm": "إزالة \"{name}\" من المفضلة؟",
+  "@removeFavoriteConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "addToOtherFolders": "إضافة إلى مجلدات أخرى",
+  "selectFolder": "اختر المجلد",
+  "createAndAdd": "إنشاء وإضافة",
+  "favoriteManaged": "محفوظ في: {folders}",
+  "@favoriteManaged": {
+    "placeholders": {
+      "folders": {
+        "type": "String"
+      }
+    }
+  },
+  "cancelAllFavorites": "إزالة من الكل",
+  "pubMirror": "مرآة Pub",
+  "pubMirrorHint": "التبديل إلى مصدر مرآة جديد للبحث عن الحزم",
+  "githubMirror": "مرآة GitHub",
+  "githubRawMirror": "مرآة GitHub Raw",
+  "githubMirrorHint": "لجلب README الحزم، يُوصى باستخدام المرآة في الصين",
+  "appearance": "المظهر",
+  "theme": "السمة",
+  "themeSystem": "النظام",
+  "themeLight": "فاتح",
+  "themeDark": "داكن",
+  "selectTheme": "اختر السمة",
+  "themeColor": "لون السمة",
+  "data": "البيانات",
+  "clearCache": "مسح ذاكرة التخزين المؤقت",
+  "clearCacheSubtitle": "مسح جميع بيانات ذاكرة التخزين المؤقت",
+  "clearCacheTitle": "مسح ذاكرة التخزين المؤقت",
+  "clearCacheConfirm": "مسح جميع ذاكرة التخزين المؤقت؟ لن يتم حذف المفضلة والإعدادات.",
+  "cacheCleared": "تم مسح ذاكرة التخزين المؤقت",
+  "aboutPubPub": "حول PubPub",
+  "version": "الإصدار {version}",
+  "@version": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "aboutTitle": "حول",
+  "aboutDescription": "متصفح مرايا Pub متعدد المنصات",
+  "features": "الميزات",
+  "featureSearch": "البحث عن الحزم",
+  "featureSearchDesc": "البحث عبر مرايا Pub متعددة",
+  "featureDetail": "تفاصيل الحزمة",
+  "featureDetailDesc": "الإصدار، التبعيات، عرض README كامل",
+  "featureFavorites": "مجموعات مخصصة",
+  "featureFavoritesDesc": "إنشاء مجلدات متعددة للتنظيم",
+  "featureTheme": "تخصيص السمة",
+  "featureThemeDesc": "10 ألوان سمة + الوضع الداكن",
+  "featureLayout": "تصميم متجاوب",
+  "featureLayoutDesc": "تكيف الجوال/سطح المكتب",
+  "techStack": "التقنيات المستخدمة",
+  "linksTitle": "الروابط",
+  "githubRepo": "مستودع GitHub",
+  "pubDev": "pub.dev",
+  "flutterOfficial": "Flutter الرسمي",
+  "tdesign": "TDesign Flutter",
+  "license": "الترخيص",
+  "licenseApache": "Apache License 2.0",
+  "copyright": "حقوق النشر © 2026 PubPub Contributors",
+  "madeWith": "صنع بـ ❤️ باستخدام Flutter",
+  "loading": "جاري التحميل...",
+  "error": "خطأ",
+  "success": "نجاح",
+  "ok": "موافق",
+  "yes": "نعم",
+  "no": "لا"
+}

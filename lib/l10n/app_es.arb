@@ -1,0 +1,163 @@
+{
+  "@@locale": "es",
+  "appTitle": "PubPub",
+  "appDescription": "Navegador de espejos Pub multiplataforma",
+  "navSearch": "Buscar",
+  "navFavorites": "Favoritos",
+  "navSettings": "Configuración",
+  "searchHint": "Buscar paquetes Flutter/Dart...",
+  "searchFailed": "Búsqueda fallida, verifique su red",
+  "searchEmpty": "Busque los paquetes Flutter/Dart que necesita",
+  "searchNoResults": "No se encontraron paquetes",
+  "hotRecommend": "Recomendaciones populares",
+  "retry": "Reintentar",
+  "install": "Instalar",
+  "terminal": "Terminal",
+  "readme": "README",
+  "loadingReadme": "Cargando README...",
+  "about": "Acerca de",
+  "topics": "Temas",
+  "details": "Detalles",
+  "language": "Idioma",
+  "selectLanguage": "Seleccionar idioma",
+  "languageSystem": "Sistema",
+  "checkUpdate": "Buscar actualizaciones",
+  "autoTranslate": "Traducción automática",
+  "autoTranslateDesc": "Traducción con API compatible con OpenAI",
+  "latestVersion": "Último",
+  "publishDate": "Publicado",
+  "dartSdk": "Dart SDK",
+  "flutterSdk": "Flutter SDK",
+  "dependencyCount": "Dependencias",
+  "links": "Enlaces",
+  "homepage": "Página principal",
+  "repository": "Repositorio",
+  "dependencies": "Dependencias",
+  "noDependencies": "Sin dependencias directas",
+  "versionHistory": "Historial de versiones",
+  "moreVersions": "{count} versiones anteriores...",
+  "@moreVersions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "latest": "último",
+  "copied": "Copiado",
+  "copiedToClipboard": "Código copiado al portapapeles",
+  "favoritesFolders": "Carpetas",
+  "noFavorites": "Aún no hay favoritos",
+  "noFavoritesHint": "Toque el icono de corazón en los resultados para agregar a favoritos",
+  "emptyFolder": "\"{name}\" no tiene favoritos",
+  "@emptyFolder": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "createFolder": "Nueva carpeta",
+  "folderName": "Nombre de la carpeta",
+  "create": "Crear",
+  "rename": "Renombrar",
+  "delete": "Eliminar",
+  "renameFolder": "Renombrar carpeta",
+  "deleteFolder": "Eliminar carpeta",
+  "deleteFolderConfirm": "¿Eliminar \"{name}\"? Los paquetes en ella serán eliminados.",
+  "@deleteFolderConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cancel": "Cancelar",
+  "confirm": "Confirmar",
+  "folderExists": "La carpeta ya existe",
+  "removeFromFolder": "¿Eliminar de \"{folder}\"?",
+  "@removeFromFolder": {
+    "placeholders": {
+      "folder": {
+        "type": "String"
+      }
+    }
+  },
+  "removeFavorite": "Eliminar favorito",
+  "removeFavoriteConfirm": "¿Eliminar \"{name}\" de favoritos?",
+  "@removeFavoriteConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "addToOtherFolders": "Agregar a otras carpetas",
+  "selectFolder": "Seleccionar carpeta",
+  "createAndAdd": "Crear y agregar",
+  "favoriteManaged": "Guardado en: {folders}",
+  "@favoriteManaged": {
+    "placeholders": {
+      "folders": {
+        "type": "String"
+      }
+    }
+  },
+  "cancelAllFavorites": "Eliminar de todos",
+  "pubMirror": "Espejo Pub",
+  "pubMirrorHint": "Cambiar a una nueva fuente de espejo para buscar paquetes",
+  "githubMirror": "Espejo GitHub",
+  "githubRawMirror": "Espejo GitHub Raw",
+  "githubMirrorHint": "Para obtener README de paquetes, se recomienda usar espejo en China",
+  "appearance": "Apariencia",
+  "theme": "Tema",
+  "themeSystem": "Sistema",
+  "themeLight": "Claro",
+  "themeDark": "Oscuro",
+  "selectTheme": "Seleccionar tema",
+  "themeColor": "Color del tema",
+  "data": "Datos",
+  "clearCache": "Limpiar caché",
+  "clearCacheSubtitle": "Limpiar todos los datos de caché API",
+  "clearCacheTitle": "Limpiar caché",
+  "clearCacheConfirm": "¿Limpiar toda la caché API? Los favoritos y configuraciones no se eliminarán.",
+  "cacheCleared": "Caché limpiada",
+  "aboutPubPub": "Acerca de PubPub",
+  "version": "Versión {version}",
+  "@version": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "aboutTitle": "Acerca de",
+  "aboutDescription": "Navegador de espejos Pub multiplataforma",
+  "features": "Características",
+  "featureSearch": "Búsqueda de paquetes",
+  "featureSearchDesc": "Búsqueda a través de múltiples espejos Pub",
+  "featureDetail": "Detalles del paquete",
+  "featureDetailDesc": "Versión, dependencias, visualización completa del README",
+  "featureFavorites": "Colecciones personalizadas",
+  "featureFavoritesDesc": "Crear múltiples carpetas para organizar",
+  "featureTheme": "Personalización de tema",
+  "featureThemeDesc": "10 colores de tema + modo oscuro",
+  "featureLayout": "Diseño responsivo",
+  "featureLayoutDesc": "Adaptación móvil/escritorio",
+  "techStack": "Stack tecnológico",
+  "linksTitle": "Enlaces",
+  "githubRepo": "Repositorio GitHub",
+  "pubDev": "pub.dev",
+  "flutterOfficial": "Flutter Oficial",
+  "tdesign": "TDesign Flutter",
+  "license": "Licencia",
+  "licenseApache": "Apache License 2.0",
+  "copyright": "Copyright © 2026 PubPub Contributors",
+  "madeWith": "Hecho con ❤️ usando Flutter",
+  "loading": "Cargando...",
+  "error": "Error",
+  "success": "Éxito",
+  "ok": "Aceptar",
+  "yes": "Sí",
+  "no": "No"
+}

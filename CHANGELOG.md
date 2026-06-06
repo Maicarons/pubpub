@@ -2,6 +2,16 @@
 
 本项目遵循 [Semantic Versioning](https://semver.org/lang/zh-CN/)。
 
+## [0.2.0] - 2026-06-06
+
+### 新增
+
+- 🌍 新增 19 种语言支持：
+  - 亚洲：日本語、한국어、简体中文、हिन्दी、বাংলা、ਪੰਜਾਬੀ、मराठी、తెలుగు、اردو、فارسی
+  - 欧洲：English、Deutsch、Français、Italiano、Português、Español、Русский、Türkçe
+  - 非洲：العربية、Kiswahili、Basa Jawa
+- 🔄 RTL 布局支持：阿拉伯语、乌尔都语、波斯语从右到左显示
+
 ## [0.1.1] - 2026-06-06
 
 ### 新增

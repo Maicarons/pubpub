@@ -286,21 +286,39 @@ class SettingsPage extends StatelessWidget {
 
   // ==================== 语言 ====================
 
+  // 语言配置
+  static const Map<String, String> _languageNames = {
+    'system': '', // 使用翻译
+    'ar': 'العربية',
+    'bn': 'বাংলা',
+    'de': 'Deutsch',
+    'en': 'English',
+    'es': 'Español',
+    'fa': 'فارسی',
+    'fr': 'Français',
+    'hi': 'हिन्दी',
+    'it': 'Italiano',
+    'ja': '日本語',
+    'jv': 'Basa Jawa',
+    'ko': '한국어',
+    'mr': 'मराठी',
+    'pa': 'ਪੰਜਾਬੀ',
+    'pt': 'Português',
+    'ru': 'Русский',
+    'sw': 'Kiswahili',
+    'te': 'తెలుగు',
+    'tr': 'Türkçe',
+    'ur': 'اردو',
+    'zh': '简体中文',
+  };
+
   Widget _buildLanguageTile(BuildContext context, SettingsController ctrl) {
     return Obx(() {
       String langText;
-      switch (ctrl.localeKey.value) {
-        case 'system':
-          langText = context.l10n.languageSystem;
-          break;
-        case 'en':
-          langText = 'English';
-          break;
-        case 'zh':
-          langText = '简体中文';
-          break;
-        default:
-          langText = context.l10n.languageSystem;
+      if (ctrl.localeKey.value == 'system') {
+        langText = context.l10n.languageSystem;
+      } else {
+        langText = _languageNames[ctrl.localeKey.value] ?? context.l10n.languageSystem;
       }
 
       return ListTile(
@@ -326,20 +344,15 @@ class SettingsPage extends StatelessWidget {
             },
             child: Text(context.l10n.languageSystem),
           ),
-          SimpleDialogOption(
-            onPressed: () {
-              ctrl.setLocale('zh');
-              Navigator.pop(context);
-            },
-            child: const Text('简体中文'),
-          ),
-          SimpleDialogOption(
-            onPressed: () {
-              ctrl.setLocale('en');
-              Navigator.pop(context);
-            },
-            child: const Text('English'),
-          ),
+          ..._languageNames.entries
+              .where((e) => e.key != 'system')
+              .map((e) => SimpleDialogOption(
+                    onPressed: () {
+                      ctrl.setLocale(e.key);
+                      Navigator.pop(context);
+                    },
+                    child: Text(e.value),
+                  )),
         ],
       ),
     );
