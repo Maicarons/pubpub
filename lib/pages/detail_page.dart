@@ -39,7 +39,7 @@ class _DetailPageState extends State<DetailPage> {
     super.dispose();
   }
 
-  bool get isDark => Theme.of(context).brightness == Brightness.dark;
+  TDThemeData get tdTheme => TDTheme.of(context);
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,7 @@ class _DetailPageState extends State<DetailPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(TDIcons.error_circle,
-                    size: 48, color: Colors.grey[400]),
+                    size: 48, color: tdTheme.textColorPlaceholder),
                 const SizedBox(height: 16),
                 Text(detailCtrl.errorMessage.value),
                 const SizedBox(height: 16),
@@ -229,7 +229,7 @@ class _DetailPageState extends State<DetailPage> {
             detail.description,
             style: TextStyle(
               fontSize: 15,
-              color: isDark ? Colors.grey[400] : Colors.grey[700],
+              color: tdTheme.textColorSecondary,
             ),
           ),
         ],
@@ -274,7 +274,7 @@ class _DetailPageState extends State<DetailPage> {
               label,
               style: TextStyle(
                 fontSize: 12,
-                color: isDark ? Colors.grey[400] : Colors.grey[600],
+                color: tdTheme.textColorPlaceholder,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -288,7 +288,7 @@ class _DetailPageState extends State<DetailPage> {
               },
               child: Icon(TDIcons.copy,
                   size: 16,
-                  color: isDark ? Colors.grey[400] : Colors.grey[600]),
+                  color: tdTheme.textColorPlaceholder),
             ),
           ],
         ),
@@ -297,7 +297,7 @@ class _DetailPageState extends State<DetailPage> {
           width: double.infinity,
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: isDark ? Colors.grey[850] : Colors.grey[100],
+            color: tdTheme.bgColorSecondaryContainer,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Text(
@@ -305,7 +305,7 @@ class _DetailPageState extends State<DetailPage> {
             style: TextStyle(
               fontFamily: 'monospace',
               fontSize: 13,
-              color: isDark ? Colors.grey[300] : Colors.black87,
+              color: tdTheme.textColorPrimary,
             ),
           ),
         ),
@@ -334,7 +334,7 @@ class _DetailPageState extends State<DetailPage> {
                   Text(
                     context.l10n.loadingReadme,
                     style: TextStyle(
-                        color: isDark ? Colors.grey[400] : Colors.grey[600]),
+                        color: tdTheme.textColorPlaceholder),
                   ),
                 ],
               ),
@@ -374,13 +374,13 @@ class _DetailPageState extends State<DetailPage> {
                       icon: Icon(
                         TDIcons.translate,
                         size: 16,
-                        color: isDark ? Colors.blue[300] : Colors.blue,
+                        color: tdTheme.textColorLink,
                       ),
                       label: Text(
                         detailCtrl.showTranslatedReadme.value ? context.l10n.original : context.l10n.translated,
                         style: TextStyle(
                           fontSize: 13,
-                          color: isDark ? Colors.blue[300] : Colors.blue,
+                          color: tdTheme.textColorLink,
                         ),
                       ),
                     );
@@ -403,47 +403,47 @@ class _DetailPageState extends State<DetailPage> {
                   p: TextStyle(
                     fontSize: 14,
                     height: 1.6,
-                    color: isDark ? Colors.grey[300] : Colors.black87,
+                    color: tdTheme.textColorPrimary,
                   ),
                   h1: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: isDark ? Colors.white : Colors.black,
+                    color: tdTheme.textColorPrimary,
                   ),
                   h2: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: isDark ? Colors.white : Colors.black,
+                    color: tdTheme.textColorPrimary,
                   ),
                   h3: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: isDark ? Colors.white : Colors.black,
+                    color: tdTheme.textColorPrimary,
                   ),
                   code: TextStyle(
                     fontSize: 13,
                     backgroundColor:
-                        isDark ? Colors.grey[800] : Colors.grey[200],
+                        tdTheme.bgColorSecondaryContainer,
                     fontFamily: 'monospace',
-                    color: isDark ? Colors.grey[300] : Colors.black87,
+                    color: tdTheme.textColorPrimary,
                   ),
                   codeblockDecoration: BoxDecoration(
-                    color: isDark ? Colors.grey[850] : Colors.grey[100],
+                    color: tdTheme.bgColorSecondaryContainer,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   blockquoteDecoration: BoxDecoration(
                     border: Border(
                       left: BorderSide(
-                        color: isDark ? Colors.grey[600]! : Colors.grey[400]!,
+                        color: tdTheme.componentBorderColor,
                         width: 3,
                       ),
                     ),
                   ),
                   blockquote: TextStyle(
-                    color: isDark ? Colors.grey[400] : Colors.grey[700],
+                    color: tdTheme.textColorSecondary,
                   ),
                   a: TextStyle(
-                    color: isDark ? Colors.blue[300] : Colors.blue,
+                    color: tdTheme.textColorLink,
                   ),
                 ),
                 );
@@ -489,7 +489,7 @@ class _DetailPageState extends State<DetailPage> {
                     icon: Icon(
                       TDIcons.translate,
                       size: 16,
-                      color: isDark ? Colors.blue[300] : Colors.blue,
+                      color: tdTheme.textColorLink,
                     ),
                     label: Text(
                       detailCtrl.showTranslatedDescription.value
@@ -497,7 +497,7 @@ class _DetailPageState extends State<DetailPage> {
                           : context.l10n.translated,
                       style: TextStyle(
                         fontSize: 13,
-                        color: isDark ? Colors.blue[300] : Colors.blue,
+                        color: tdTheme.textColorLink,
                       ),
                     ),
                   );
@@ -516,7 +516,7 @@ class _DetailPageState extends State<DetailPage> {
                 style: TextStyle(
                   fontSize: 14,
                   height: 1.6,
-                  color: isDark ? Colors.grey[300] : Colors.black87,
+                  color: tdTheme.textColorPrimary,
                 ),
               );
             }),
@@ -581,14 +581,14 @@ class _DetailPageState extends State<DetailPage> {
             child: Text(
               label,
               style: TextStyle(
-                  color: isDark ? Colors.grey[400] : Colors.grey[600]),
+                  color: tdTheme.textColorPlaceholder),
             ),
           ),
           Expanded(
             child: Text(
               value,
               style: TextStyle(
-                  color: isDark ? Colors.grey[200] : Colors.black87),
+                  color: tdTheme.textColorPrimary),
             ),
           ),
         ],
@@ -646,17 +646,13 @@ class _DetailPageState extends State<DetailPage> {
                         children: [
                           Icon(link.icon,
                               size: 16,
-                              color: isDark
-                                  ? Colors.grey[400]
-                                  : Colors.grey[600]),
+                              color: tdTheme.textColorPlaceholder),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
                               link.label,
                               style: TextStyle(
-                                color: isDark
-                                    ? Colors.blue[300]
-                                    : Colors.blue,
+                                color: tdTheme.textColorLink,
                                 decoration: TextDecoration.underline,
                               ),
                             ),
@@ -691,7 +687,7 @@ class _DetailPageState extends State<DetailPage> {
             if (deps.isEmpty)
               Text(context.l10n.noDependencies,
                   style: TextStyle(
-                      color: isDark ? Colors.grey[500] : Colors.grey))
+                      color: tdTheme.textColorPlaceholder))
             else
               DependencyTree(dependencies: deps),
           ],
@@ -727,7 +723,7 @@ class _DetailPageState extends State<DetailPage> {
                 child: Text(
                   context.l10n.moreVersions(versions.length - 20),
                   style: TextStyle(
-                      color: isDark ? Colors.grey[500] : Colors.grey[600],
+                      color: tdTheme.textColorPlaceholder,
                       fontSize: 13),
                 ),
               ),
@@ -751,7 +747,7 @@ class _DetailPageState extends State<DetailPage> {
               decoration: BoxDecoration(
                 color: isLatest
                     ? Colors.green.withValues(alpha: 0.15)
-                    : (isDark ? Colors.grey[800] : Colors.grey[100]),
+                    : tdTheme.bgColorSecondaryContainer,
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Text(
@@ -762,7 +758,7 @@ class _DetailPageState extends State<DetailPage> {
                       isLatest ? FontWeight.w600 : FontWeight.normal,
                   color: isLatest
                       ? Colors.green
-                      : (isDark ? Colors.grey[300] : Colors.black87),
+                      : (tdTheme.textColorPrimary),
                 ),
                 overflow: TextOverflow.ellipsis,
               ),
@@ -779,7 +775,7 @@ class _DetailPageState extends State<DetailPage> {
               _formatDate(v.published!),
               style: TextStyle(
                   fontSize: 12,
-                  color: isDark ? Colors.grey[500] : Colors.grey[600]),
+                  color: tdTheme.textColorPlaceholder),
             ),
         ],
       ),

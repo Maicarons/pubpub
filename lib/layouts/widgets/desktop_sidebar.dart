@@ -15,12 +15,11 @@ class DesktopSidebar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
+    final tdTheme = TDTheme.of(context);
 
     return Container(
       width: 220,
-      color: isDark ? Colors.grey[900] : Colors.grey[50],
+      color: tdTheme.bgColorContainer,
       child: Column(
         children: [
           // Logo 区域
@@ -37,16 +36,17 @@ class DesktopSidebar extends StatelessWidget {
                     errorBuilder: (context, error, stackTrace) => Icon(
                       TDIcons.logo_github,
                       size: 32,
-                      color: theme.primaryColor,
+                      color: tdTheme.brandNormalColor,
                     ),
                   ),
                 ),
                 const SizedBox(width: 12),
                 Text(
                   'PubPub',
-                  style: theme.textTheme.titleLarge?.copyWith(
+                  style: TextStyle(
+                    fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: theme.primaryColor,
+                    color: tdTheme.brandNormalColor,
                   ),
                 ),
               ],
@@ -84,14 +84,14 @@ class DesktopSidebar extends StatelessWidget {
     required IconData icon,
     required String label,
   }) {
-    final theme = Theme.of(context);
+    final tdTheme = TDTheme.of(context);
     final isSelected = selectedIndex == index;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       child: Material(
         color: isSelected
-            ? theme.primaryColor.withValues(alpha: 0.1)
+            ? tdTheme.brandNormalColor.withValues(alpha: 0.1)
             : Colors.transparent,
         borderRadius: BorderRadius.circular(8),
         child: InkWell(
@@ -105,7 +105,7 @@ class DesktopSidebar extends StatelessWidget {
                 Icon(
                   icon,
                   size: 20,
-                  color: isSelected ? theme.primaryColor : Colors.grey[600],
+                  color: isSelected ? tdTheme.brandNormalColor : tdTheme.textColorSecondary,
                 ),
                 const SizedBox(width: 12),
                 Text(
@@ -114,7 +114,7 @@ class DesktopSidebar extends StatelessWidget {
                     fontSize: 14,
                     fontWeight:
                         isSelected ? FontWeight.w600 : FontWeight.normal,
-                    color: isSelected ? theme.primaryColor : Colors.grey[700],
+                    color: isSelected ? tdTheme.brandNormalColor : tdTheme.textColorPrimary,
                   ),
                 ),
               ],

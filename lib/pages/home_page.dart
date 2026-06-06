@@ -16,8 +16,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final searchCtrl = Get.find<AppSearchController>();
     final layoutCtrl = Get.find<LayoutController>();
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
+    final tdTheme = TDTheme.of(context);
 
     return Column(
       children: [
@@ -29,9 +28,7 @@ class HomePage extends StatelessWidget {
               hintText: context.l10n.searchHint,
               prefixIcon: const Icon(TDIcons.search, size: 20),
               filled: true,
-              fillColor: isDark
-                  ? Colors.grey[800]
-                  : Colors.grey[100],
+              fillColor: tdTheme.bgColorSecondaryContainer,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
@@ -63,13 +60,13 @@ class HomePage extends StatelessWidget {
                       size: 48,
                       color: searchCtrl.errorMessage.value == 'mirrorNoSearch'
                           ? Colors.orange
-                          : Colors.grey,
+                          : tdTheme.textColorPlaceholder,
                     ),
                     const SizedBox(height: 16),
                     Text(
                       _getErrorMessage(context, searchCtrl.errorMessage.value),
                       textAlign: TextAlign.center,
-                      style: const TextStyle(color: Colors.grey),
+                      style: TextStyle(color: tdTheme.textColorPlaceholder),
                     ),
                     const SizedBox(height: 16),
                     if (searchCtrl.errorMessage.value != 'mirrorNoSearch')
@@ -92,13 +89,13 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(TDIcons.search, size: 48, color: Colors.grey[300]),
+                    Icon(TDIcons.search, size: 48, color: tdTheme.textColorPlaceholder),
                     const SizedBox(height: 16),
                     Text(
                       searchCtrl.currentQuery.value.isEmpty
                           ? context.l10n.searchEmpty
                           : context.l10n.searchNoResults,
-                      style: TextStyle(color: Colors.grey[500]),
+                      style: TextStyle(color: tdTheme.textColorPlaceholder),
                     ),
                   ],
                 ),
@@ -118,7 +115,7 @@ class HomePage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
-                        color: Colors.grey[600],
+                        color: tdTheme.textColorSecondary,
                       ),
                     ),
                   ),

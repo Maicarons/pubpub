@@ -11,7 +11,7 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
+    final tdTheme = TDTheme.of(context);
 
     return Scaffold(
       appBar: AppBar(title: Text(context.l10n.about)),
@@ -56,7 +56,7 @@ class AboutPage extends StatelessWidget {
                   context.l10n.aboutDescription,
                   style: TextStyle(
                     fontSize: 14,
-                    color: isDark ? Colors.grey[400] : Colors.grey[600],
+                    color: tdTheme.textColorPlaceholder,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -64,7 +64,7 @@ class AboutPage extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   decoration: BoxDecoration(
-                    color: isDark ? Colors.grey[800] : Colors.grey[200],
+                    color: tdTheme.bgColorSecondaryContainer,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
@@ -72,7 +72,7 @@ class AboutPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 12,
                       color:
-                          isDark ? Colors.grey[300] : Colors.grey[700],
+                          tdTheme.textColorSecondary,
                     ),
                   ),
                 ),
@@ -93,8 +93,7 @@ class AboutPage extends StatelessWidget {
           const SizedBox(height: 32),
 
           // 功能介绍
-          _buildSection(
-            context,
+          _buildSection(context,
             title: context.l10n.features,
             children: [
               _buildFeatureItem(
@@ -114,23 +113,21 @@ class AboutPage extends StatelessWidget {
           const SizedBox(height: 16),
 
           // 技术栈
-          _buildSection(
-            context,
+          _buildSection(context,
             title: context.l10n.techStack,
             children: [
-              _buildTechItem('Flutter', '3.41+'),
-              _buildTechItem('Dart', '3.11+'),
-              _buildTechItem('GetX', 'State Management'),
-              _buildTechItem('Dio', 'Networking'),
-              _buildTechItem('Hive', 'Local Storage'),
-              _buildTechItem('TDesign', 'UI Components'),
+              _buildTechItem(context, 'Flutter', '3.41+'),
+              _buildTechItem(context, 'Dart', '3.11+'),
+              _buildTechItem(context, 'GetX', 'State Management'),
+              _buildTechItem(context, 'Dio', 'Networking'),
+              _buildTechItem(context, 'Hive', 'Local Storage'),
+              _buildTechItem(context, 'TDesign', 'UI Components'),
             ],
           ),
           const SizedBox(height: 16),
 
           // 链接
-          _buildSection(
-            context,
+          _buildSection(context,
             title: context.l10n.linksTitle,
             children: [
               _buildLinkItem(
@@ -166,8 +163,7 @@ class AboutPage extends StatelessWidget {
           const SizedBox(height: 16),
 
           // 开源许可
-          _buildSection(
-            context,
+          _buildSection(context,
             title: context.l10n.license,
             children: [
               ListTile(
@@ -187,7 +183,7 @@ class AboutPage extends StatelessWidget {
               context.l10n.madeWith,
               style: TextStyle(
                 fontSize: 13,
-                color: isDark ? Colors.grey[500] : Colors.grey[400],
+                color: tdTheme.textColorPlaceholder,
               ),
             ),
           ),
@@ -242,6 +238,7 @@ class AboutPage extends StatelessWidget {
     required String title,
     required List<Widget> children,
   }) {
+    final tdTheme = TDTheme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -250,7 +247,7 @@ class AboutPage extends StatelessWidget {
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
-            color: Colors.grey[500],
+            color: tdTheme.textColorPlaceholder,
           ),
         ),
         const SizedBox(height: 8),
@@ -267,14 +264,15 @@ class AboutPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTechItem(String name, String value) {
+  Widget _buildTechItem(BuildContext context, String name, String value) {
+    final tdTheme = TDTheme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(name),
-          Text(value, style: const TextStyle(color: Colors.grey)),
+          Text(value, style: TextStyle(color: tdTheme.textColorPlaceholder)),
         ],
       ),
     );
