@@ -12,20 +12,6 @@ import 'controllers/settings_controller.dart';
 import 'l10n/app_localizations.dart';
 import 'layouts/adaptive_builder.dart';
 
-/// TDesign 主题名称映射
-const Map<String, String> _tdThemeNames = {
-  'blue': 'blue',
-  'indigo': 'indigo',
-  'purple': 'purple',
-  'deepPurple': 'deepPurple',
-  'teal': 'teal',
-  'green': 'green',
-  'orange': 'orange',
-  'red': 'red',
-  'pink': 'pink',
-  'brown': 'brown',
-};
-
 /// 应用入口 Widget
 class PubPubApp extends StatefulWidget {
   const PubPubApp({super.key});
@@ -35,41 +21,18 @@ class PubPubApp extends StatefulWidget {
 }
 
 class _PubPubAppState extends State<PubPubApp> {
-  String? _themeJson;
-  final Map<String, TDThemeData> _themeCache = {};
+  TDThemeData? _tdTheme;
 
   @override
   void initState() {
     super.initState();
-    _loadThemeJson();
+    _loadTheme();
   }
 
-  Future<void> _loadThemeJson() async {
+  Future<void> _loadTheme() async {
     final json = await rootBundle.loadString('assets/td_theme.json');
-    setState(() => _themeJson = json);
-  }
-
-  TDThemeData _getThemeData(String colorKey, {bool isDark = false}) {
-    final themeName = _tdThemeNames[colorKey] ?? 'blue';
-    final darkName = '${themeName}Dark';
-    final cacheKey = '${themeName}_$isDark';
-
-    if (_themeCache.containsKey(cacheKey)) return _themeCache[cacheKey]!;
-
-    if (_themeJson != null) {
-      final tdTheme = TDThemeData.fromJson(
-        themeName,
-        _themeJson!,
-        darkName: darkName,
-        recoverDefault: false,
-      );
-      if (tdTheme != null) {
-        _themeCache[cacheKey] = tdTheme;
-        return tdTheme;
-      }
-    }
-
-    return TDThemeData.defaultData();
+    final theme = TDThemeData.fromJson('default', json, darkName: 'defaultDark');
+    setState(() => _tdTheme = theme);
   }
 
   @override
@@ -80,12 +43,11 @@ class _PubPubAppState extends State<PubPubApp> {
     Get.put(AppSearchController());
     Get.put(FavoritesController());
 
+    // 主题未加载时使用默认主题
+    final tdTheme = _tdTheme ?? TDThemeData.defaultData();
+
     return Obx(() {
       final isDark = settingsCtrl.themeMode.value == ThemeMode.dark;
-      final colorKey = settingsCtrl.colorSchemeKey.value;
-
-      // 获取 TDesign 主题
-      final tdTheme = _getThemeData(colorKey);
       final currentTdTheme = isDark ? (tdTheme.dark ?? tdTheme) : tdTheme;
 
       // 生成 Flutter ThemeData
