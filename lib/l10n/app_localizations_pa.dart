@@ -452,4 +452,14 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get flutterChina => 'Flutter China';
+
+  @override
+  String get mirrorNoSearch =>
+      'Current mirror does not support search, please switch to a supported source';
+
+  @override
+  String get mirrorSearchNotSupported => 'Search not supported';
+
+  @override
+  String get mirrorSearchSupported => 'Search supported';
 }

@@ -448,4 +448,13 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get flutterChina => 'Flutter 中国';
+
+  @override
+  String get mirrorNoSearch => '当前镜像源不支持搜索，请切换到支持搜索的源';
+
+  @override
+  String get mirrorSearchNotSupported => '不支持搜索';
+
+  @override
+  String get mirrorSearchSupported => '支持搜索';
 }

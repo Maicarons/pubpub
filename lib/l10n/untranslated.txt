@@ -30,7 +30,10 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ],
 
   "bn": [
@@ -64,7 +67,10 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ],
 
   "de": [
@@ -98,7 +104,10 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ],
 
   "es": [
@@ -132,7 +141,10 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ],
 
   "fa": [
@@ -166,7 +178,10 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ],
 
   "fr": [
@@ -200,7 +215,10 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ],
 
   "hi": [
@@ -234,7 +252,10 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ],
 
   "it": [
@@ -268,7 +289,10 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ],
 
   "ja": [
@@ -302,7 +326,10 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ],
 
   "jv": [
@@ -336,7 +363,10 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ],
 
   "ko": [
@@ -370,7 +400,10 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ],
 
   "mr": [
@@ -404,7 +437,10 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ],
 
   "pa": [
@@ -438,7 +474,10 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ],
 
   "pt": [
@@ -472,7 +511,10 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ],
 
   "ru": [
@@ -506,7 +548,10 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ],
 
   "sw": [
@@ -540,7 +585,10 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ],
 
   "te": [
@@ -574,7 +622,10 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ],
 
   "tr": [
@@ -608,7 +659,10 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ],
 
   "ur": [
@@ -642,6 +696,9 @@
     "pubOfficial",
     "tuna",
     "sjtu",
-    "flutterChina"
+    "flutterChina",
+    "mirrorNoSearch",
+    "mirrorSearchNotSupported",
+    "mirrorSearchSupported"
   ]
 }

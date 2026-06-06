@@ -56,24 +56,32 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(TDIcons.error_circle, size: 48, color: Colors.grey),
+                    Icon(
+                      searchCtrl.errorMessage.value == 'mirrorNoSearch'
+                          ? TDIcons.info_circle
+                          : TDIcons.error_circle,
+                      size: 48,
+                      color: searchCtrl.errorMessage.value == 'mirrorNoSearch'
+                          ? Colors.orange
+                          : Colors.grey,
+                    ),
                     const SizedBox(height: 16),
                     Text(
-                      searchCtrl.errorMessage.value == 'searchFailed'
-                          ? context.l10n.searchFailed
-                          : searchCtrl.errorMessage.value,
+                      _getErrorMessage(context, searchCtrl.errorMessage.value),
+                      textAlign: TextAlign.center,
                       style: const TextStyle(color: Colors.grey),
                     ),
                     const SizedBox(height: 16),
-                    TDButton(
-                      text: context.l10n.retry,
-                      theme: TDButtonTheme.primary,
-                      onTap: () {
-                        if (searchCtrl.currentQuery.value.isNotEmpty) {
-                          searchCtrl.search(searchCtrl.currentQuery.value);
-                        }
-                      },
-                    ),
+                    if (searchCtrl.errorMessage.value != 'mirrorNoSearch')
+                      TDButton(
+                        text: context.l10n.retry,
+                        theme: TDButtonTheme.primary,
+                        onTap: () {
+                          if (searchCtrl.currentQuery.value.isNotEmpty) {
+                            searchCtrl.search(searchCtrl.currentQuery.value);
+                          }
+                        },
+                      ),
                   ],
                 ),
               );
@@ -123,6 +131,17 @@ class HomePage extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String _getErrorMessage(BuildContext context, String errorKey) {
+    switch (errorKey) {
+      case 'searchFailed':
+        return context.l10n.searchFailed;
+      case 'mirrorNoSearch':
+        return context.l10n.mirrorNoSearch;
+      default:
+        return errorKey;
+    }
   }
 
   Widget _buildResultList(

@@ -141,5 +141,8 @@
   "pubOfficial": "官方 (pub.dev)",
   "tuna": "清华 TUNA",
   "sjtu": "上海交大 SJTU",
-  "flutterChina": "Flutter 中国"
+  "flutterChina": "Flutter 中国",
+  "mirrorNoSearch": "当前镜像源不支持搜索，请切换到支持搜索的源",
+  "mirrorSearchNotSupported": "不支持搜索",
+  "mirrorSearchSupported": "支持搜索"
 }

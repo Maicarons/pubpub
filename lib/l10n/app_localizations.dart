@@ -987,6 +987,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Flutter China'**
   String get flutterChina;
+
+  /// No description provided for @mirrorNoSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Current mirror does not support search, please switch to a supported source'**
+  String get mirrorNoSearch;
+
+  /// No description provided for @mirrorSearchNotSupported.
+  ///
+  /// In en, this message translates to:
+  /// **'Search not supported'**
+  String get mirrorSearchNotSupported;
+
+  /// No description provided for @mirrorSearchSupported.
+  ///
+  /// In en, this message translates to:
+  /// **'Search supported'**
+  String get mirrorSearchSupported;
 }
 
 class _AppLocalizationsDelegate

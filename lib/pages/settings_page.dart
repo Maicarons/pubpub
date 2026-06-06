@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 import '../common/l10n_ext.dart';
 import '../controllers/settings_controller.dart';
+import '../services/settings_service.dart';
 import '../services/update_service.dart';
 import 'about_page.dart';
 
@@ -12,26 +13,31 @@ const List<_MirrorSource> _pubMirrorSources = [
     nameKey: 'flutterChina',
     name: 'Flutter China (flutter-io.cn)',
     url: 'https://pub.flutter-io.cn',
+    supportsSearch: true,
   ),
   _MirrorSource(
     nameKey: 'flutterChina',
     name: 'Flutter China (storage.flutter-io.cn)',
     url: 'https://storage.flutter-io.cn',
+    supportsSearch: false,
   ),
   _MirrorSource(
     nameKey: 'pubOfficial',
     name: 'Official (pub.dev)',
     url: 'https://pub.dev',
+    supportsSearch: true,
   ),
   _MirrorSource(
     nameKey: 'tuna',
     name: 'Tsinghua TUNA',
     url: 'https://mirrors.tuna.tsinghua.edu.cn/dart-pub',
+    supportsSearch: false,
   ),
   _MirrorSource(
     nameKey: 'sjtu',
     name: 'SJTU',
     url: 'https://mirror.sjtu.edu.cn/dart-pub',
+    supportsSearch: false,
   ),
 ];
 
@@ -46,7 +52,23 @@ class _MirrorSource {
   final String nameKey; // i18n key
   final String name; // fallback name
   final String url;
-  const _MirrorSource({required this.nameKey, required this.name, required this.url});
+  final bool supportsSearch; // 是否支持搜索 API
+  const _MirrorSource({
+    required this.nameKey,
+    required this.name,
+    required this.url,
+    this.supportsSearch = true,
+  });
+}
+
+/// 检查当前镜像源是否支持搜索
+bool isCurrentMirrorSearchSupported() {
+  final currentUrl = SettingsService.getSource();
+  final source = _pubMirrorSources.firstWhere(
+    (s) => s.url == currentUrl,
+    orElse: () => _pubMirrorSources.first,
+  );
+  return source.supportsSearch;
 }
 
 /// 获取镜像源的本地化名称
@@ -186,7 +208,31 @@ class SettingsPage extends StatelessWidget {
             items: _pubMirrorSources.map((source) {
               return DropdownMenuItem(
                 value: source.url,
-                child: Text(_getMirrorName(context, source), style: const TextStyle(fontSize: 14)),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(_getMirrorName(context, source), style: const TextStyle(fontSize: 14)),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: source.supportsSearch
+                            ? Colors.green.withValues(alpha: 0.1)
+                            : Colors.orange.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        source.supportsSearch
+                            ? context.l10n.mirrorSearchSupported
+                            : context.l10n.mirrorSearchNotSupported,
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: source.supportsSearch ? Colors.green : Colors.orange,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               );
             }).toList(),
             onChanged: (value) {

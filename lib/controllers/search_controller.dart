@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import '../common/logger.dart';
 import '../models/package_search_result.dart';
 import '../services/api_service.dart';
+import '../pages/settings_page.dart' show isCurrentMirrorSearchSupported;
 
 /// 推荐包列表（写死）
 const List<String> _recommendedPackages = [
@@ -29,6 +30,7 @@ class AppSearchController extends GetxController {
   var isLoading = false.obs;
   var hasError = false.obs;
   var errorMessage = ''.obs;
+  var mirrorSupportsSearch = true.obs; // 当前镜像源是否支持搜索
   var searchResults = <PackageItem>[].obs;
   var currentQuery = ''.obs;
   var currentPage = 1.obs;
@@ -40,6 +42,17 @@ class AppSearchController extends GetxController {
   void onInit() {
     super.onInit();
     _loadRecommended();
+    _checkMirrorSearchSupport();
+  }
+
+  /// 检查当前镜像源是否支持搜索
+  void _checkMirrorSearchSupport() {
+    mirrorSupportsSearch.value = isCurrentMirrorSearchSupported();
+  }
+
+  /// 刷新镜像源搜索支持状态
+  void refreshMirrorSearchSupport() {
+    _checkMirrorSearchSupport();
   }
 
   /// 加载推荐包
@@ -55,6 +68,14 @@ class AppSearchController extends GetxController {
   /// 执行搜索
   Future<void> search(String query) async {
     if (query.trim().isEmpty) return;
+
+    // 检查镜像源是否支持搜索
+    _checkMirrorSearchSupport();
+    if (!mirrorSupportsSearch.value) {
+      hasError.value = true;
+      errorMessage.value = 'mirrorNoSearch';
+      return;
+    }
 
     currentQuery.value = query.trim();
     currentPage.value = 1;
