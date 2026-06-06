@@ -69,6 +69,13 @@ class SettingsPage extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         _buildSection(
+          title: context.l10n.autoTranslate,
+          children: [
+            _buildTranslationSettings(context, settingsCtrl),
+          ],
+        ),
+        const SizedBox(height: 16),
+        _buildSection(
           title: context.l10n.appearance,
           children: [
             _buildThemeTile(context, settingsCtrl),
@@ -408,6 +415,106 @@ class SettingsPage extends StatelessWidget {
                 ),
               );
             }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ==================== 翻译设置 ====================
+
+  Widget _buildTranslationSettings(
+      BuildContext context, SettingsController ctrl) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(TDIcons.translate, size: 20),
+              const SizedBox(width: 12),
+              const Text('OpenAI 兼容 API', style: TextStyle(fontSize: 15)),
+              const Spacer(),
+              Obx(() {
+                final configured = ctrl.isTranslationConfigured;
+                return Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: configured
+                        ? Colors.green.withValues(alpha: 0.1)
+                        : Colors.grey.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    configured ? '已配置' : '未配置',
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: configured ? Colors.green : Colors.grey,
+                    ),
+                  ),
+                );
+              }),
+            ],
+          ),
+          const SizedBox(height: 12),
+          // Endpoint
+          Obx(() => TextField(
+                controller: TextEditingController(
+                    text: ctrl.translationEndpoint.value),
+                decoration: const InputDecoration(
+                  labelText: 'API Endpoint',
+                  hintText: 'https://api.openai.com',
+                  border: OutlineInputBorder(),
+                  isDense: true,
+                ),
+                onSubmitted: (v) => ctrl.setTranslationEndpoint(v),
+              )),
+          const SizedBox(height: 8),
+          // API Key
+          Obx(() => TextField(
+                controller:
+                    TextEditingController(text: ctrl.translationApiKey.value),
+                decoration: const InputDecoration(
+                  labelText: 'API Key',
+                  hintText: 'sk-...',
+                  border: OutlineInputBorder(),
+                  isDense: true,
+                ),
+                obscureText: true,
+                onSubmitted: (v) => ctrl.setTranslationApiKey(v),
+              )),
+          const SizedBox(height: 8),
+          // Model
+          Obx(() => TextField(
+                controller:
+                    TextEditingController(text: ctrl.translationModel.value),
+                decoration: const InputDecoration(
+                  labelText: '模型',
+                  hintText: 'gpt-4o-mini',
+                  border: OutlineInputBorder(),
+                  isDense: true,
+                ),
+                onSubmitted: (v) => ctrl.setTranslationModel(v),
+              )),
+          const SizedBox(height: 8),
+          // 目标语言
+          Obx(() => TextField(
+                controller: TextEditingController(
+                    text: ctrl.translationTargetLang.value),
+                decoration: const InputDecoration(
+                  labelText: '目标语言',
+                  hintText: '简体中文 / English / 日本語',
+                  border: OutlineInputBorder(),
+                  isDense: true,
+                ),
+                onSubmitted: (v) => ctrl.setTranslationTargetLang(v),
+              )),
+          const SizedBox(height: 8),
+          Text(
+            '支持所有 OpenAI 兼容 API（OpenAI、DeepSeek、Moonshot 等）',
+            style: TextStyle(fontSize: 12, color: Colors.grey[500]),
           ),
         ],
       ),
