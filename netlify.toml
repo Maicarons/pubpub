@@ -1,0 +1,12 @@
+[build]
+  command = "bash netlify-build.sh"
+  publish = "build/web"
+
+[build.environment]
+  FLUTTER_VERSION = "3.41.9"
+
+# SPA 路由重定向
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
