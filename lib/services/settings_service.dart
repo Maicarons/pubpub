@@ -207,4 +207,26 @@ class SettingsService {
       AppLogger.e(_tag, 'Error setting translation target lang', e);
     }
   }
+
+  /// 获取界面语言
+  static String getLocale() {
+    try {
+      final box = Hive.box(CacheKeys.settingsBox);
+      return box.get(CacheKeys.settingsLocale, defaultValue: 'system') as String;
+    } catch (e) {
+      AppLogger.e(_tag, 'Error reading locale', e);
+      return 'system';
+    }
+  }
+
+  /// 设置界面语言
+  static Future<void> setLocale(String locale) async {
+    try {
+      final box = Hive.box(CacheKeys.settingsBox);
+      await box.put(CacheKeys.settingsLocale, locale);
+      AppLogger.d(_tag, 'Locale set to: $locale');
+    } catch (e) {
+      AppLogger.e(_tag, 'Error setting locale', e);
+    }
+  }
 }

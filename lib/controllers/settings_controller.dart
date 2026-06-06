@@ -46,6 +46,8 @@ class SettingsController extends GetxController {
   var translationApiKey = ''.obs;
   var translationModel = 'gpt-4o-mini'.obs;
   var translationTargetLang = '简体中文'.obs;
+  var locale = const Locale('zh').obs;
+  var localeKey = 'system'.obs;
 
   /// 获取当前主题色
   Color get primaryColor {
@@ -76,6 +78,16 @@ class SettingsController extends GetxController {
     translationApiKey.value = SettingsService.getTranslationApiKey();
     translationModel.value = SettingsService.getTranslationModel();
     translationTargetLang.value = SettingsService.getTranslationTargetLang();
+
+    final savedLocale = SettingsService.getLocale();
+    localeKey.value = savedLocale;
+    if (savedLocale == 'system') {
+      // 使用系统语言
+      final systemLocale = WidgetsBinding.instance.platformDispatcher.locale;
+      locale.value = Locale(systemLocale.languageCode);
+    } else {
+      locale.value = Locale(savedLocale);
+    }
   }
 
   ThemeMode _parseThemeMode(String mode) {
@@ -158,6 +170,26 @@ class SettingsController extends GetxController {
   Future<void> setTranslationTargetLang(String value) async {
     translationTargetLang.value = value;
     await SettingsService.setTranslationTargetLang(value);
+  }
+
+  /// 切换语言
+  Future<void> setLocale(String key) async {
+    localeKey.value = key;
+    await SettingsService.setLocale(key);
+
+    Locale newLocale;
+    if (key == 'system') {
+      final systemLocale = WidgetsBinding.instance.platformDispatcher.locale;
+      newLocale = Locale(systemLocale.languageCode);
+    } else {
+      newLocale = Locale(key);
+    }
+
+    locale.value = newLocale;
+    // 延迟一帧执行，确保 locale 已更新
+    Future.microtask(() {
+      Get.updateLocale(newLocale);
+    });
   }
 
   /// 清除缓存

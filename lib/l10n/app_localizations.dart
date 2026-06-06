@@ -206,6 +206,42 @@ abstract class AppLocalizations {
   /// **'Details'**
   String get details;
 
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// No description provided for @selectLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Language'**
+  String get selectLanguage;
+
+  /// No description provided for @languageSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get languageSystem;
+
+  /// No description provided for @checkUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Check for Updates'**
+  String get checkUpdate;
+
+  /// No description provided for @autoTranslate.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto Translate'**
+  String get autoTranslate;
+
+  /// No description provided for @autoTranslateDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'OpenAI compatible API translation'**
+  String get autoTranslateDesc;
+
   /// No description provided for @latestVersion.
   ///
   /// In en, this message translates to:

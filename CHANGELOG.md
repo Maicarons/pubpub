@@ -2,6 +2,27 @@
 
 本项目遵循 [Semantic Versioning](https://semver.org/lang/zh-CN/)。
 
+## [0.1.1] - 2026-06-06
+
+### 新增
+
+- 🌍 语言切换功能：支持跟随系统、简体中文、English
+- 🖼️ 全平台应用图标：使用 flutter_launcher_icons 生成 Android/iOS/Web/Windows/macOS 图标
+
+### 修复
+
+- 🐛 修复 Android 无法联网问题：添加 INTERNET 权限到 release 版本
+- 🐛 修复暗黑模式下底部导航栏颜色不正确
+- 🐛 修复 Android 状态栏与应用内容重叠：添加 SafeArea
+- 🐛 修复语言切换后不生效问题
+- 🐛 修复依赖树组件暗黑模式下文本颜色不正确
+
+### 优化
+
+- ⚡ 界面文本全面使用 i18n 翻译（底部导航、设置页面、关于页面等）
+- ⚡ 移除 Crowdin 集成，简化本地化流程
+- ⚡ 应用图标替换为项目 Logo
+
 ## [0.1.0] - 2026-06-05
 
 ### 新增
@@ -18,7 +39,6 @@
 - 📱 桌面端卡片悬停动效
 - 📋 旧版收藏数据自动迁移
 - 🌍 i18n 国际化支持（中文/英文）
-- 🌍 Crowdin 本地化配置
 - 🤖 自动翻译功能（OpenAI 兼容 API）
 - 🔄 应用内更新检查
 - 📖 包 README 展示（支持 GitHub 镜像）

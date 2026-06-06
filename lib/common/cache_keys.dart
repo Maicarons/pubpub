@@ -36,6 +36,9 @@ class CacheKeys {
   /// 设置项：翻译目标语言
   static const String settingsTranslationTargetLang = 'translation_target_lang';
 
+  /// 设置项：界面语言
+  static const String settingsLocale = 'locale';
+
   /// 收藏列表 key（旧版，用于迁移）
   static const String favoritesList = 'favorites_list';
 

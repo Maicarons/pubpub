@@ -29,10 +29,32 @@ supportedLocales: const [
 ],
 ```
 
+在 `lib/pages/settings_page.dart` 的 `_showLanguageDialog` 中添加新选项：
+
+```dart
+SimpleDialogOption(
+  onPressed: () {
+    ctrl.setLocale(const Locale('ja'));
+    Navigator.pop(context);
+  },
+  child: const Text('日本語'),
+),
+```
+
 ### 3. 重新生成
 
 ```bash
 flutter gen-l10n
+```
+
+### 4. 更新语言显示名称
+
+在 `lib/pages/settings_page.dart` 的 `_buildLanguageTile` 中添加新语言的显示名称：
+
+```dart
+case 'ja':
+  langText = '日本語';
+  break;
 ```
 
 ## ARB 文件格式
@@ -89,35 +111,6 @@ import '../l10n/app_localizations.dart';
 
 // 在 Widget 中
 Text(AppLocalizations.of(context)!.appTitle)
-```
-
-## Crowdin 集成
-
-项目已配置 Crowdin 集成，方便翻译管理。
-
-### 配置
-
-1. 在 [Crowdin](https://crowdin.com) 创建项目
-2. 设置环境变量：
-   - `CROWDIN_PROJECT_ID` - 项目 ID
-   - `CROWDIN_PERSONAL_TOKEN` - 个人访问令牌
-
-### 上传源文件
-
-```bash
-crowdin upload sources
-```
-
-### 下载翻译
-
-```bash
-crowdin download
-```
-
-### 上传翻译
-
-```bash
-crowdin upload translations
 ```
 
 ## 翻译规范

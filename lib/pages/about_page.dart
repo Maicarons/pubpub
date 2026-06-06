@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../common/l10n_ext.dart';
 import '../services/update_service.dart';
 
 /// 关于页面
@@ -13,7 +14,7 @@ class AboutPage extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('关于')),
+      appBar: AppBar(title: Text(context.l10n.about)),
       body: ListView(
         padding: const EdgeInsets.all(24),
         children: [
@@ -21,17 +22,25 @@ class AboutPage extends StatelessWidget {
           Center(
             child: Column(
               children: [
-                Container(
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.primary,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: const Icon(
-                    TDIcons.logo_github,
-                    size: 40,
-                    color: Colors.white,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.asset(
+                    'logo.png',
+                    width: 80,
+                    height: 80,
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.primary,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Icon(
+                        TDIcons.logo_github,
+                        size: 40,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -44,7 +53,7 @@ class AboutPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '跨平台 Pub 镜像浏览器',
+                  context.l10n.aboutDescription,
                   style: TextStyle(
                     fontSize: 14,
                     color: isDark ? Colors.grey[400] : Colors.grey[600],
@@ -59,7 +68,7 @@ class AboutPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
-                    'v${UpdateService.currentVersion}',
+                    context.l10n.version(UpdateService.currentVersion),
                     style: TextStyle(
                       fontSize: 12,
                       color:
@@ -78,7 +87,7 @@ class AboutPage extends StatelessWidget {
             child: OutlinedButton.icon(
               onPressed: () => _checkForUpdate(context),
               icon: const Icon(Icons.system_update),
-              label: const Text('检查更新'),
+              label: Text(context.l10n.checkUpdate),
             ),
           ),
           const SizedBox(height: 32),
@@ -86,20 +95,20 @@ class AboutPage extends StatelessWidget {
           // 功能介绍
           _buildSection(
             context,
-            title: '功能特性',
+            title: context.l10n.features,
             children: [
               _buildFeatureItem(
-                  TDIcons.search, '包搜索', '支持多个 Pub 镜像源搜索'),
+                  TDIcons.search, context.l10n.featureSearch, context.l10n.featureSearchDesc),
               _buildFeatureItem(
-                  TDIcons.info_circle, '包详情', '版本、依赖、README 完整展示'),
+                  TDIcons.info_circle, context.l10n.featureDetail, context.l10n.featureDetailDesc),
               _buildFeatureItem(
-                  TDIcons.heart, '自定义收藏夹', '创建多个收藏夹分类管理'),
+                  TDIcons.heart, context.l10n.featureFavorites, context.l10n.featureFavoritesDesc),
               _buildFeatureItem(
-                  TDIcons.sunny, '主题定制', '10 种主题色 + 深色模式'),
+                  TDIcons.sunny, context.l10n.featureTheme, context.l10n.featureThemeDesc),
               _buildFeatureItem(
-                  TDIcons.translate, '自动翻译', 'OpenAI 兼容 API 翻译简介/README'),
+                  TDIcons.translate, context.l10n.autoTranslate, context.l10n.autoTranslateDesc),
               _buildFeatureItem(
-                  TDIcons.refresh, '响应式布局', '移动端/桌面端自适应'),
+                  TDIcons.refresh, context.l10n.featureLayout, context.l10n.featureLayoutDesc),
             ],
           ),
           const SizedBox(height: 16),
@@ -107,14 +116,14 @@ class AboutPage extends StatelessWidget {
           // 技术栈
           _buildSection(
             context,
-            title: '技术栈',
+            title: context.l10n.techStack,
             children: [
               _buildTechItem('Flutter', '3.41+'),
               _buildTechItem('Dart', '3.11+'),
-              _buildTechItem('GetX', '状态管理'),
-              _buildTechItem('Dio', '网络请求'),
-              _buildTechItem('Hive', '本地存储'),
-              _buildTechItem('TDesign', 'UI 组件'),
+              _buildTechItem('GetX', 'State Management'),
+              _buildTechItem('Dio', 'Networking'),
+              _buildTechItem('Hive', 'Local Storage'),
+              _buildTechItem('TDesign', 'UI Components'),
             ],
           ),
           const SizedBox(height: 16),
@@ -122,33 +131,33 @@ class AboutPage extends StatelessWidget {
           // 链接
           _buildSection(
             context,
-            title: '链接',
+            title: context.l10n.linksTitle,
             children: [
               _buildLinkItem(
                 context,
                 icon: TDIcons.logo_github,
-                title: 'GitHub 仓库',
+                title: context.l10n.githubRepo,
                 subtitle: 'github.com/Maicarons/pubpub',
                 url: 'https://github.com/Maicarons/pubpub',
               ),
               _buildLinkItem(
                 context,
                 icon: TDIcons.link,
-                title: 'pub.dev',
+                title: context.l10n.pubDev,
                 subtitle: 'pub.dev',
                 url: 'https://pub.dev',
               ),
               _buildLinkItem(
                 context,
                 icon: TDIcons.link,
-                title: 'Flutter 官网',
+                title: context.l10n.flutterOfficial,
                 subtitle: 'flutter.dev',
                 url: 'https://flutter.dev',
               ),
               _buildLinkItem(
                 context,
                 icon: TDIcons.link,
-                title: 'TDesign Flutter',
+                title: context.l10n.tdesign,
                 subtitle: 'github.com/Tencent/tdesign-flutter',
                 url: 'https://github.com/Tencent/tdesign-flutter',
               ),
@@ -159,12 +168,12 @@ class AboutPage extends StatelessWidget {
           // 开源许可
           _buildSection(
             context,
-            title: '开源许可',
+            title: context.l10n.license,
             children: [
               ListTile(
                 leading: const Icon(TDIcons.file),
-                title: const Text('Apache License 2.0'),
-                subtitle: const Text('Copyright © 2026 PubPub Contributors'),
+                title: Text(context.l10n.licenseApache),
+                subtitle: Text(context.l10n.copyright),
                 trailing: const Icon(TDIcons.chevron_right),
                 onTap: () => _showLicenseDialog(context),
               ),
@@ -175,7 +184,7 @@ class AboutPage extends StatelessWidget {
           // 底部
           Center(
             child: Text(
-              'Made with ❤️ using Flutter',
+              context.l10n.madeWith,
               style: TextStyle(
                 fontSize: 13,
                 color: isDark ? Colors.grey[500] : Colors.grey[400],

@@ -2,6 +2,8 @@
 
 <div align="center">
 
+<img src="logo.png" alt="PubPub Logo" width="120" height="120">
+
 ![Flutter](https://img.shields.io/badge/Flutter-3.41+-02569B?logo=flutter)
 ![Dart](https://img.shields.io/badge/Dart-3.11+-0175C2?logo=dart)
 ![License](https://img.shields.io/badge/License-Apache%202.0-blue)

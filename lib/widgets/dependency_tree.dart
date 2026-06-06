@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
+import '../common/l10n_ext.dart';
 import '../common/logger.dart';
 import '../layouts/widgets/page_navigation.dart';
 
@@ -12,7 +13,10 @@ class DependencyTree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (dependencies.isEmpty) {
-      return const Text('无直接依赖', style: TextStyle(color: Colors.grey));
+      return Text(
+        context.l10n.noDependencies,
+        style: const TextStyle(color: Colors.grey),
+      );
     }
 
     return Column(
@@ -39,6 +43,7 @@ class _DependencyNode extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return GestureDetector(
       onTap: () {
@@ -51,7 +56,11 @@ class _DependencyNode extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 4),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: Colors.grey.withValues(alpha: 0.2)),
+          border: Border.all(
+            color: isDark
+                ? Colors.grey.withValues(alpha: 0.4)
+                : Colors.grey.withValues(alpha: 0.2),
+          ),
         ),
         child: Row(
           children: [
@@ -79,14 +88,16 @@ class _DependencyNode extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
-                  color: Colors.grey.withValues(alpha: 0.1),
+                  color: isDark
+                      ? Colors.grey.withValues(alpha: 0.2)
+                      : Colors.grey.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
                   version,
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.grey[600],
+                    color: isDark ? Colors.grey[400] : Colors.grey[600],
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -96,7 +107,7 @@ class _DependencyNode extends StatelessWidget {
             Icon(
               TDIcons.chevron_right,
               size: 14,
-              color: Colors.grey[400],
+              color: isDark ? Colors.grey[500] : Colors.grey[400],
             ),
           ],
         ),

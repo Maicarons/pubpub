@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
+import '../../common/l10n_ext.dart';
 
 /// 桌面端侧边栏
 class DesktopSidebar extends StatelessWidget {
@@ -27,10 +28,18 @@ class DesktopSidebar extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
             child: Row(
               children: [
-                Icon(
-                  TDIcons.logo_github,
-                  size: 32,
-                  color: theme.primaryColor,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    'logo.png',
+                    width: 32,
+                    height: 32,
+                    errorBuilder: (context, error, stackTrace) => Icon(
+                      TDIcons.logo_github,
+                      size: 32,
+                      color: theme.primaryColor,
+                    ),
+                  ),
                 ),
                 const SizedBox(width: 12),
                 Text(
@@ -50,19 +59,19 @@ class DesktopSidebar extends StatelessWidget {
             context,
             index: 0,
             icon: TDIcons.search,
-            label: '搜索',
+            label: context.l10n.navSearch,
           ),
           _buildMenuItem(
             context,
             index: 1,
             icon: TDIcons.heart,
-            label: '收藏',
+            label: context.l10n.navFavorites,
           ),
           _buildMenuItem(
             context,
             index: 2,
             icon: TDIcons.setting,
-            label: '设置',
+            label: context.l10n.navSettings,
           ),
         ],
       ),

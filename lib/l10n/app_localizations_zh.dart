@@ -63,6 +63,24 @@ class AppLocalizationsZh extends AppLocalizations {
   String get details => '详情';
 
   @override
+  String get language => '语言';
+
+  @override
+  String get selectLanguage => '选择语言';
+
+  @override
+  String get languageSystem => '跟随系统';
+
+  @override
+  String get checkUpdate => '检查更新';
+
+  @override
+  String get autoTranslate => '自动翻译';
+
+  @override
+  String get autoTranslateDesc => 'OpenAI 兼容 API 翻译简介/README';
+
+  @override
   String get latestVersion => '最新版本';
 
   @override

@@ -2,12 +2,14 @@
 
 <div align="center">
 
+<img src="logo.png" alt="PubPub Logo" width="120" height="120">
+
 ![Flutter](https://img.shields.io/badge/Flutter-3.41+-02569B?logo=flutter)
 ![Dart](https://img.shields.io/badge/Dart-3.11+-0175C2?logo=dart)
 ![License](https://img.shields.io/badge/License-Apache%202.0-blue)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Android%20%7C%20Web-lightgrey)
 
-**跨平台 Pub 镜像浏览器** — 搜索、浏览、收藏 Flutter/Dart 包
+**跨平台 Pub 包浏览器** — 搜索、浏览、收藏 Flutter/Dart 包
 
 [English](#features) | [中文](#功能特性)
 
@@ -17,7 +19,7 @@
 
 ## 功能特性
 
-- 🔍 **包搜索** — 支持 pub.flutter-io.cn 镜像源搜索
+- 🔍 **包搜索** — 支持镜像源搜索
 - 📦 **包详情** — 版本信息、依赖树、评分、许可证
 - ❤️ **自定义收藏夹** — 创建多个收藏夹，分类管理收藏的包
 - 🔄 **响应式布局** — 移动端底部导航 / 桌面端侧边栏自动切换

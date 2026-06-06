@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
+import '../common/l10n_ext.dart';
 import '../controllers/settings_controller.dart';
 import '../services/update_service.dart';
 import 'about_page.dart';
@@ -54,49 +55,44 @@ class SettingsPage extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: [
         _buildSection(
-          title: 'Pub 镜像源',
+          title: context.l10n.pubMirror,
           children: [
             Obx(() => _buildPubSourceDropdown(settingsCtrl)),
           ],
         ),
         const SizedBox(height: 16),
         _buildSection(
-          title: 'GitHub 镜像源',
+          title: context.l10n.githubRawMirror,
           children: [
             Obx(() => _buildGithubMirrorDropdown(settingsCtrl)),
           ],
         ),
         const SizedBox(height: 16),
         _buildSection(
-          title: '自动翻译',
-          children: [
-            _buildTranslationSettings(context, settingsCtrl),
-          ],
-        ),
-        const SizedBox(height: 16),
-        _buildSection(
-          title: '外观',
+          title: context.l10n.appearance,
           children: [
             _buildThemeTile(context, settingsCtrl),
+            const Divider(height: 1),
+            _buildLanguageTile(context, settingsCtrl),
             const Divider(height: 1),
             Obx(() => _buildColorSchemeSection(settingsCtrl)),
           ],
         ),
         const SizedBox(height: 16),
         _buildSection(
-          title: '数据',
+          title: context.l10n.data,
           children: [
             _buildCacheTile(context, settingsCtrl),
           ],
         ),
         const SizedBox(height: 16),
         _buildSection(
-          title: '关于',
+          title: context.l10n.about,
           children: [
             ListTile(
               leading: const Icon(TDIcons.info_circle),
-              title: const Text('关于 PubPub'),
-              subtitle: Text('版本 ${UpdateService.currentVersion}'),
+              title: Text(context.l10n.aboutPubPub),
+              subtitle: Text(context.l10n.version(UpdateService.currentVersion)),
               trailing: const Icon(TDIcons.chevron_right),
               onTap: () => Get.to(() => const AboutPage()),
             ),
@@ -237,18 +233,18 @@ class SettingsPage extends StatelessWidget {
       String themeText;
       switch (ctrl.themeMode.value) {
         case ThemeMode.light:
-          themeText = '浅色模式';
+          themeText = context.l10n.themeLight;
           break;
         case ThemeMode.dark:
-          themeText = '深色模式';
+          themeText = context.l10n.themeDark;
           break;
         default:
-          themeText = '跟随系统';
+          themeText = context.l10n.themeSystem;
       }
 
       return ListTile(
         leading: const Icon(TDIcons.sunny),
-        title: const Text('主题'),
+        title: Text(context.l10n.theme),
         subtitle: Text(themeText),
         trailing: const Icon(TDIcons.chevron_right),
         onTap: () => _showThemeDialog(context, ctrl),
@@ -260,28 +256,89 @@ class SettingsPage extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => SimpleDialog(
-        title: const Text('选择主题'),
+        title: Text(context.l10n.selectTheme),
         children: [
           SimpleDialogOption(
             onPressed: () {
               ctrl.setThemeMode(ThemeMode.system);
               Navigator.pop(context);
             },
-            child: const Text('跟随系统'),
+            child: Text(context.l10n.themeSystem),
           ),
           SimpleDialogOption(
             onPressed: () {
               ctrl.setThemeMode(ThemeMode.light);
               Navigator.pop(context);
             },
-            child: const Text('浅色模式'),
+            child: Text(context.l10n.themeLight),
           ),
           SimpleDialogOption(
             onPressed: () {
               ctrl.setThemeMode(ThemeMode.dark);
               Navigator.pop(context);
             },
-            child: const Text('深色模式'),
+            child: Text(context.l10n.themeDark),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ==================== 语言 ====================
+
+  Widget _buildLanguageTile(BuildContext context, SettingsController ctrl) {
+    return Obx(() {
+      String langText;
+      switch (ctrl.localeKey.value) {
+        case 'system':
+          langText = context.l10n.languageSystem;
+          break;
+        case 'en':
+          langText = 'English';
+          break;
+        case 'zh':
+          langText = '简体中文';
+          break;
+        default:
+          langText = context.l10n.languageSystem;
+      }
+
+      return ListTile(
+        leading: const Icon(TDIcons.translate),
+        title: Text(context.l10n.language),
+        subtitle: Text(langText),
+        trailing: const Icon(TDIcons.chevron_right),
+        onTap: () => _showLanguageDialog(context, ctrl),
+      );
+    });
+  }
+
+  void _showLanguageDialog(BuildContext context, SettingsController ctrl) {
+    showDialog(
+      context: context,
+      builder: (context) => SimpleDialog(
+        title: Text(context.l10n.selectLanguage),
+        children: [
+          SimpleDialogOption(
+            onPressed: () {
+              ctrl.setLocale('system');
+              Navigator.pop(context);
+            },
+            child: Text(context.l10n.languageSystem),
+          ),
+          SimpleDialogOption(
+            onPressed: () {
+              ctrl.setLocale('zh');
+              Navigator.pop(context);
+            },
+            child: const Text('简体中文'),
+          ),
+          SimpleDialogOption(
+            onPressed: () {
+              ctrl.setLocale('en');
+              Navigator.pop(context);
+            },
+            child: const Text('English'),
           ),
         ],
       ),
@@ -344,113 +401,13 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  // ==================== 翻译设置 ====================
-
-  Widget _buildTranslationSettings(
-      BuildContext context, SettingsController ctrl) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              const Icon(TDIcons.translate, size: 20),
-              const SizedBox(width: 12),
-              const Text('OpenAI 兼容 API', style: TextStyle(fontSize: 15)),
-              const Spacer(),
-              Obx(() {
-                final configured = ctrl.isTranslationConfigured;
-                return Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                  decoration: BoxDecoration(
-                    color: configured
-                        ? Colors.green.withValues(alpha: 0.1)
-                        : Colors.grey.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Text(
-                    configured ? '已配置' : '未配置',
-                    style: TextStyle(
-                      fontSize: 11,
-                      color: configured ? Colors.green : Colors.grey,
-                    ),
-                  ),
-                );
-              }),
-            ],
-          ),
-          const SizedBox(height: 12),
-          // Endpoint
-          Obx(() => TextField(
-                controller: TextEditingController(
-                    text: ctrl.translationEndpoint.value),
-                decoration: const InputDecoration(
-                  labelText: 'API Endpoint',
-                  hintText: 'https://api.openai.com',
-                  border: OutlineInputBorder(),
-                  isDense: true,
-                ),
-                onSubmitted: (v) => ctrl.setTranslationEndpoint(v),
-              )),
-          const SizedBox(height: 8),
-          // API Key
-          Obx(() => TextField(
-                controller:
-                    TextEditingController(text: ctrl.translationApiKey.value),
-                decoration: const InputDecoration(
-                  labelText: 'API Key',
-                  hintText: 'sk-...',
-                  border: OutlineInputBorder(),
-                  isDense: true,
-                ),
-                obscureText: true,
-                onSubmitted: (v) => ctrl.setTranslationApiKey(v),
-              )),
-          const SizedBox(height: 8),
-          // Model
-          Obx(() => TextField(
-                controller:
-                    TextEditingController(text: ctrl.translationModel.value),
-                decoration: const InputDecoration(
-                  labelText: '模型',
-                  hintText: 'gpt-4o-mini',
-                  border: OutlineInputBorder(),
-                  isDense: true,
-                ),
-                onSubmitted: (v) => ctrl.setTranslationModel(v),
-              )),
-          const SizedBox(height: 8),
-          // 目标语言
-          Obx(() => TextField(
-                controller: TextEditingController(
-                    text: ctrl.translationTargetLang.value),
-                decoration: const InputDecoration(
-                  labelText: '目标语言',
-                  hintText: '简体中文 / English / 日本語',
-                  border: OutlineInputBorder(),
-                  isDense: true,
-                ),
-                onSubmitted: (v) => ctrl.setTranslationTargetLang(v),
-              )),
-          const SizedBox(height: 8),
-          Text(
-            '支持所有 OpenAI 兼容 API（OpenAI、DeepSeek、Moonshot 等）',
-            style: TextStyle(fontSize: 12, color: Colors.grey[500]),
-          ),
-        ],
-      ),
-    );
-  }
-
   // ==================== 缓存 ====================
 
   Widget _buildCacheTile(BuildContext context, SettingsController ctrl) {
     return ListTile(
       leading: const Icon(TDIcons.delete),
-      title: const Text('清除缓存'),
-      subtitle: const Text('清除所有 API 缓存数据'),
+      title: Text(context.l10n.clearCache),
+      subtitle: Text(context.l10n.clearCacheSubtitle),
       onTap: () => _showClearCacheDialog(context, ctrl),
     );
   }
@@ -460,19 +417,19 @@ class SettingsPage extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('清除缓存'),
-        content: const Text('确定清除所有 API 缓存吗？收藏和设置不会被清除。'),
+        title: Text(context.l10n.clearCacheTitle),
+        content: Text(context.l10n.clearCacheConfirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('取消'),
+            child: Text(context.l10n.cancel),
           ),
           TextButton(
             onPressed: () {
               ctrl.clearCache();
               Navigator.pop(context);
             },
-            child: const Text('确定'),
+            child: Text(context.l10n.confirm),
           ),
         ],
       ),

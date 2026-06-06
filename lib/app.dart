@@ -38,6 +38,16 @@ class PubPubApp extends StatelessWidget {
           brightness: Brightness.dark,
         ).useSystemChineseFont(Brightness.dark),
         themeMode: settingsCtrl.themeMode.value,
+        locale: settingsCtrl.locale.value,
+        localeResolutionCallback: (locale, supportedLocales) {
+          // 优先使用用户设置的语言
+          for (final supported in supportedLocales) {
+            if (supported.languageCode == settingsCtrl.locale.value.languageCode) {
+              return supported;
+            }
+          }
+          return supportedLocales.first;
+        },
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,

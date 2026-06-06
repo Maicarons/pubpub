@@ -63,6 +63,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get details => 'Details';
 
   @override
+  String get language => 'Language';
+
+  @override
+  String get selectLanguage => 'Select Language';
+
+  @override
+  String get languageSystem => 'System';
+
+  @override
+  String get checkUpdate => 'Check for Updates';
+
+  @override
+  String get autoTranslate => 'Auto Translate';
+
+  @override
+  String get autoTranslateDesc => 'OpenAI compatible API translation';
+
+  @override
   String get latestVersion => 'Latest';
 
   @override

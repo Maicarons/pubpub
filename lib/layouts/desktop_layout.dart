@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../common/l10n_ext.dart';
 import '../pages/home_page.dart';
 import '../pages/favorites_page.dart';
 import '../pages/settings_page.dart';
@@ -21,11 +22,15 @@ class _DesktopLayoutState extends State<DesktopLayout> {
     SettingsPage(),
   ];
 
-  final List<String> _pageTitles = const ['搜索', '收藏', '设置'];
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final pageTitles = [
+      context.l10n.navSearch,
+      context.l10n.navFavorites,
+      context.l10n.navSettings,
+    ];
+
     return Scaffold(
       body: Row(
         children: [
@@ -54,7 +59,7 @@ class _DesktopLayoutState extends State<DesktopLayout> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                   child: Text(
-                    _pageTitles[_selectedIndex],
+                    pageTitles[_selectedIndex],
                     style: theme.textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
