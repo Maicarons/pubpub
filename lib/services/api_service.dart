@@ -26,20 +26,19 @@ class ApiService {
     return _dio!;
   }
 
-  /// 获取当前源地址
-  static String get baseUrl => SettingsService.getSource();
+  /// 获取当前源地址（Web 端强制使用 pub.dev，其他镜像不支持 CORS）
+  static String get baseUrl => kIsWeb ? 'https://pub.dev' : SettingsService.getSource();
 
-  /// Web 端代理：仅对无 CORS 头的 API 走 Netlify 代理
-  /// pub.dev 搜索 API 无 CORS 头需要代理；包详情和 GitHub Raw 有 CORS 头可直接访问
+  /// Web 端搜索 API 无 CORS 头，走 Netlify 代理；包详情和 GitHub Raw 直接访问
   static String _proxyUrl(String url) {
     if (!kIsWeb) return url;
 
-    // pub.dev 包详情和 GitHub Raw 有 CORS 头，直接访问
+    // 有 CORS 头的直接访问
     if (url.contains('pub.dev/api/packages/')) return url;
     if (url.contains('raw.githubusercontent.com')) return url;
     if (url.contains('raw.gitmirror.com')) return url;
 
-    // 搜索 API 或非 pub.dev 镜像源走 Netlify 代理
+    // 搜索 API 走 Netlify 代理
     final uri = Uri.parse(url);
     return '/api/pubdev${uri.path}${uri.hasQuery ? '?${uri.query}' : ''}';
   }
