@@ -447,6 +447,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sjtu => '上海交大 SJTU';
 
   @override
+  String get njtech => '南京工业 NJTech';
+
+  @override
+  String get cernet => '教育网 CERNET';
+
+  @override
   String get flutterChina => 'Flutter 中国';
 
   @override

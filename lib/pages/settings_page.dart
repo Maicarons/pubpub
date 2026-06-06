@@ -39,6 +39,18 @@ const List<_MirrorSource> _pubMirrorSources = [
     url: 'https://mirror.sjtu.edu.cn/dart-pub',
     supportsSearch: false,
   ),
+  _MirrorSource(
+    nameKey: 'njtech',
+    name: 'Nanjing Tech',
+    url: 'https://mirrors.njtech.edu.cn/dart-pub',
+    supportsSearch: false,
+  ),
+  _MirrorSource(
+    nameKey: 'cernet',
+    name: 'CERNET',
+    url: 'https://mirrors.cernet.edu.cn/dart-pub',
+    supportsSearch: false,
+  ),
 ];
 
 /// GitHub Raw 镜像源列表
@@ -90,6 +102,10 @@ String _getMirrorName(BuildContext context, _MirrorSource source) {
       return context.l10n.tuna;
     case 'sjtu':
       return context.l10n.sjtu;
+    case 'njtech':
+      return context.l10n.njtech;
+    case 'cernet':
+      return context.l10n.cernet;
     default:
       return source.name;
   }

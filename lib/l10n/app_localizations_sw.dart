@@ -453,6 +453,12 @@ class AppLocalizationsSw extends AppLocalizations {
   String get sjtu => 'SJTU';
 
   @override
+  String get njtech => 'Nanjing Tech';
+
+  @override
+  String get cernet => 'CERNET';
+
+  @override
   String get flutterChina => 'Flutter China';
 
   @override

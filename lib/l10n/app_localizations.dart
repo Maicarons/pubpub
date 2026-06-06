@@ -982,6 +982,18 @@ abstract class AppLocalizations {
   /// **'SJTU'**
   String get sjtu;
 
+  /// No description provided for @njtech.
+  ///
+  /// In en, this message translates to:
+  /// **'Nanjing Tech'**
+  String get njtech;
+
+  /// No description provided for @cernet.
+  ///
+  /// In en, this message translates to:
+  /// **'CERNET'**
+  String get cernet;
+
   /// No description provided for @flutterChina.
   ///
   /// In en, this message translates to:

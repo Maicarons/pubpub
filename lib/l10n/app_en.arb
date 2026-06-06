@@ -190,6 +190,8 @@
   "pubOfficial": "Official (pub.dev)",
   "tuna": "Tsinghua TUNA",
   "sjtu": "SJTU",
+  "njtech": "Nanjing Tech",
+  "cernet": "CERNET",
   "flutterChina": "Flutter China",
   "mirrorNoSearch": "Current mirror does not support search, please switch to a supported source",
   "mirrorSearchNotSupported": "Search not supported",
