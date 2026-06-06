@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:dio_web_adapter/dio_web_adapter.dart';
 import '../common/logger.dart';
 import '../models/package_search_result.dart';
 import '../models/package_detail.dart';
 import 'cache_service.dart';
 import 'settings_service.dart';
+import 'platform_adapter_web.dart' if (dart.library.io) 'platform_adapter_native.dart';
 
 /// Dio 封装，支持动态 baseUrl、缓存拦截器
 class ApiService {
@@ -22,10 +22,8 @@ class ApiService {
         connectTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 10),
       ));
-      // Web 端使用 BrowserHttpClientAdapter 解决 CORS 问题
-      if (kIsWeb) {
-        _dio!.httpClientAdapter = BrowserHttpClientAdapter();
-      }
+      // 使用平台适配器（Web 端使用 BrowserHttpClientAdapter，Native 端使用 IOHttpClientAdapter）
+      _dio!.httpClientAdapter = createHttpClientAdapter();
       _dio!.interceptors.add(_CacheInterceptor());
     }
     return _dio!;
