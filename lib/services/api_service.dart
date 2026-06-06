@@ -30,13 +30,16 @@ class ApiService {
   static String get baseUrl => SettingsService.getSource();
 
   /// Web 端通过 Netlify 反向代理路径转发请求（避免 CORS）
+  /// pub.dev 包详情有 CORS 头可直接访问，搜索 API 和其他镜像源需要代理
   static String _proxyPubUrl(String url) {
-    if (kIsWeb) {
-      // https://pub.dev/api/packages/dio → /api/pubdev/api/packages/dio
-      final uri = Uri.parse(url);
-      return '/api/pubdev${uri.path}${uri.hasQuery ? '?${uri.query}' : ''}';
-    }
-    return url;
+    if (!kIsWeb) return url;
+
+    // pub.dev 包详情有 CORS 头，可以直接访问
+    if (url.contains('pub.dev/api/packages/')) return url;
+
+    // 搜索 API 或非 pub.dev 镜像源走代理
+    final uri = Uri.parse(url);
+    return '/api/pubdev${uri.path}${uri.hasQuery ? '?${uri.query}' : ''}';
   }
 
   /// Web 端通过 Netlify 代理获取 GitHub Raw 内容
