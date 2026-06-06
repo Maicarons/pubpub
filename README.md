@@ -9,62 +9,62 @@
 ![License](https://img.shields.io/badge/License-Apache%202.0-blue)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Android%20%7C%20Web-lightgrey)
 
-**跨平台 Pub 包浏览器** — 搜索、浏览、收藏 Flutter/Dart 包
+**Cross-platform Pub Package Browser** — Search, browse, and favorite Flutter/Dart packages
 
-[English](#features) | [中文](#功能特性)
+[English](#features) | [中文](README.zh.md#功能特性)
 
 </div>
 
 ---
 
-## 功能特性
+## Features
 
-- 🔍 **包搜索** — 支持镜像源搜索
-- 📦 **包详情** — 版本信息、依赖树、评分、许可证
-- ❤️ **自定义收藏夹** — 创建多个收藏夹，分类管理收藏的包
-- 🔄 **响应式布局** — 移动端底部导航 / 桌面端侧边栏自动切换
-- 💾 **本地缓存** — Hive 缓存 + 离线降级，断网也能浏览
-- 🌐 **源切换** — 支持切换不同的 Pub 镜像源
-- 🎨 **主题适配** — 跟随系统 / 浅色 / 深色模式
-- 🌍 **多语言支持** — 支持 22 种语言，含 RTL 布局
+- 🔍 **Package Search** — Search via multiple Pub mirror sources
+- 📦 **Package Details** — Version history, dependency tree, README display
+- ❤️ **Custom Collections** — Create multiple folders to organize favorites
+- 🔄 **Responsive Layout** — Mobile bottom navigation / Desktop sidebar auto-switch
+- 💾 **Local Cache** — Hive cache + offline fallback, browse without network
+- 🌐 **Mirror Sources** — Switch between different Pub mirrors
+- 🎨 **Theme Support** — System / Light / Dark mode with 10 theme colors
+- 🌍 **Multi-language** — 22 languages supported, including RTL layout
 
-## 支持语言
+## Supported Languages
 
-| 区域 | 语言 |
-|------|------|
-| 亚洲 | 简体中文、日本語、한국어、हिन्दी、বাংলা、ਪੰਜਾਬੀ、मराठी、తెలుగు、اردو、فارسی |
-| 欧洲 | English、Deutsch、Français、Italiano、Português、Español、Русский、Türkçe |
-| 非洲 | العربية、Kiswahili、Basa Jawa |
+| Region | Languages |
+|--------|-----------|
+| Asia | 简体中文、日本語、한국어、हिन्दी、বাংলা、ਪੰਜਾਬੀ、मराठी、తెలుగు、اردو、فارسی |
+| Europe | English、Deutsch、Français、Italiano、Português、Español、Русский、Türkçe |
+| Africa | العربية、Kiswahili、Basa Jawa |
 
-> 阿拉伯语、乌尔都语、波斯语支持 RTL（从右到左）布局
+> Arabic, Urdu, and Persian support RTL (Right-to-Left) layout
 
-## 快速开始
+## Getting Started
 
-### 环境要求
+### Requirements
 
 - Flutter 3.41+
 - Dart 3.11+
 
-### 安装与运行
+### Install & Run
 
 ```bash
-# 克隆仓库
+# Clone repository
 git clone https://github.com/your-username/pubpub.git
 cd pubpub
 
-# 安装依赖
+# Install dependencies
 flutter pub get
 
-# 生成序列化代码
+# Generate serialization code
 flutter pub run build_runner build
 
-# 运行
+# Run
 flutter run -d windows   # Windows
 flutter run -d android   # Android
 flutter run -d chrome    # Web
 ```
 
-### 构建发布版
+### Build Release
 
 ```bash
 flutter build windows
@@ -72,52 +72,52 @@ flutter build apk
 flutter build web
 ```
 
-## 项目结构
+## Project Structure
 
 ```
 lib/
-├── main.dart                     # 应用入口
-├── app.dart                      # GetMaterialApp 配置
-├── common/                       # 常量、缓存 key、日志
-├── models/                       # 数据模型
-├── services/                     # API、缓存、收藏、设置服务
-├── controllers/                  # GetX 控制器
-├── layouts/                      # 响应式布局（移动端/桌面端）
-├── pages/                        # 页面（首页、详情、收藏、设置）
-└── widgets/                      # 公共组件
+├── main.dart                     # App entry point
+├── app.dart                      # GetMaterialApp configuration
+├── common/                       # Constants, cache keys, logger
+├── models/                       # Data models
+├── services/                     # API, cache, favorites, settings
+├── controllers/                  # GetX controllers
+├── layouts/                      # Responsive layout (mobile/desktop)
+├── pages/                        # Pages (home, detail, favorites, settings)
+└── widgets/                      # Shared widgets
 ```
 
-## 技术栈
+## Tech Stack
 
-| 类别 | 技术 |
-|------|------|
-| 框架 | Flutter 3.41 |
-| 状态管理 | GetX |
-| 网络 | Dio |
-| 本地存储 | Hive |
-| UI 组件库 | TDesign Flutter |
-| 代码生成 | json_serializable |
+| Category | Technology |
+|----------|------------|
+| Framework | Flutter 3.41 |
+| State Management | GetX |
+| Networking | Dio |
+| Local Storage | Hive |
+| UI Components | TDesign Flutter |
+| Code Generation | json_serializable |
 
 ## API
 
-应用使用 Pub 镜像站 API：
+The app uses Pub mirror API:
 
 ```
-GET /api/search?q={query}&page={page}    # 搜索包
-GET /api/packages/{name}                  # 获取包详情
+GET /api/search?q={query}&page={page}    # Search packages
+GET /api/packages/{name}                  # Get package details
 ```
 
-默认镜像源：`https://pub.flutter-io.cn`
+Default mirror: `https://pub.flutter-io.cn`
 
-## 贡献
+## Contributing
 
-欢迎贡献！请查看 [CONTRIBUTING.md](CONTRIBUTING.md)。
+Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## 许可证
+## License
 
-Apache 2.0 — 详见 [LICENSE](LICENSE)
+Apache 2.0 — See [LICENSE](LICENSE)
 
-## 致谢
+## Acknowledgements
 
 - [Flutter](https://flutter.dev)
 - [pub.dev](https://pub.dev)
