@@ -457,4 +457,15 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mirrorSearchSupported => '支持搜索';
+
+  @override
+  String get addCustomMirror => '添加自定义镜像';
+
+  @override
+  String get deleteMirror => '删除镜像源';
+
+  @override
+  String deleteMirrorConfirm(Object url) {
+    return '确定删除 \"$url\" 吗？';
+  }
 }

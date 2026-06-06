@@ -1005,6 +1005,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search supported'**
   String get mirrorSearchSupported;
+
+  /// No description provided for @addCustomMirror.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Custom Mirror'**
+  String get addCustomMirror;
+
+  /// No description provided for @deleteMirror.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Mirror'**
+  String get deleteMirror;
+
+  /// No description provided for @deleteMirrorConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete \"{url}\"?'**
+  String deleteMirrorConfirm(Object url);
 }
 
 class _AppLocalizationsDelegate

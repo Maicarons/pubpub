@@ -39,6 +39,12 @@ class CacheKeys {
   /// 设置项：界面语言
   static const String settingsLocale = 'locale';
 
+  /// 设置项：自定义 Pub 镜像源列表
+  static const String settingsCustomPubMirrors = 'custom_pub_mirrors';
+
+  /// 设置项：自定义 GitHub Raw 镜像源列表
+  static const String settingsCustomGithubRawMirrors = 'custom_github_raw_mirrors';
+
   /// 收藏列表 key（旧版，用于迁移）
   static const String favoritesList = 'favorites_list';
 

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../common/cache_keys.dart';
 import '../common/constants.dart';
@@ -205,6 +206,48 @@ class SettingsService {
       await box.put(CacheKeys.settingsTranslationTargetLang, value);
     } catch (e) {
       AppLogger.e(_tag, 'Error setting translation target lang', e);
+    }
+  }
+
+  /// 获取自定义 Pub 镜像源列表
+  static List<String> getCustomPubMirrors() {
+    try {
+      final box = Hive.box(CacheKeys.settingsBox);
+      final raw = box.get(CacheKeys.settingsCustomPubMirrors, defaultValue: '[]') as String;
+      return List<String>.from(jsonDecode(raw));
+    } catch (e) {
+      return [];
+    }
+  }
+
+  /// 设置自定义 Pub 镜像源列表
+  static Future<void> setCustomPubMirrors(List<String> mirrors) async {
+    try {
+      final box = Hive.box(CacheKeys.settingsBox);
+      await box.put(CacheKeys.settingsCustomPubMirrors, jsonEncode(mirrors));
+    } catch (e) {
+      AppLogger.e(_tag, 'Error setting custom pub mirrors', e);
+    }
+  }
+
+  /// 获取自定义 GitHub Raw 镜像源列表
+  static List<String> getCustomGithubRawMirrors() {
+    try {
+      final box = Hive.box(CacheKeys.settingsBox);
+      final raw = box.get(CacheKeys.settingsCustomGithubRawMirrors, defaultValue: '[]') as String;
+      return List<String>.from(jsonDecode(raw));
+    } catch (e) {
+      return [];
+    }
+  }
+
+  /// 设置自定义 GitHub Raw 镜像源列表
+  static Future<void> setCustomGithubRawMirrors(List<String> mirrors) async {
+    try {
+      final box = Hive.box(CacheKeys.settingsBox);
+      await box.put(CacheKeys.settingsCustomGithubRawMirrors, jsonEncode(mirrors));
+    } catch (e) {
+      AppLogger.e(_tag, 'Error setting custom github raw mirrors', e);
     }
   }
 

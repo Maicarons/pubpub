@@ -466,4 +466,15 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mirrorSearchSupported => 'Search supported';
+
+  @override
+  String get addCustomMirror => 'Add Custom Mirror';
+
+  @override
+  String get deleteMirror => 'Delete Mirror';
+
+  @override
+  String deleteMirrorConfirm(Object url) {
+    return 'Delete \"$url\"?';
+  }
 }

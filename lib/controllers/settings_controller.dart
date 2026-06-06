@@ -48,6 +48,8 @@ class SettingsController extends GetxController {
   var translationTargetLang = 'zh'.obs; // 使用语言代码
   var locale = const Locale('zh').obs;
   var localeKey = 'system'.obs;
+  var customPubMirrors = <String>[].obs;
+  var customGithubRawMirrors = <String>[].obs;
 
   /// 获取当前主题色
   Color get primaryColor {
@@ -78,6 +80,9 @@ class SettingsController extends GetxController {
     translationApiKey.value = SettingsService.getTranslationApiKey();
     translationModel.value = SettingsService.getTranslationModel();
     translationTargetLang.value = SettingsService.getTranslationTargetLang();
+
+    customPubMirrors.value = SettingsService.getCustomPubMirrors();
+    customGithubRawMirrors.value = SettingsService.getCustomGithubRawMirrors();
 
     final savedLocale = SettingsService.getLocale();
     localeKey.value = savedLocale;
@@ -170,6 +175,44 @@ class SettingsController extends GetxController {
   Future<void> setTranslationTargetLang(String value) async {
     translationTargetLang.value = value;
     await SettingsService.setTranslationTargetLang(value);
+  }
+
+  /// 添加自定义 Pub 镜像源
+  Future<void> addCustomPubMirror(String url) async {
+    if (url.trim().isEmpty) return;
+    final cleaned = url.trim().replaceAll(RegExp(r'/+$'), '');
+    if (customPubMirrors.contains(cleaned)) return;
+    customPubMirrors.add(cleaned);
+    await SettingsService.setCustomPubMirrors(customPubMirrors.toList());
+  }
+
+  /// 删除自定义 Pub 镜像源
+  Future<void> removeCustomPubMirror(String url) async {
+    customPubMirrors.remove(url);
+    await SettingsService.setCustomPubMirrors(customPubMirrors.toList());
+    // 如果删除的是当前选中的源，切换到默认源
+    if (currentSource.value == url) {
+      await resetSource();
+    }
+  }
+
+  /// 添加自定义 GitHub Raw 镜像源
+  Future<void> addCustomGithubRawMirror(String url) async {
+    if (url.trim().isEmpty) return;
+    final cleaned = url.trim().replaceAll(RegExp(r'/+$'), '');
+    if (customGithubRawMirrors.contains(cleaned)) return;
+    customGithubRawMirrors.add(cleaned);
+    await SettingsService.setCustomGithubRawMirrors(customGithubRawMirrors.toList());
+  }
+
+  /// 删除自定义 GitHub Raw 镜像源
+  Future<void> removeCustomGithubRawMirror(String url) async {
+    customGithubRawMirrors.remove(url);
+    await SettingsService.setCustomGithubRawMirrors(customGithubRawMirrors.toList());
+    // 如果删除的是当前选中的源，切换到默认源
+    if (githubRawMirror.value == url) {
+      await setGithubRawMirror('raw.githubusercontent.com');
+    }
   }
 
   /// 切换语言

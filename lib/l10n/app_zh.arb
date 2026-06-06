@@ -144,5 +144,8 @@
   "flutterChina": "Flutter 中国",
   "mirrorNoSearch": "当前镜像源不支持搜索，请切换到支持搜索的源",
   "mirrorSearchNotSupported": "不支持搜索",
-  "mirrorSearchSupported": "支持搜索"
+  "mirrorSearchSupported": "支持搜索",
+  "addCustomMirror": "添加自定义镜像",
+  "deleteMirror": "删除镜像源",
+  "deleteMirrorConfirm": "确定删除 \"{url}\" 吗？"
 }

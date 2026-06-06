@@ -33,7 +33,10 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ],
 
   "bn": [
@@ -70,7 +73,10 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ],
 
   "de": [
@@ -107,7 +113,10 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ],
 
   "es": [
@@ -144,7 +153,10 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ],
 
   "fa": [
@@ -181,7 +193,10 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ],
 
   "fr": [
@@ -218,7 +233,10 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ],
 
   "hi": [
@@ -255,7 +273,10 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ],
 
   "it": [
@@ -292,7 +313,10 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ],
 
   "ja": [
@@ -329,7 +353,10 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ],
 
   "jv": [
@@ -366,7 +393,10 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ],
 
   "ko": [
@@ -403,7 +433,10 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ],
 
   "mr": [
@@ -440,7 +473,10 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ],
 
   "pa": [
@@ -477,7 +513,10 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ],
 
   "pt": [
@@ -514,7 +553,10 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ],
 
   "ru": [
@@ -551,7 +593,10 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ],
 
   "sw": [
@@ -588,7 +633,10 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ],
 
   "te": [
@@ -625,7 +673,10 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ],
 
   "tr": [
@@ -662,7 +713,10 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ],
 
   "ur": [
@@ -699,6 +753,9 @@
     "flutterChina",
     "mirrorNoSearch",
     "mirrorSearchNotSupported",
-    "mirrorSearchSupported"
+    "mirrorSearchSupported",
+    "addCustomMirror",
+    "deleteMirror",
+    "deleteMirrorConfirm"
   ]
 }

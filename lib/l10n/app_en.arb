@@ -193,5 +193,8 @@
   "flutterChina": "Flutter China",
   "mirrorNoSearch": "Current mirror does not support search, please switch to a supported source",
   "mirrorSearchNotSupported": "Search not supported",
-  "mirrorSearchSupported": "Search supported"
+  "mirrorSearchSupported": "Search supported",
+  "addCustomMirror": "Add Custom Mirror",
+  "deleteMirror": "Delete Mirror",
+  "deleteMirrorConfirm": "Delete \"{url}\"?"
 }

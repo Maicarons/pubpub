@@ -46,6 +46,14 @@ const List<String> _githubRawMirrors = [
   'raw.githubusercontent.com',
   'raw.gitmirror.com',
   'raw.kkgithub.com',
+  'wget.la/https://raw.githubusercontent.com',
+  'hk.gh-proxy.org/https://raw.githubusercontent.com',
+  'hub.glowp.xyz/https://raw.githubusercontent.com',
+  'ghfast.top/https://raw.githubusercontent.com',
+  'gh.catmak.name/https://raw.githubusercontent.com',
+  'fastly.jsdelivr.net/gh',
+  'cdn.gh-proxy.org/https://raw.githubusercontent.com',
+  'g.blfrp.cn/https://raw.githubusercontent.com',
 ];
 
 class _MirrorSource {
@@ -180,10 +188,13 @@ class SettingsPage extends StatelessWidget {
 
   Widget _buildPubSourceDropdown(BuildContext context, SettingsController ctrl) {
     final currentUrl = ctrl.currentSource.value;
-    final selected = _pubMirrorSources.firstWhere(
-      (s) => s.url == currentUrl,
-      orElse: () => _pubMirrorSources.first,
-    );
+
+    // 合并内置和自定义源
+    final allUrls = [
+      ..._pubMirrorSources.map((s) => s.url),
+      ...ctrl.customPubMirrors,
+    ];
+    final selectedUrl = allUrls.contains(currentUrl) ? currentUrl : allUrls.first;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -195,46 +206,73 @@ class SettingsPage extends StatelessWidget {
               const Icon(TDIcons.link, size: 20),
               const SizedBox(width: 12),
               Text(context.l10n.pubMirror, style: const TextStyle(fontSize: 15)),
+              const Spacer(),
+              IconButton(
+                icon: const Icon(TDIcons.add, size: 18),
+                tooltip: context.l10n.addCustomMirror,
+                onPressed: () => _showAddMirrorDialog(context, ctrl, isPub: true),
+              ),
             ],
           ),
           const SizedBox(height: 8),
           DropdownButtonFormField<String>(
-            initialValue: selected.url,
+            initialValue: selectedUrl,
+            isExpanded: true,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               contentPadding:
                   EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             ),
-            items: _pubMirrorSources.map((source) {
-              return DropdownMenuItem(
-                value: source.url,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(_getMirrorName(context, source), style: const TextStyle(fontSize: 14)),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: source.supportsSearch
-                            ? Colors.green.withValues(alpha: 0.1)
-                            : Colors.orange.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(4),
+            items: [
+              // 内置源
+              ..._pubMirrorSources.map((source) {
+                return DropdownMenuItem(
+                  value: source.url,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(_getMirrorName(context, source), style: const TextStyle(fontSize: 14)),
                       ),
-                      child: Text(
-                        source.supportsSearch
-                            ? context.l10n.mirrorSearchSupported
-                            : context.l10n.mirrorSearchNotSupported,
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: source.supportsSearch ? Colors.green : Colors.orange,
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: source.supportsSearch
+                              ? Colors.green.withValues(alpha: 0.1)
+                              : Colors.orange.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          source.supportsSearch
+                              ? context.l10n.mirrorSearchSupported
+                              : context.l10n.mirrorSearchNotSupported,
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: source.supportsSearch ? Colors.green : Colors.orange,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            }).toList(),
+                    ],
+                  ),
+                );
+              }),
+              // 自定义源
+              ...ctrl.customPubMirrors.map((url) {
+                return DropdownMenuItem(
+                  value: url,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(url, style: const TextStyle(fontSize: 14)),
+                      ),
+                      GestureDetector(
+                        onTap: () => _showDeleteMirrorDialog(context, ctrl, url, isPub: true),
+                        child: Icon(TDIcons.close, size: 16, color: Colors.grey[400]),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+            ],
             onChanged: (value) {
               if (value != null) {
                 ctrl.setSource(value);
@@ -255,9 +293,11 @@ class SettingsPage extends StatelessWidget {
 
   Widget _buildGithubMirrorDropdown(BuildContext context, SettingsController ctrl) {
     final currentMirror = ctrl.githubRawMirror.value;
-    final selected = _githubRawMirrors.contains(currentMirror)
-        ? currentMirror
-        : _githubRawMirrors.first;
+    final allUrls = [
+      ..._githubRawMirrors,
+      ...ctrl.customGithubRawMirrors,
+    ];
+    final selectedUrl = allUrls.contains(currentMirror) ? currentMirror : allUrls.first;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -269,22 +309,49 @@ class SettingsPage extends StatelessWidget {
               const Icon(TDIcons.logo_github, size: 20),
               const SizedBox(width: 12),
               Text(context.l10n.githubRawMirror, style: const TextStyle(fontSize: 15)),
+              const Spacer(),
+              IconButton(
+                icon: const Icon(TDIcons.add, size: 18),
+                tooltip: context.l10n.addCustomMirror,
+                onPressed: () => _showAddMirrorDialog(context, ctrl, isPub: false),
+              ),
             ],
           ),
           const SizedBox(height: 8),
           DropdownButtonFormField<String>(
-            initialValue: selected,
+            initialValue: selectedUrl,
+            isExpanded: true,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               contentPadding:
                   EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             ),
-            items: _githubRawMirrors.map((mirror) {
-              return DropdownMenuItem(
-                value: mirror,
-                child: Text(mirror, style: const TextStyle(fontSize: 14)),
-              );
-            }).toList(),
+            items: [
+              // 内置源
+              ..._githubRawMirrors.map((mirror) {
+                return DropdownMenuItem(
+                  value: mirror,
+                  child: Text(mirror, style: const TextStyle(fontSize: 14)),
+                );
+              }),
+              // 自定义源
+              ...ctrl.customGithubRawMirrors.map((url) {
+                return DropdownMenuItem(
+                  value: url,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(url, style: const TextStyle(fontSize: 14)),
+                      ),
+                      GestureDetector(
+                        onTap: () => _showDeleteMirrorDialog(context, ctrl, url, isPub: false),
+                        child: Icon(TDIcons.close, size: 16, color: Colors.grey[400]),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+            ],
             onChanged: (value) {
               if (value != null) {
                 ctrl.setGithubRawMirror(value);
@@ -295,6 +362,74 @@ class SettingsPage extends StatelessWidget {
           Text(
             context.l10n.githubMirrorHint,
             style: TextStyle(fontSize: 12, color: Colors.grey[500]),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ==================== 自定义镜像源对话框 ====================
+
+  void _showAddMirrorDialog(BuildContext context, SettingsController ctrl, {required bool isPub}) {
+    final textCtrl = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(context.l10n.addCustomMirror),
+        content: TextField(
+          controller: textCtrl,
+          autofocus: true,
+          decoration: InputDecoration(
+            hintText: isPub ? 'https://pub.example.com' : 'raw.example.com/owner/repo',
+            border: const OutlineInputBorder(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(context.l10n.cancel),
+          ),
+          TextButton(
+            onPressed: () {
+              final url = textCtrl.text.trim();
+              if (url.isNotEmpty) {
+                if (isPub) {
+                  ctrl.addCustomPubMirror(url);
+                } else {
+                  ctrl.addCustomGithubRawMirror(url);
+                }
+              }
+              Navigator.pop(context);
+            },
+            child: Text(context.l10n.create),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showDeleteMirrorDialog(
+      BuildContext context, SettingsController ctrl, String url, {required bool isPub}) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(context.l10n.deleteMirror),
+        content: Text(context.l10n.deleteMirrorConfirm(url)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(context.l10n.cancel),
+          ),
+          TextButton(
+            onPressed: () {
+              if (isPub) {
+                ctrl.removeCustomPubMirror(url);
+              } else {
+                ctrl.removeCustomGithubRawMirror(url);
+              }
+              Navigator.pop(context);
+            },
+            child: Text(context.l10n.delete, style: const TextStyle(color: Colors.red)),
           ),
         ],
       ),
