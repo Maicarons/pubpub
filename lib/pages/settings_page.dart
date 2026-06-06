@@ -9,23 +9,28 @@ import 'about_page.dart';
 /// Pub 镜像源列表
 const List<_MirrorSource> _pubMirrorSources = [
   _MirrorSource(
-    name: 'Flutter 中国 (flutter-io.cn)',
+    nameKey: 'flutterChina',
+    name: 'Flutter China (flutter-io.cn)',
     url: 'https://pub.flutter-io.cn',
   ),
   _MirrorSource(
-    name: 'Flutter 中国 (storage.flutter-io.cn)',
+    nameKey: 'flutterChina',
+    name: 'Flutter China (storage.flutter-io.cn)',
     url: 'https://storage.flutter-io.cn',
   ),
   _MirrorSource(
-    name: '官方 (pub.dev)',
+    nameKey: 'pubOfficial',
+    name: 'Official (pub.dev)',
     url: 'https://pub.dev',
   ),
   _MirrorSource(
-    name: '清华 TUNA',
+    nameKey: 'tuna',
+    name: 'Tsinghua TUNA',
     url: 'https://mirrors.tuna.tsinghua.edu.cn/dart-pub',
   ),
   _MirrorSource(
-    name: '上海交大 SJTU',
+    nameKey: 'sjtu',
+    name: 'SJTU',
     url: 'https://mirror.sjtu.edu.cn/dart-pub',
   ),
 ];
@@ -38,9 +43,26 @@ const List<String> _githubRawMirrors = [
 ];
 
 class _MirrorSource {
-  final String name;
+  final String nameKey; // i18n key
+  final String name; // fallback name
   final String url;
-  const _MirrorSource({required this.name, required this.url});
+  const _MirrorSource({required this.nameKey, required this.name, required this.url});
+}
+
+/// 获取镜像源的本地化名称
+String _getMirrorName(BuildContext context, _MirrorSource source) {
+  switch (source.nameKey) {
+    case 'flutterChina':
+      return context.l10n.flutterChina;
+    case 'pubOfficial':
+      return context.l10n.pubOfficial;
+    case 'tuna':
+      return context.l10n.tuna;
+    case 'sjtu':
+      return context.l10n.sjtu;
+    default:
+      return source.name;
+  }
 }
 
 /// 设置内容
@@ -57,14 +79,14 @@ class SettingsPage extends StatelessWidget {
         _buildSection(
           title: context.l10n.pubMirror,
           children: [
-            Obx(() => _buildPubSourceDropdown(settingsCtrl)),
+            Obx(() => _buildPubSourceDropdown(context, settingsCtrl)),
           ],
         ),
         const SizedBox(height: 16),
         _buildSection(
           title: context.l10n.githubRawMirror,
           children: [
-            Obx(() => _buildGithubMirrorDropdown(settingsCtrl)),
+            Obx(() => _buildGithubMirrorDropdown(context, settingsCtrl)),
           ],
         ),
         const SizedBox(height: 16),
@@ -82,7 +104,7 @@ class SettingsPage extends StatelessWidget {
             const Divider(height: 1),
             _buildLanguageTile(context, settingsCtrl),
             const Divider(height: 1),
-            Obx(() => _buildColorSchemeSection(settingsCtrl)),
+            Obx(() => _buildColorSchemeSection(context, settingsCtrl)),
           ],
         ),
         const SizedBox(height: 16),
@@ -134,7 +156,7 @@ class SettingsPage extends StatelessWidget {
 
   // ==================== Pub 镜像源下拉 ====================
 
-  Widget _buildPubSourceDropdown(SettingsController ctrl) {
+  Widget _buildPubSourceDropdown(BuildContext context, SettingsController ctrl) {
     final currentUrl = ctrl.currentSource.value;
     final selected = _pubMirrorSources.firstWhere(
       (s) => s.url == currentUrl,
@@ -150,7 +172,7 @@ class SettingsPage extends StatelessWidget {
             children: [
               const Icon(TDIcons.link, size: 20),
               const SizedBox(width: 12),
-              const Text('Pub 镜像源', style: TextStyle(fontSize: 15)),
+              Text(context.l10n.pubMirror, style: const TextStyle(fontSize: 15)),
             ],
           ),
           const SizedBox(height: 8),
@@ -164,7 +186,7 @@ class SettingsPage extends StatelessWidget {
             items: _pubMirrorSources.map((source) {
               return DropdownMenuItem(
                 value: source.url,
-                child: Text(source.name, style: const TextStyle(fontSize: 14)),
+                child: Text(_getMirrorName(context, source), style: const TextStyle(fontSize: 14)),
               );
             }).toList(),
             onChanged: (value) {
@@ -175,7 +197,7 @@ class SettingsPage extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            '切换后将使用新的镜像源搜索和获取包信息',
+            context.l10n.pubMirrorHint,
             style: TextStyle(fontSize: 12, color: Colors.grey[500]),
           ),
         ],
@@ -185,7 +207,7 @@ class SettingsPage extends StatelessWidget {
 
   // ==================== GitHub 镜像源下拉 ====================
 
-  Widget _buildGithubMirrorDropdown(SettingsController ctrl) {
+  Widget _buildGithubMirrorDropdown(BuildContext context, SettingsController ctrl) {
     final currentMirror = ctrl.githubRawMirror.value;
     final selected = _githubRawMirrors.contains(currentMirror)
         ? currentMirror
@@ -200,7 +222,7 @@ class SettingsPage extends StatelessWidget {
             children: [
               const Icon(TDIcons.logo_github, size: 20),
               const SizedBox(width: 12),
-              const Text('GitHub Raw 镜像', style: TextStyle(fontSize: 15)),
+              Text(context.l10n.githubRawMirror, style: const TextStyle(fontSize: 15)),
             ],
           ),
           const SizedBox(height: 8),
@@ -225,7 +247,7 @@ class SettingsPage extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            '用于获取包的 README，国内推荐使用镜像',
+            context.l10n.githubMirrorHint,
             style: TextStyle(fontSize: 12, color: Colors.grey[500]),
           ),
         ],
@@ -367,17 +389,17 @@ class SettingsPage extends StatelessWidget {
 
   // ==================== 主题色 ====================
 
-  Widget _buildColorSchemeSection(SettingsController ctrl) {
+  Widget _buildColorSchemeSection(BuildContext context, SettingsController ctrl) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
-              Icon(TDIcons.palette, size: 20),
-              SizedBox(width: 12),
-              Text('主题色', style: TextStyle(fontSize: 15)),
+              const Icon(TDIcons.palette, size: 20),
+              const SizedBox(width: 12),
+              Text(context.l10n.themeColor, style: const TextStyle(fontSize: 15)),
             ],
           ),
           const SizedBox(height: 12),
@@ -434,7 +456,7 @@ class SettingsPage extends StatelessWidget {
             children: [
               const Icon(TDIcons.translate, size: 20),
               const SizedBox(width: 12),
-              const Text('OpenAI 兼容 API', style: TextStyle(fontSize: 15)),
+              Text(context.l10n.autoTranslateDesc, style: const TextStyle(fontSize: 15)),
               const Spacer(),
               Obx(() {
                 final configured = ctrl.isTranslationConfigured;
@@ -448,7 +470,7 @@ class SettingsPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
-                    configured ? '已配置' : '未配置',
+                    configured ? context.l10n.configured : context.l10n.notConfigured,
                     style: TextStyle(
                       fontSize: 11,
                       color: configured ? Colors.green : Colors.grey,
@@ -490,10 +512,10 @@ class SettingsPage extends StatelessWidget {
           Obx(() => TextField(
                 controller:
                     TextEditingController(text: ctrl.translationModel.value),
-                decoration: const InputDecoration(
-                  labelText: '模型',
+                decoration: InputDecoration(
+                  labelText: context.l10n.modelLabel,
                   hintText: 'gpt-4o-mini',
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                   isDense: true,
                 ),
                 onSubmitted: (v) => ctrl.setTranslationModel(v),
@@ -503,17 +525,17 @@ class SettingsPage extends StatelessWidget {
           Obx(() => TextField(
                 controller: TextEditingController(
                     text: ctrl.translationTargetLang.value),
-                decoration: const InputDecoration(
-                  labelText: '目标语言',
-                  hintText: '简体中文 / English / 日本語',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: context.l10n.targetLangLabel,
+                  hintText: context.l10n.targetLangHint,
+                  border: const OutlineInputBorder(),
                   isDense: true,
                 ),
                 onSubmitted: (v) => ctrl.setTranslationTargetLang(v),
               )),
           const SizedBox(height: 8),
           Text(
-            '支持所有 OpenAI 兼容 API（OpenAI、DeepSeek、Moonshot 等）',
+            context.l10n.translateApiHint,
             style: TextStyle(fontSize: 12, color: Colors.grey[500]),
           ),
         ],

@@ -40,7 +40,7 @@ class DetailController extends GetxController {
       _fetchReadme(detail.repository);
     } catch (e) {
       hasError.value = true;
-      errorMessage.value = '获取详情失败，请检查网络连接';
+      errorMessage.value = 'detailFailed'; // 使用 key，在页面中翻译
       AppLogger.e(_tag, 'Fetch detail error', e);
     } finally {
       isLoading.value = false;

@@ -202,16 +202,16 @@ class AboutPage extends StatelessWidget {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => const Center(
+      builder: (ctx) => Center(
         child: Card(
           child: Padding(
-            padding: EdgeInsets.all(24),
+            padding: const EdgeInsets.all(24),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                CircularProgressIndicator(),
-                SizedBox(height: 16),
-                Text('正在检查更新...'),
+                const CircularProgressIndicator(),
+                const SizedBox(height: 16),
+                Text(ctx.l10n.checkingUpdate),
               ],
             ),
           ),
@@ -228,9 +228,9 @@ class AboutPage extends StatelessWidget {
         UpdateService.showUpdateDialog(info);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('当前已是最新版本'),
-            duration: Duration(seconds: 2),
+          SnackBar(
+            content: Text(context.l10n.alreadyLatest),
+            duration: const Duration(seconds: 2),
           ),
         );
       }
@@ -320,7 +320,7 @@ class AboutPage extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('关闭'),
+            child: Text(context.l10n.close),
           ),
         ],
       ),

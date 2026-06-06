@@ -4,6 +4,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../common/l10n_ext.dart';
 import '../controllers/detail_controller.dart';
 import '../controllers/favorites_controller.dart';
 import '../controllers/layout_controller.dart';
@@ -81,7 +82,7 @@ class _DetailPageState extends State<DetailPage> {
                 Text(detailCtrl.errorMessage.value),
                 const SizedBox(height: 16),
                 TDButton(
-                  text: '重试',
+                  text: context.l10n.retry,
                   theme: TDButtonTheme.primary,
                   onTap: () => detailCtrl.fetchDetail(widget.packageName),
                 ),
@@ -249,12 +250,12 @@ class _DetailPageState extends State<DetailPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '安装',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            Text(
+              context.l10n.install,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 12),
-            _buildCodeBlock('终端', pubAddCode),
+            _buildCodeBlock(context.l10n.terminal, pubAddCode),
             const SizedBox(height: 12),
             _buildCodeBlock('pubspec.yaml', yamlCode),
           ],
@@ -281,7 +282,7 @@ class _DetailPageState extends State<DetailPage> {
             GestureDetector(
               onTap: () {
                 Clipboard.setData(ClipboardData(text: code));
-                Get.snackbar('已复制', '代码已复制到剪贴板',
+                Get.snackbar(context.l10n.copied, context.l10n.copiedToClipboard,
                     snackPosition: SnackPosition.BOTTOM,
                     duration: const Duration(seconds: 1));
               },
@@ -331,7 +332,7 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                   const SizedBox(width: 12),
                   Text(
-                    '加载 README...',
+                    context.l10n.loadingReadme,
                     style: TextStyle(
                         color: isDark ? Colors.grey[400] : Colors.grey[600]),
                   ),
@@ -376,7 +377,7 @@ class _DetailPageState extends State<DetailPage> {
                         color: isDark ? Colors.blue[300] : Colors.blue,
                       ),
                       label: Text(
-                        detailCtrl.showTranslatedReadme.value ? '原文' : '翻译',
+                        detailCtrl.showTranslatedReadme.value ? context.l10n.original : context.l10n.translated,
                         style: TextStyle(
                           fontSize: 13,
                           color: isDark ? Colors.blue[300] : Colors.blue,
@@ -466,10 +467,10 @@ class _DetailPageState extends State<DetailPage> {
           children: [
             Row(
               children: [
-                const Text(
-                  '关于',
+                Text(
+                  context.l10n.about,
                   style:
-                      TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                      const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
                 const Spacer(),
                 Obx(() {
@@ -492,8 +493,8 @@ class _DetailPageState extends State<DetailPage> {
                     ),
                     label: Text(
                       detailCtrl.showTranslatedDescription.value
-                          ? '原文'
-                          : '翻译',
+                          ? context.l10n.original
+                          : context.l10n.translated,
                       style: TextStyle(
                         fontSize: 13,
                         color: isDark ? Colors.blue[300] : Colors.blue,
@@ -550,19 +551,19 @@ class _DetailPageState extends State<DetailPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '详情',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            Text(
+              context.l10n.details,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 12),
-            _buildMetaRow('最新版本', detail.latestVersion),
+            _buildMetaRow(context.l10n.latestVersionLabel, detail.latestVersion),
             if (detail.published.isNotEmpty)
-              _buildMetaRow('发布时间', _formatDate(detail.published)),
+              _buildMetaRow(context.l10n.publishTime, _formatDate(detail.published)),
             if (detail.dartSdkConstraint.isNotEmpty)
               _buildMetaRow('Dart SDK', detail.dartSdkConstraint),
             if (detail.flutterSdkConstraint != null)
               _buildMetaRow('Flutter SDK', detail.flutterSdkConstraint!),
-            _buildMetaRow('依赖数', '${detail.dependencies.length}'),
+            _buildMetaRow(context.l10n.dependencyNum, '${detail.dependencies.length}'),
           ],
         ),
       ),
@@ -609,10 +610,10 @@ class _DetailPageState extends State<DetailPage> {
   Widget _buildLinksSection(PackageDetail detail) {
     final links = <_LinkItem>[];
     if (detail.homepage.isNotEmpty) {
-      links.add(_LinkItem('主页', TDIcons.link, detail.homepage));
+      links.add(_LinkItem(context.l10n.homepage, TDIcons.link, detail.homepage));
     }
     if (detail.repository.isNotEmpty) {
-      links.add(_LinkItem('仓库', TDIcons.logo_github, detail.repository));
+      links.add(_LinkItem(context.l10n.repository, TDIcons.logo_github, detail.repository));
     }
     links.add(_LinkItem(
       'pub.dev',
@@ -628,9 +629,9 @@ class _DetailPageState extends State<DetailPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '链接',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            Text(
+              context.l10n.links,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 8),
             ...links.map((link) => Padding(
@@ -682,13 +683,13 @@ class _DetailPageState extends State<DetailPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '依赖 (${deps.length})',
+              '${context.l10n.dependencies} (${deps.length})',
               style:
                   const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 12),
             if (deps.isEmpty)
-              Text('无直接依赖',
+              Text(context.l10n.noDependencies,
                   style: TextStyle(
                       color: isDark ? Colors.grey[500] : Colors.grey))
             else
@@ -714,7 +715,7 @@ class _DetailPageState extends State<DetailPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '版本历史 (${versions.length})',
+              '${context.l10n.versionHistory} (${versions.length})',
               style:
                   const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
@@ -724,7 +725,7 @@ class _DetailPageState extends State<DetailPage> {
               Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: Text(
-                  '还有 ${versions.length - 20} 个历史版本...',
+                  context.l10n.moreVersions(versions.length - 20),
                   style: TextStyle(
                       color: isDark ? Colors.grey[500] : Colors.grey[600],
                       fontSize: 13),
@@ -769,8 +770,8 @@ class _DetailPageState extends State<DetailPage> {
           ),
           if (isLatest) ...[
             const SizedBox(width: 8),
-            const Text('latest',
-                style: TextStyle(fontSize: 11, color: Colors.green)),
+            Text(context.l10n.latest,
+                style: const TextStyle(fontSize: 11, color: Colors.green)),
           ],
           const Spacer(),
           if (v.published != null)
@@ -804,7 +805,7 @@ class _DetailPageState extends State<DetailPage> {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
-                  '已收藏到：${folders.join(", ")}',
+                  context.l10n.favoriteManaged(folders.join(", ")),
                   style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
               ),
@@ -812,7 +813,7 @@ class _DetailPageState extends State<DetailPage> {
               ListTile(
                 leading:
                     const Icon(TDIcons.heart_filled, color: Colors.red),
-                title: const Text('取消所有收藏'),
+                title: Text(context.l10n.cancelAllFavorites),
                 onTap: () {
                   ctrl.removeFromAll(packageName);
                   Navigator.pop(context);
@@ -820,7 +821,7 @@ class _DetailPageState extends State<DetailPage> {
               ),
               ListTile(
                 leading: const Icon(TDIcons.add),
-                title: const Text('添加到其他收藏夹'),
+                title: Text(context.l10n.addToOtherFolders),
                 onTap: () {
                   Navigator.pop(context);
                   _showAddToFolderDialog(context, ctrl, packageName);
@@ -846,9 +847,9 @@ class _DetailPageState extends State<DetailPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Padding(
-              padding: EdgeInsets.all(16),
-              child: Text('选择收藏夹',
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(context.l10n.selectFolder,
                   style:
                       TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
             ),
@@ -873,7 +874,7 @@ class _DetailPageState extends State<DetailPage> {
             }),
             ListTile(
               leading: const Icon(TDIcons.add),
-              title: const Text('新建收藏夹'),
+              title: Text(context.l10n.createFolder),
               onTap: () {
                 Navigator.pop(context);
                 _showCreateAndAddDialog(context, ctrl, packageName);
@@ -895,19 +896,19 @@ class _DetailPageState extends State<DetailPage> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('新建收藏夹'),
+        title: Text(context.l10n.createFolder),
         content: TextField(
           controller: textCtrl,
           autofocus: true,
-          decoration: const InputDecoration(
-            hintText: '收藏夹名称',
+          decoration: InputDecoration(
+            hintText: context.l10n.folderName,
             border: OutlineInputBorder(),
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('取消'),
+            child: Text(context.l10n.cancel),
           ),
           TextButton(
             onPressed: () async {
@@ -918,7 +919,7 @@ class _DetailPageState extends State<DetailPage> {
               }
               if (ctx.mounted) Navigator.pop(ctx);
             },
-            child: const Text('创建并收藏'),
+            child: Text(context.l10n.createAndAdd),
           ),
         ],
       ),

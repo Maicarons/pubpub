@@ -5,6 +5,7 @@ import '../services/favorites_service.dart';
 /// 收藏夹控制器
 class FavoritesController extends GetxController {
   static const String _tag = 'FavoritesController';
+  static const String defaultFolderName = '默认收藏'; // Hive 中存储的 key，不可变
 
   /// 所有收藏夹 { 文件夹名: [包名列表] }
   var folders = <String, List<String>>{}.obs;
@@ -25,7 +26,7 @@ class FavoritesController extends GetxController {
     if (currentFolder.value.isEmpty ||
         !folders.containsKey(currentFolder.value)) {
       currentFolder.value =
-          folders.isNotEmpty ? folders.keys.first : '默认收藏';
+          folders.isNotEmpty ? folders.keys.first : defaultFolderName;
     }
     AppLogger.d(_tag, 'Loaded ${folders.length} folders');
   }
@@ -85,7 +86,7 @@ class FavoritesController extends GetxController {
     if (isFavorite(packageName)) {
       await removeFromAll(packageName);
     } else {
-      await addToFolder('默认收藏', packageName);
+      await addToFolder(defaultFolderName, packageName);
     }
   }
 

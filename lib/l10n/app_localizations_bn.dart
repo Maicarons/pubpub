@@ -359,4 +359,99 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get no => 'না';
+
+  @override
+  String get defaultFolder => 'Default';
+
+  @override
+  String get detailFailed =>
+      'Failed to load details, please check your network';
+
+  @override
+  String get tip => 'Tip';
+
+  @override
+  String get checkingUpdate => 'Checking for updates...';
+
+  @override
+  String get alreadyLatest => 'Already the latest version';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get original => 'Original';
+
+  @override
+  String get translated => 'Translated';
+
+  @override
+  String get latestVersionLabel => 'Latest Version';
+
+  @override
+  String get publishTime => 'Published';
+
+  @override
+  String get dependencyNum => 'Dependencies';
+
+  @override
+  String get colorBlue => 'Blue';
+
+  @override
+  String get colorIndigo => 'Indigo';
+
+  @override
+  String get colorPurple => 'Purple';
+
+  @override
+  String get colorDeepPurple => 'Deep Purple';
+
+  @override
+  String get colorTeal => 'Teal';
+
+  @override
+  String get colorGreen => 'Green';
+
+  @override
+  String get colorOrange => 'Orange';
+
+  @override
+  String get colorRed => 'Red';
+
+  @override
+  String get colorPink => 'Pink';
+
+  @override
+  String get colorBrown => 'Brown';
+
+  @override
+  String get configured => 'Configured';
+
+  @override
+  String get notConfigured => 'Not Configured';
+
+  @override
+  String get modelLabel => 'Model';
+
+  @override
+  String get targetLangLabel => 'Target Language';
+
+  @override
+  String get targetLangHint => '简体中文 / English / 日本語';
+
+  @override
+  String get translateApiHint =>
+      'Supports all OpenAI compatible APIs (OpenAI, DeepSeek, Moonshot, etc.)';
+
+  @override
+  String get pubOfficial => 'Official (pub.dev)';
+
+  @override
+  String get tuna => 'Tsinghua TUNA';
+
+  @override
+  String get sjtu => 'SJTU';
+
+  @override
+  String get flutterChina => 'Flutter China';
 }

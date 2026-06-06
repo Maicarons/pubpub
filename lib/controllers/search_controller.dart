@@ -73,7 +73,7 @@ class AppSearchController extends GetxController {
       AppLogger.d(_tag, 'Search found ${result.packages.length} results');
     } catch (e) {
       hasError.value = true;
-      errorMessage.value = '搜索失败，请检查网络连接';
+      errorMessage.value = 'searchFailed'; // 使用 key，在页面中翻译
       AppLogger.e(_tag, 'Search error', e);
     } finally {
       isLoading.value = false;

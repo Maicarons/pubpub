@@ -801,6 +801,192 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No'**
   String get no;
+
+  /// No description provided for @defaultFolder.
+  ///
+  /// In en, this message translates to:
+  /// **'Default'**
+  String get defaultFolder;
+
+  /// No description provided for @detailFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load details, please check your network'**
+  String get detailFailed;
+
+  /// No description provided for @tip.
+  ///
+  /// In en, this message translates to:
+  /// **'Tip'**
+  String get tip;
+
+  /// No description provided for @checkingUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Checking for updates...'**
+  String get checkingUpdate;
+
+  /// No description provided for @alreadyLatest.
+  ///
+  /// In en, this message translates to:
+  /// **'Already the latest version'**
+  String get alreadyLatest;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @original.
+  ///
+  /// In en, this message translates to:
+  /// **'Original'**
+  String get original;
+
+  /// No description provided for @translated.
+  ///
+  /// In en, this message translates to:
+  /// **'Translated'**
+  String get translated;
+
+  /// No description provided for @latestVersionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest Version'**
+  String get latestVersionLabel;
+
+  /// No description provided for @publishTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Published'**
+  String get publishTime;
+
+  /// No description provided for @dependencyNum.
+  ///
+  /// In en, this message translates to:
+  /// **'Dependencies'**
+  String get dependencyNum;
+
+  /// No description provided for @colorBlue.
+  ///
+  /// In en, this message translates to:
+  /// **'Blue'**
+  String get colorBlue;
+
+  /// No description provided for @colorIndigo.
+  ///
+  /// In en, this message translates to:
+  /// **'Indigo'**
+  String get colorIndigo;
+
+  /// No description provided for @colorPurple.
+  ///
+  /// In en, this message translates to:
+  /// **'Purple'**
+  String get colorPurple;
+
+  /// No description provided for @colorDeepPurple.
+  ///
+  /// In en, this message translates to:
+  /// **'Deep Purple'**
+  String get colorDeepPurple;
+
+  /// No description provided for @colorTeal.
+  ///
+  /// In en, this message translates to:
+  /// **'Teal'**
+  String get colorTeal;
+
+  /// No description provided for @colorGreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Green'**
+  String get colorGreen;
+
+  /// No description provided for @colorOrange.
+  ///
+  /// In en, this message translates to:
+  /// **'Orange'**
+  String get colorOrange;
+
+  /// No description provided for @colorRed.
+  ///
+  /// In en, this message translates to:
+  /// **'Red'**
+  String get colorRed;
+
+  /// No description provided for @colorPink.
+  ///
+  /// In en, this message translates to:
+  /// **'Pink'**
+  String get colorPink;
+
+  /// No description provided for @colorBrown.
+  ///
+  /// In en, this message translates to:
+  /// **'Brown'**
+  String get colorBrown;
+
+  /// No description provided for @configured.
+  ///
+  /// In en, this message translates to:
+  /// **'Configured'**
+  String get configured;
+
+  /// No description provided for @notConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'Not Configured'**
+  String get notConfigured;
+
+  /// No description provided for @modelLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Model'**
+  String get modelLabel;
+
+  /// No description provided for @targetLangLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Target Language'**
+  String get targetLangLabel;
+
+  /// No description provided for @targetLangHint.
+  ///
+  /// In en, this message translates to:
+  /// **'简体中文 / English / 日本語'**
+  String get targetLangHint;
+
+  /// No description provided for @translateApiHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Supports all OpenAI compatible APIs (OpenAI, DeepSeek, Moonshot, etc.)'**
+  String get translateApiHint;
+
+  /// No description provided for @pubOfficial.
+  ///
+  /// In en, this message translates to:
+  /// **'Official (pub.dev)'**
+  String get pubOfficial;
+
+  /// No description provided for @tuna.
+  ///
+  /// In en, this message translates to:
+  /// **'Tsinghua TUNA'**
+  String get tuna;
+
+  /// No description provided for @sjtu.
+  ///
+  /// In en, this message translates to:
+  /// **'SJTU'**
+  String get sjtu;
+
+  /// No description provided for @flutterChina.
+  ///
+  /// In en, this message translates to:
+  /// **'Flutter China'**
+  String get flutterChina;
 }
 
 class _AppLocalizationsDelegate

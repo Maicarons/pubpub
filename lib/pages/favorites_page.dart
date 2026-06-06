@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
+import '../common/l10n_ext.dart';
 import '../controllers/favorites_controller.dart';
 import '../controllers/layout_controller.dart';
 import '../layouts/widgets/page_navigation.dart';
@@ -70,7 +71,7 @@ class FavoritesPage extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                '收藏夹',
+                context.l10n.favoritesFolders,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -80,7 +81,7 @@ class FavoritesPage extends StatelessWidget {
               const Spacer(),
               IconButton(
                 icon: const Icon(TDIcons.add, size: 20),
-                tooltip: '新建收藏夹',
+                tooltip: context.l10n.createFolder,
                 onPressed: () => _showCreateFolderDialog(context, ctrl),
               ),
             ],
@@ -92,7 +93,7 @@ class FavoritesPage extends StatelessWidget {
           child: folderNames.isEmpty
               ? Center(
                   child: Text(
-                    '暂无收藏夹',
+                    context.l10n.favoritesFolders,
                     style: TextStyle(color: Colors.grey[400]),
                   ),
                 )
@@ -130,7 +131,7 @@ class FavoritesPage extends StatelessWidget {
                               color: Colors.grey[500],
                             ),
                           ),
-                          if (name != '默认收藏')
+                          if (name != FavoritesController.defaultFolderName)
                             IconButton(
                               icon: Icon(TDIcons.more,
                                   size: 16, color: Colors.grey[400]),
@@ -258,19 +259,19 @@ class FavoritesPage extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('新建收藏夹'),
+        title: Text(context.l10n.createFolder),
         content: TextField(
           controller: textCtrl,
           autofocus: true,
-          decoration: const InputDecoration(
-            hintText: '收藏夹名称',
-            border: OutlineInputBorder(),
+          decoration: InputDecoration(
+            hintText: context.l10n.folderName,
+            border: const OutlineInputBorder(),
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('取消'),
+            child: Text(context.l10n.cancel),
           ),
           TextButton(
             onPressed: () async {
@@ -280,12 +281,12 @@ class FavoritesPage extends StatelessWidget {
                 if (!context.mounted) return;
                 Navigator.pop(context);
                 if (!ok) {
-                  Get.snackbar('提示', '收藏夹已存在',
+                  Get.snackbar(context.l10n.tip, context.l10n.folderExists,
                       snackPosition: SnackPosition.BOTTOM);
                 }
               }
             },
-            child: const Text('创建'),
+            child: Text(context.l10n.create),
           ),
         ],
       ),
@@ -305,7 +306,7 @@ class FavoritesPage extends StatelessWidget {
           children: [
             ListTile(
               leading: const Icon(TDIcons.edit),
-              title: const Text('重命名'),
+              title: Text(context.l10n.rename),
               onTap: () {
                 Navigator.pop(context);
                 _showRenameFolderDialog(context, ctrl, folderName);
@@ -313,7 +314,7 @@ class FavoritesPage extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(TDIcons.delete, color: Colors.red),
-              title: const Text('删除', style: TextStyle(color: Colors.red)),
+              title: Text(context.l10n.delete, style: const TextStyle(color: Colors.red)),
               onTap: () {
                 Navigator.pop(context);
                 _showDeleteFolderDialog(context, ctrl, folderName);
@@ -334,7 +335,7 @@ class FavoritesPage extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('重命名收藏夹'),
+        title: Text(context.l10n.renameFolder),
         content: TextField(
           controller: textCtrl,
           autofocus: true,
@@ -343,7 +344,7 @@ class FavoritesPage extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('取消'),
+            child: Text(context.l10n.cancel),
           ),
           TextButton(
             onPressed: () async {
@@ -353,12 +354,12 @@ class FavoritesPage extends StatelessWidget {
                 if (!context.mounted) return;
                 Navigator.pop(context);
                 if (!ok) {
-                  Get.snackbar('提示', '名称已存在',
+                  Get.snackbar(context.l10n.tip, context.l10n.folderExists,
                       snackPosition: SnackPosition.BOTTOM);
                 }
               }
             },
-            child: const Text('确定'),
+            child: Text(context.l10n.confirm),
           ),
         ],
       ),
@@ -373,19 +374,19 @@ class FavoritesPage extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('删除收藏夹'),
-        content: Text('确定删除 "$folderName" 吗？其中的包将被移除。'),
+        title: Text(context.l10n.deleteFolder),
+        content: Text(context.l10n.deleteFolderConfirm(folderName)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('取消'),
+            child: Text(context.l10n.cancel),
           ),
           TextButton(
             onPressed: () {
               ctrl.deleteFolder(folderName);
               Navigator.pop(context);
             },
-            child: const Text('删除', style: TextStyle(color: Colors.red)),
+            child: Text(context.l10n.delete, style: const TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -400,19 +401,19 @@ class FavoritesPage extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('取消收藏'),
-        content: Text('确定从 "${ctrl.currentFolder.value}" 移除 "$packageName" 吗？'),
+        title: Text(context.l10n.removeFavorite),
+        content: Text(context.l10n.removeFromFolder(ctrl.currentFolder.value)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('取消'),
+            child: Text(context.l10n.cancel),
           ),
           TextButton(
             onPressed: () {
               ctrl.removeFromFolder(ctrl.currentFolder.value, packageName);
               Navigator.pop(context);
             },
-            child: const Text('确定'),
+            child: Text(context.l10n.confirm),
           ),
         ],
       ),
@@ -445,7 +446,7 @@ class _MobilePackageListPage extends StatelessWidget {
                 Icon(TDIcons.heart, size: 48, color: Colors.grey[300]),
                 const SizedBox(height: 12),
                 Text(
-                  '暂无收藏',
+                  context.l10n.emptyFolder(folderName),
                   style: TextStyle(color: Colors.grey[500]),
                 ),
               ],

@@ -9,12 +9,12 @@ import 'detail_controller.dart';
 
 /// 主题色配置
 class ColorSchemeOption {
-  final String name;
+  final String nameKey; // i18n key
   final String key;
   final Color color;
 
   const ColorSchemeOption({
-    required this.name,
+    required this.nameKey,
     required this.key,
     required this.color,
   });
@@ -22,16 +22,16 @@ class ColorSchemeOption {
 
 /// 可选主题色列表
 const List<ColorSchemeOption> colorSchemeOptions = [
-  ColorSchemeOption(name: '蓝色', key: 'blue', color: Colors.blue),
-  ColorSchemeOption(name: '靛蓝', key: 'indigo', color: Colors.indigo),
-  ColorSchemeOption(name: '紫色', key: 'purple', color: Colors.purple),
-  ColorSchemeOption(name: '深紫', key: 'deepPurple', color: Colors.deepPurple),
-  ColorSchemeOption(name: '青色', key: 'teal', color: Colors.teal),
-  ColorSchemeOption(name: '绿色', key: 'green', color: Colors.green),
-  ColorSchemeOption(name: '橙色', key: 'orange', color: Colors.orange),
-  ColorSchemeOption(name: '红色', key: 'red', color: Colors.red),
-  ColorSchemeOption(name: '粉色', key: 'pink', color: Colors.pink),
-  ColorSchemeOption(name: '棕色', key: 'brown', color: Colors.brown),
+  ColorSchemeOption(nameKey: 'colorBlue', key: 'blue', color: Colors.blue),
+  ColorSchemeOption(nameKey: 'colorIndigo', key: 'indigo', color: Colors.indigo),
+  ColorSchemeOption(nameKey: 'colorPurple', key: 'purple', color: Colors.purple),
+  ColorSchemeOption(nameKey: 'colorDeepPurple', key: 'deepPurple', color: Colors.deepPurple),
+  ColorSchemeOption(nameKey: 'colorTeal', key: 'teal', color: Colors.teal),
+  ColorSchemeOption(nameKey: 'colorGreen', key: 'green', color: Colors.green),
+  ColorSchemeOption(nameKey: 'colorOrange', key: 'orange', color: Colors.orange),
+  ColorSchemeOption(nameKey: 'colorRed', key: 'red', color: Colors.red),
+  ColorSchemeOption(nameKey: 'colorPink', key: 'pink', color: Colors.pink),
+  ColorSchemeOption(nameKey: 'colorBrown', key: 'brown', color: Colors.brown),
 ];
 
 /// 设置控制器
@@ -45,7 +45,7 @@ class SettingsController extends GetxController {
   var translationEndpoint = ''.obs;
   var translationApiKey = ''.obs;
   var translationModel = 'gpt-4o-mini'.obs;
-  var translationTargetLang = '简体中文'.obs;
+  var translationTargetLang = 'zh'.obs; // 使用语言代码
   var locale = const Locale('zh').obs;
   var localeKey = 'system'.obs;
 
@@ -196,12 +196,6 @@ class SettingsController extends GetxController {
   Future<void> clearCache() async {
     await CacheService.clearApiCache();
     AppLogger.d(_tag, 'Cache cleared');
-    Get.snackbar(
-      '提示',
-      '缓存已清除',
-      snackPosition: SnackPosition.BOTTOM,
-      duration: const Duration(seconds: 2),
-    );
   }
 
   /// 源切换后刷新相关控制器

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
+import '../common/l10n_ext.dart';
 import '../controllers/search_controller.dart';
 import '../controllers/layout_controller.dart';
 import '../layouts/widgets/page_navigation.dart';
@@ -25,7 +26,7 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: TextField(
             decoration: InputDecoration(
-              hintText: '搜索 Flutter/Dart 包...',
+              hintText: context.l10n.searchHint,
               prefixIcon: const Icon(TDIcons.search, size: 20),
               filled: true,
               fillColor: isDark
@@ -58,12 +59,14 @@ class HomePage extends StatelessWidget {
                     const Icon(TDIcons.error_circle, size: 48, color: Colors.grey),
                     const SizedBox(height: 16),
                     Text(
-                      searchCtrl.errorMessage.value,
+                      searchCtrl.errorMessage.value == 'searchFailed'
+                          ? context.l10n.searchFailed
+                          : searchCtrl.errorMessage.value,
                       style: const TextStyle(color: Colors.grey),
                     ),
                     const SizedBox(height: 16),
                     TDButton(
-                      text: '重试',
+                      text: context.l10n.retry,
                       theme: TDButtonTheme.primary,
                       onTap: () {
                         if (searchCtrl.currentQuery.value.isNotEmpty) {
@@ -85,8 +88,8 @@ class HomePage extends StatelessWidget {
                     const SizedBox(height: 16),
                     Text(
                       searchCtrl.currentQuery.value.isEmpty
-                          ? '搜索你需要的 Flutter/Dart 包'
-                          : '未找到相关包',
+                          ? context.l10n.searchEmpty
+                          : context.l10n.searchNoResults,
                       style: TextStyle(color: Colors.grey[500]),
                     ),
                   ],
@@ -103,7 +106,7 @@ class HomePage extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Text(
-                      '热门推荐',
+                      context.l10n.hotRecommend,
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,

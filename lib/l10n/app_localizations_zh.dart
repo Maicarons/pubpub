@@ -354,4 +354,98 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get no => '否';
+
+  @override
+  String get defaultFolder => '默认收藏';
+
+  @override
+  String get detailFailed => '获取详情失败，请检查网络连接';
+
+  @override
+  String get tip => '提示';
+
+  @override
+  String get checkingUpdate => '正在检查更新...';
+
+  @override
+  String get alreadyLatest => '当前已是最新版本';
+
+  @override
+  String get close => '关闭';
+
+  @override
+  String get original => '原文';
+
+  @override
+  String get translated => '翻译';
+
+  @override
+  String get latestVersionLabel => '最新版本';
+
+  @override
+  String get publishTime => '发布时间';
+
+  @override
+  String get dependencyNum => '依赖数';
+
+  @override
+  String get colorBlue => '蓝色';
+
+  @override
+  String get colorIndigo => '靛蓝';
+
+  @override
+  String get colorPurple => '紫色';
+
+  @override
+  String get colorDeepPurple => '深紫';
+
+  @override
+  String get colorTeal => '青色';
+
+  @override
+  String get colorGreen => '绿色';
+
+  @override
+  String get colorOrange => '橙色';
+
+  @override
+  String get colorRed => '红色';
+
+  @override
+  String get colorPink => '粉色';
+
+  @override
+  String get colorBrown => '棕色';
+
+  @override
+  String get configured => '已配置';
+
+  @override
+  String get notConfigured => '未配置';
+
+  @override
+  String get modelLabel => '模型';
+
+  @override
+  String get targetLangLabel => '目标语言';
+
+  @override
+  String get targetLangHint => '简体中文 / English / 日本語';
+
+  @override
+  String get translateApiHint =>
+      '支持所有 OpenAI 兼容 API（OpenAI、DeepSeek、Moonshot 等）';
+
+  @override
+  String get pubOfficial => '官方 (pub.dev)';
+
+  @override
+  String get tuna => '清华 TUNA';
+
+  @override
+  String get sjtu => '上海交大 SJTU';
+
+  @override
+  String get flutterChina => 'Flutter 中国';
 }
