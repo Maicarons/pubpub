@@ -657,8 +657,9 @@ class SettingsPage extends StatelessWidget {
             children: [
               const Icon(TDIcons.translate, size: 20),
               const SizedBox(width: 12),
-              Text(context.l10n.autoTranslateDesc, style: const TextStyle(fontSize: 15)),
-              const Spacer(),
+              Expanded(
+                child: Text(context.l10n.autoTranslateDesc, style: const TextStyle(fontSize: 15)),
+              ),
               Obx(() {
                 final configured = ctrl.isTranslationConfigured;
                 return Container(
