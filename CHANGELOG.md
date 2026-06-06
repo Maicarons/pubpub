@@ -2,6 +2,19 @@
 
 本项目遵循 [Semantic Versioning](https://semver.org/lang/zh-CN/)。
 
+## [0.2.4] - 2026-06-07
+
+### 修复
+
+- 🐛 修复 Web 端 CORS 跨域问题：通过 CORS 代理 (`corsproxy.io`) 转发请求
+- 🐛 Web 端默认使用 `pub.dev` 作为 Pub 源（唯一支持浏览器 CORS 的源）
+- 🐛 移除不支持 CORS 的 `pub-web.flutter-io.cn` 镜像源
+
+### 优化
+
+- ⚡ Pub 镜像源列表调整：`pub.dev` 置顶为首选项
+- ⚡ Web 端所有 API 请求（搜索、包详情、README）自动通过 CORS 代理
+
 ## [0.2.2] - 2026-06-06
 
 ### 修复

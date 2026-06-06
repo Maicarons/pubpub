@@ -1,7 +1,11 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 /// 应用常量定义
 class AppConstants {
-  /// 默认 Pub 镜像源地址
-  static const String defaultPubHostUrl = 'https://pub.flutter-io.cn';
+  /// 默认 Pub 镜像源地址（Web 端必须使用 pub.dev，中国镜像不支持浏览器 CORS）
+  static const String defaultPubHostUrl = kIsWeb
+      ? 'https://pub.dev'
+      : 'https://pub.flutter-io.cn';
 
   /// 缓存时长（毫秒），默认 30 分钟
   static const int defaultCacheTtlMs = 30 * 60 * 1000;

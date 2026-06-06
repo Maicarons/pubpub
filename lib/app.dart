@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -24,19 +25,23 @@ class PubPubApp extends StatelessWidget {
     return Obx(() {
       final seedColor = settingsCtrl.primaryColor;
 
+      // Web 端不支持 chinese_font_library（文件系统访问），跳过字体加载
+      final lightTheme = ThemeData(
+        colorSchemeSeed: seedColor,
+        useMaterial3: true,
+        brightness: Brightness.light,
+      );
+      final darkTheme = ThemeData(
+        colorSchemeSeed: seedColor,
+        useMaterial3: true,
+        brightness: Brightness.dark,
+      );
+
       return GetMaterialApp(
         title: 'PubPub',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorSchemeSeed: seedColor,
-          useMaterial3: true,
-          brightness: Brightness.light,
-        ).useSystemChineseFont(Brightness.light),
-        darkTheme: ThemeData(
-          colorSchemeSeed: seedColor,
-          useMaterial3: true,
-          brightness: Brightness.dark,
-        ).useSystemChineseFont(Brightness.dark),
+        theme: kIsWeb ? lightTheme : lightTheme.useSystemChineseFont(Brightness.light),
+        darkTheme: kIsWeb ? darkTheme : darkTheme.useSystemChineseFont(Brightness.dark),
         themeMode: settingsCtrl.themeMode.value,
         locale: settingsCtrl.locale.value,
         localeResolutionCallback: (locale, supportedLocales) {

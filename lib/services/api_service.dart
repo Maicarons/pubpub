@@ -12,6 +12,9 @@ class ApiService {
   static const String _tag = 'ApiService';
   static Dio? _dio;
 
+  /// CORS 代理地址（Web 端使用，将请求通过代理转发以绕过 CORS 限制）
+  static const String _corsProxy = 'https://corsproxy.io/?';
+
   /// 获取 Dio 实例
   static Dio getDio() {
     if (_dio == null) {
@@ -31,6 +34,12 @@ class ApiService {
   /// 获取当前源地址
   static String get baseUrl => SettingsService.getSource();
 
+  /// Web 端通过 CORS 代理包装 URL
+  static String _proxyUrl(String url) {
+    if (kIsWeb) return '$_corsProxy${Uri.encodeComponent(url)}';
+    return url;
+  }
+
   /// 搜索包
   static Future<PackageSearchResult> searchPackages(
     String query, {
@@ -41,7 +50,7 @@ class ApiService {
 
     try {
       final response = await getDio().get(
-        url,
+        _proxyUrl(url),
         options: Options(extra: {'cacheKey': cacheKey}),
       );
       return PackageSearchResult.fromJson(
@@ -65,7 +74,7 @@ class ApiService {
 
     try {
       final response = await getDio().get(
-        url,
+        _proxyUrl(url),
         options: Options(extra: {'cacheKey': cacheKey}),
       );
       return PackageDetail.fromJson(
@@ -117,7 +126,7 @@ class ApiService {
         for (final host in hosts) {
           try {
             final url = 'https://$host/$rawPath';
-            final response = await getDio().get(url);
+            final response = await getDio().get(_proxyUrl(url));
             if (response.statusCode == 200) {
               final content = response.data as String;
               await CacheService.setApiCache(

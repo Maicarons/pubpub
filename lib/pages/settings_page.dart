@@ -10,6 +10,12 @@ import 'about_page.dart';
 /// Pub 镜像源列表
 const List<_MirrorSource> _pubMirrorSources = [
   _MirrorSource(
+    nameKey: 'pubOfficial',
+    name: 'Official (pub.dev)',
+    url: 'https://pub.dev',
+    supportsSearch: true,
+  ),
+  _MirrorSource(
     nameKey: 'flutterChina',
     name: 'Flutter China (flutter-io.cn)',
     url: 'https://pub.flutter-io.cn',
@@ -20,12 +26,6 @@ const List<_MirrorSource> _pubMirrorSources = [
     name: 'Flutter China (storage.flutter-io.cn)',
     url: 'https://storage.flutter-io.cn',
     supportsSearch: false,
-  ),
-  _MirrorSource(
-    nameKey: 'pubOfficial',
-    name: 'Official (pub.dev)',
-    url: 'https://pub.dev',
-    supportsSearch: true,
   ),
   _MirrorSource(
     nameKey: 'tuna',
