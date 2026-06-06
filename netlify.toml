@@ -5,24 +5,10 @@
 [build.environment]
   FLUTTER_VERSION = "3.41.9"
 
-# 反向代理 Pub API（避免 CORS）
+# 反向代理 Pub 搜索 API（pub.dev 搜索无 CORS 头）
 [[redirects]]
   from = "/api/pubdev/*"
   to = "https://pub.dev/:splat"
-  status = 200
-  force = true
-
-# 反向代理 GitHub Raw
-[[redirects]]
-  from = "/api/ghraw/*"
-  to = "https://raw.githubusercontent.com/:splat"
-  status = 200
-  force = true
-
-# 反向代理 GitHub Raw 镜像
-[[redirects]]
-  from = "/api/ghraw-mirror/*"
-  to = "https://raw.gitmirror.com/:splat"
   status = 200
   force = true
 

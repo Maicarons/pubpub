@@ -29,32 +29,19 @@ class ApiService {
   /// 获取当前源地址
   static String get baseUrl => SettingsService.getSource();
 
-  /// Web 端通过 Netlify 反向代理路径转发请求（避免 CORS）
-  /// pub.dev 包详情有 CORS 头可直接访问，搜索 API 和其他镜像源需要代理
-  static String _proxyPubUrl(String url) {
+  /// Web 端代理：仅对无 CORS 头的 API 走 Netlify 代理
+  /// pub.dev 搜索 API 无 CORS 头需要代理；包详情和 GitHub Raw 有 CORS 头可直接访问
+  static String _proxyUrl(String url) {
     if (!kIsWeb) return url;
 
-    // pub.dev 包详情有 CORS 头，可以直接访问
+    // pub.dev 包详情和 GitHub Raw 有 CORS 头，直接访问
     if (url.contains('pub.dev/api/packages/')) return url;
+    if (url.contains('raw.githubusercontent.com')) return url;
+    if (url.contains('raw.gitmirror.com')) return url;
 
-    // 搜索 API 或非 pub.dev 镜像源走代理
+    // 搜索 API 或非 pub.dev 镜像源走 Netlify 代理
     final uri = Uri.parse(url);
     return '/api/pubdev${uri.path}${uri.hasQuery ? '?${uri.query}' : ''}';
-  }
-
-  /// Web 端通过 Netlify 代理获取 GitHub Raw 内容
-  static String _proxyGithubRawUrl(String host, String path) {
-    if (kIsWeb) {
-      if (host == 'raw.githubusercontent.com') {
-        return '/api/ghraw/$path';
-      }
-      if (host == 'raw.gitmirror.com') {
-        return '/api/ghraw-mirror/$path';
-      }
-      // 其他镜像源直接访问（可能有 CORS）
-      return 'https://$host/$path';
-    }
-    return 'https://$host/$path';
   }
 
   /// 搜索包
@@ -67,7 +54,7 @@ class ApiService {
 
     try {
       final response = await getDio().get(
-        _proxyPubUrl(url),
+        _proxyUrl(url),
         options: Options(extra: {'cacheKey': cacheKey}),
       );
       return PackageSearchResult.fromJson(
@@ -91,7 +78,7 @@ class ApiService {
 
     try {
       final response = await getDio().get(
-        _proxyPubUrl(url),
+        _proxyUrl(url),
         options: Options(extra: {'cacheKey': cacheKey}),
       );
       return PackageDetail.fromJson(
@@ -142,8 +129,8 @@ class ApiService {
 
         for (final host in hosts) {
           try {
-            final url = _proxyGithubRawUrl(host, rawPath);
-            final response = await getDio().get(url);
+            final url = 'https://$host/$rawPath';
+            final response = await getDio().get(_proxyUrl(url));
             if (response.statusCode == 200) {
               final content = response.data as String;
               await CacheService.setApiCache(
