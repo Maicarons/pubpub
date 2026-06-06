@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:chinese_font_library/chinese_font_library.dart';
+import 'package:tdesign_flutter/tdesign_flutter.dart';
 import 'controllers/layout_controller.dart';
 import 'controllers/search_controller.dart';
 import 'controllers/favorites_controller.dart';
@@ -22,30 +23,30 @@ class PubPubApp extends StatelessWidget {
     Get.put(AppSearchController());
     Get.put(FavoritesController());
 
+    // TDesign 主题（内置亮色 + 暗色）
+    final tdTheme = TDThemeData.defaultData();
+    var lightTheme = tdTheme.systemThemeDataLight!;
+    var darkTheme = tdTheme.systemThemeDataDark!;
+
+    // Web 端不支持 chinese_font_library（文件系统访问），跳过字体加载
+    if (!kIsWeb) {
+      lightTheme = lightTheme.useSystemChineseFont(Brightness.light);
+      darkTheme = darkTheme.useSystemChineseFont(Brightness.dark);
+    }
+
     return Obx(() {
-      final seedColor = settingsCtrl.primaryColor;
-
-      // Web 端不支持 chinese_font_library（文件系统访问），跳过字体加载
-      final lightTheme = ThemeData(
-        colorSchemeSeed: seedColor,
-        useMaterial3: true,
-        brightness: Brightness.light,
-      );
-      final darkTheme = ThemeData(
-        colorSchemeSeed: seedColor,
-        useMaterial3: true,
-        brightness: Brightness.dark,
-      );
-
-      return GetMaterialApp(
+      final isDark = settingsCtrl.themeMode.value == ThemeMode.dark;
+      return TDTheme(
+        data: tdTheme,
+        systemData: isDark ? darkTheme : lightTheme,
+        child: GetMaterialApp(
         title: 'PubPub',
         debugShowCheckedModeBanner: false,
-        theme: kIsWeb ? lightTheme : lightTheme.useSystemChineseFont(Brightness.light),
-        darkTheme: kIsWeb ? darkTheme : darkTheme.useSystemChineseFont(Brightness.dark),
+        theme: lightTheme,
+        darkTheme: darkTheme,
         themeMode: settingsCtrl.themeMode.value,
         locale: settingsCtrl.locale.value,
         localeResolutionCallback: (locale, supportedLocales) {
-          // 优先使用用户设置的语言
           for (final supported in supportedLocales) {
             if (supported.languageCode == settingsCtrl.locale.value.languageCode) {
               return supported;
@@ -83,6 +84,7 @@ class PubPubApp extends StatelessWidget {
           Locale('zh'),
         ],
         home: const _ResponsiveRoot(),
+      ),
       );
     });
   }
