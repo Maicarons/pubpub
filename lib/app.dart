@@ -45,14 +45,15 @@ class _PubPubAppState extends State<PubPubApp> {
 
     // 主题未加载时使用默认主题
     final tdTheme = _tdTheme ?? TDThemeData.defaultData();
+    final darkTdTheme = tdTheme.dark ?? tdTheme;
 
     return Obx(() {
       final isDark = settingsCtrl.themeMode.value == ThemeMode.dark;
-      final currentTdTheme = isDark ? (tdTheme.dark ?? tdTheme) : tdTheme;
+      final currentTdTheme = isDark ? darkTdTheme : tdTheme;
 
       // 生成 Flutter ThemeData
-      var lightTheme = tdTheme.systemThemeDataLight!;
-      var darkTheme = (tdTheme.dark ?? tdTheme).systemThemeDataDark!;
+      var lightTheme = tdTheme.systemThemeDataLight ?? ThemeData();
+      var darkTheme = darkTdTheme.systemThemeDataDark ?? ThemeData();
 
       // Web 端不支持 chinese_font_library（文件系统访问），跳过字体加载
       if (!kIsWeb) {
