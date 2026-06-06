@@ -12,9 +12,6 @@ class ApiService {
   static const String _tag = 'ApiService';
   static Dio? _dio;
 
-  /// CORS 代理地址（Web 端使用，将请求通过代理转发以绕过 CORS 限制）
-  static const String _corsProxy = 'https://corsproxy.io/?';
-
   /// 获取 Dio 实例
   static Dio getDio() {
     if (_dio == null) {
@@ -32,10 +29,29 @@ class ApiService {
   /// 获取当前源地址
   static String get baseUrl => SettingsService.getSource();
 
-  /// Web 端通过 CORS 代理包装 URL
-  static String _proxyUrl(String url) {
-    if (kIsWeb) return '$_corsProxy${Uri.encodeComponent(url)}';
+  /// Web 端通过 Netlify 反向代理路径转发请求（避免 CORS）
+  static String _proxyPubUrl(String url) {
+    if (kIsWeb) {
+      // https://pub.dev/api/packages/dio → /api/pubdev/api/packages/dio
+      final uri = Uri.parse(url);
+      return '/api/pubdev${uri.path}${uri.hasQuery ? '?${uri.query}' : ''}';
+    }
     return url;
+  }
+
+  /// Web 端通过 Netlify 代理获取 GitHub Raw 内容
+  static String _proxyGithubRawUrl(String host, String path) {
+    if (kIsWeb) {
+      if (host == 'raw.githubusercontent.com') {
+        return '/api/ghraw/$path';
+      }
+      if (host == 'raw.gitmirror.com') {
+        return '/api/ghraw-mirror/$path';
+      }
+      // 其他镜像源直接访问（可能有 CORS）
+      return 'https://$host/$path';
+    }
+    return 'https://$host/$path';
   }
 
   /// 搜索包
@@ -48,7 +64,7 @@ class ApiService {
 
     try {
       final response = await getDio().get(
-        _proxyUrl(url),
+        _proxyPubUrl(url),
         options: Options(extra: {'cacheKey': cacheKey}),
       );
       return PackageSearchResult.fromJson(
@@ -72,7 +88,7 @@ class ApiService {
 
     try {
       final response = await getDio().get(
-        _proxyUrl(url),
+        _proxyPubUrl(url),
         options: Options(extra: {'cacheKey': cacheKey}),
       );
       return PackageDetail.fromJson(
@@ -123,8 +139,8 @@ class ApiService {
 
         for (final host in hosts) {
           try {
-            final url = 'https://$host/$rawPath';
-            final response = await getDio().get(_proxyUrl(url));
+            final url = _proxyGithubRawUrl(host, rawPath);
+            final response = await getDio().get(url);
             if (response.statusCode == 200) {
               final content = response.data as String;
               await CacheService.setApiCache(
