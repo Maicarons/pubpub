@@ -4,10 +4,11 @@ set -e
 # 安装 Flutter SDK
 FLUTTER_CHANNEL="stable"
 FLUTTER_VERSION="${FLUTTER_VERSION:-3.41.9}"
+FLUTTER_HOME="$HOME/flutter"
 
 echo "==> Installing Flutter $FLUTTER_VERSION ..."
-git clone --depth 1 --branch $FLUTTER_VERSION https://github.com/flutter/flutter.git /opt/flutter
-export PATH="/opt/flutter/bin:$PATH"
+git clone --depth 1 --branch $FLUTTER_VERSION https://github.com/flutter/flutter.git "$FLUTTER_HOME"
+export PATH="$FLUTTER_HOME/bin:$PATH"
 
 # 配置 Flutter
 flutter config --no-analytics
