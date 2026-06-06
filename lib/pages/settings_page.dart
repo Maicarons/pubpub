@@ -122,28 +122,28 @@ class SettingsPage extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        _buildSection(
+        _buildSection(context, 
           title: context.l10n.pubMirror,
           children: [
             Obx(() => _buildPubSourceDropdown(context, settingsCtrl)),
           ],
         ),
         const SizedBox(height: 16),
-        _buildSection(
+        _buildSection(context, 
           title: context.l10n.githubRawMirror,
           children: [
             Obx(() => _buildGithubMirrorDropdown(context, settingsCtrl)),
           ],
         ),
         const SizedBox(height: 16),
-        _buildSection(
+        _buildSection(context, 
           title: context.l10n.autoTranslate,
           children: [
             _buildTranslationSettings(context, settingsCtrl),
           ],
         ),
         const SizedBox(height: 16),
-        _buildSection(
+        _buildSection(context, 
           title: context.l10n.appearance,
           children: [
             _buildThemeTile(context, settingsCtrl),
@@ -154,14 +154,14 @@ class SettingsPage extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        _buildSection(
+        _buildSection(context, 
           title: context.l10n.data,
           children: [
             _buildCacheTile(context, settingsCtrl),
           ],
         ),
         const SizedBox(height: 16),
-        _buildSection(
+        _buildSection(context, 
           title: context.l10n.about,
           children: [
             ListTile(
@@ -177,10 +177,11 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSection({
+  Widget _buildSection(BuildContext context, {
     required String title,
     required List<Widget> children,
   }) {
+    final tdTheme = TDTheme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -191,7 +192,7 @@ class SettingsPage extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: Colors.grey[600],
+              color: tdTheme.textColorSecondary,
             ),
           ),
         ),
@@ -203,6 +204,7 @@ class SettingsPage extends StatelessWidget {
   // ==================== Pub 镜像源下拉 ====================
 
   Widget _buildPubSourceDropdown(BuildContext context, SettingsController ctrl) {
+    final tdTheme = TDTheme.of(context);
     final currentUrl = ctrl.currentSource.value;
 
     // 合并内置和自定义源
@@ -254,7 +256,7 @@ class SettingsPage extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: source.supportsSearch
                               ? Colors.green.withValues(alpha: 0.1)
-                              : Colors.orange.withValues(alpha: 0.1),
+                              : tdTheme.warningNormalColor.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
@@ -263,7 +265,7 @@ class SettingsPage extends StatelessWidget {
                               : context.l10n.mirrorSearchNotSupported,
                           style: TextStyle(
                             fontSize: 10,
-                            color: source.supportsSearch ? Colors.green : Colors.orange,
+                            color: source.supportsSearch ? Colors.green : tdTheme.warningNormalColor,
                           ),
                         ),
                       ),
@@ -282,7 +284,7 @@ class SettingsPage extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () => _showDeleteMirrorDialog(context, ctrl, url, isPub: true),
-                        child: Icon(TDIcons.close, size: 16, color: Colors.grey[400]),
+                        child: Icon(TDIcons.close, size: 16, color: tdTheme.textColorPlaceholder),
                       ),
                     ],
                   ),
@@ -298,7 +300,7 @@ class SettingsPage extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             context.l10n.pubMirrorHint,
-            style: TextStyle(fontSize: 12, color: Colors.grey[500]),
+            style: TextStyle(fontSize: 12, color: tdTheme.textColorPlaceholder),
           ),
         ],
       ),
@@ -308,6 +310,7 @@ class SettingsPage extends StatelessWidget {
   // ==================== GitHub 镜像源下拉 ====================
 
   Widget _buildGithubMirrorDropdown(BuildContext context, SettingsController ctrl) {
+    final tdTheme = TDTheme.of(context);
     final currentMirror = ctrl.githubRawMirror.value;
     final allUrls = [
       ..._githubRawMirrors,
@@ -361,7 +364,7 @@ class SettingsPage extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () => _showDeleteMirrorDialog(context, ctrl, url, isPub: false),
-                        child: Icon(TDIcons.close, size: 16, color: Colors.grey[400]),
+                        child: Icon(TDIcons.close, size: 16, color: tdTheme.textColorPlaceholder),
                       ),
                     ],
                   ),
@@ -377,7 +380,7 @@ class SettingsPage extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             context.l10n.githubMirrorHint,
-            style: TextStyle(fontSize: 12, color: Colors.grey[500]),
+            style: TextStyle(fontSize: 12, color: tdTheme.textColorPlaceholder),
           ),
         ],
       ),
@@ -644,6 +647,7 @@ class SettingsPage extends StatelessWidget {
 
   Widget _buildTranslationSettings(
       BuildContext context, SettingsController ctrl) {
+    final tdTheme = TDTheme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Column(
@@ -733,7 +737,7 @@ class SettingsPage extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             context.l10n.translateApiHint,
-            style: TextStyle(fontSize: 12, color: Colors.grey[500]),
+            style: TextStyle(fontSize: 12, color: tdTheme.textColorPlaceholder),
           ),
         ],
       ),

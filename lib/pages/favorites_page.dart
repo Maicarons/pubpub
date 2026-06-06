@@ -61,6 +61,7 @@ class FavoritesPage extends StatelessWidget {
     FavoritesController ctrl, {
     bool isMobile = false,
   }) {
+    final tdTheme = TDTheme.of(context);
     final folderNames = ctrl.folders.keys.toList();
 
     return Column(
@@ -75,7 +76,7 @@ class FavoritesPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: Colors.grey[700],
+                  color: tdTheme.textColorSecondary,
                 ),
               ),
               const Spacer(),
@@ -94,7 +95,7 @@ class FavoritesPage extends StatelessWidget {
               ? Center(
                   child: Text(
                     context.l10n.favoritesFolders,
-                    style: TextStyle(color: Colors.grey[400]),
+                    style: TextStyle(color: tdTheme.textColorPlaceholder),
                   ),
                 )
               : ListView.builder(
@@ -112,7 +113,7 @@ class FavoritesPage extends StatelessWidget {
                         TDIcons.folder,
                         color: isSelected
                             ? Theme.of(context).primaryColor
-                            : Colors.grey[500],
+                            : tdTheme.textColorPlaceholder,
                       ),
                       title: Text(
                         name,
@@ -128,13 +129,13 @@ class FavoritesPage extends StatelessWidget {
                             '$count',
                             style: TextStyle(
                               fontSize: 12,
-                              color: Colors.grey[500],
+                              color: tdTheme.textColorPlaceholder,
                             ),
                           ),
                           if (name != FavoritesController.defaultFolderName)
                             IconButton(
                               icon: Icon(TDIcons.more,
-                                  size: 16, color: Colors.grey[400]),
+                                  size: 16, color: tdTheme.textColorPlaceholder),
                               onPressed: () => _showFolderMenu(
                                   context, ctrl, name),
                             ),
@@ -161,6 +162,7 @@ class FavoritesPage extends StatelessWidget {
     BuildContext context,
     FavoritesController ctrl,
   ) {
+    final tdTheme = TDTheme.of(context);
     final packages = ctrl.currentFavorites;
     final folderName = ctrl.currentFolder.value;
 
@@ -169,11 +171,11 @@ class FavoritesPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(TDIcons.heart, size: 48, color: Colors.grey[300]),
+            Icon(TDIcons.heart, size: 48, color: tdTheme.textColorPlaceholder),
             const SizedBox(height: 12),
             Text(
               '"$folderName" 暂无收藏',
-              style: TextStyle(color: Colors.grey[500]),
+              style: TextStyle(color: tdTheme.textColorPlaceholder),
             ),
           ],
         ),
@@ -433,6 +435,7 @@ class _MobilePackageListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tdTheme = TDTheme.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(folderName)),
       body: Obx(() {
@@ -443,11 +446,11 @@ class _MobilePackageListPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(TDIcons.heart, size: 48, color: Colors.grey[300]),
+                Icon(TDIcons.heart, size: 48, color: tdTheme.textColorPlaceholder),
                 const SizedBox(height: 12),
                 Text(
                   context.l10n.emptyFolder(folderName),
-                  style: TextStyle(color: Colors.grey[500]),
+                  style: TextStyle(color: tdTheme.textColorPlaceholder),
                 ),
               ],
             ),

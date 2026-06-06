@@ -24,8 +24,7 @@ class _PackageCardState extends State<PackageCard> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
+    final tdTheme = TDTheme.of(context);
 
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
@@ -37,9 +36,6 @@ class _PackageCardState extends State<PackageCard> {
             : Matrix4.identity(),
         child: Card(
           elevation: _isHovered ? 4 : 1,
-          shadowColor: _isHovered
-              ? theme.primaryColor.withValues(alpha: 0.3)
-              : Colors.black26,
           child: InkWell(
             onTap: widget.onTap,
             borderRadius: BorderRadius.circular(12),
@@ -49,13 +45,11 @@ class _PackageCardState extends State<PackageCard> {
                 children: [
                   // 包图标
                   CircleAvatar(
-                    backgroundColor: isDark
-                        ? theme.primaryColor.withValues(alpha: 0.2)
-                        : theme.primaryColor.withValues(alpha: 0.1),
+                    backgroundColor: tdTheme.brandLightColor,
                     child: Text(
                       widget.item.package.substring(0, 1).toUpperCase(),
                       style: TextStyle(
-                        color: theme.colorScheme.primary,
+                        color: tdTheme.brandNormalColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -87,7 +81,7 @@ class _PackageCardState extends State<PackageCard> {
                       ),
                       child: Icon(
                         isFav ? TDIcons.heart_filled : TDIcons.heart,
-                        color: isFav ? Colors.red : Colors.grey[400],
+                        color: isFav ? Colors.red : tdTheme.textColorPlaceholder,
                         size: 20,
                       ),
                     );

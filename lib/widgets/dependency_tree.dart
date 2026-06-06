@@ -15,7 +15,7 @@ class DependencyTree extends StatelessWidget {
     if (dependencies.isEmpty) {
       return Text(
         context.l10n.noDependencies,
-        style: const TextStyle(color: Colors.grey),
+        style: TextStyle(color: TDTheme.of(context).textColorPlaceholder),
       );
     }
 

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tdesign_flutter/tdesign_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../common/logger.dart';
 
@@ -71,11 +72,12 @@ class UpdateService {
 
   /// 显示更新对话框
   static void showUpdateDialog(UpdateInfo info) {
+    final tdTheme = TDThemeData.defaultData();
     Get.dialog(
       AlertDialog(
         title: Row(
           children: [
-            const Icon(Icons.system_update, color: Colors.blue),
+            Icon(Icons.system_update, color: tdTheme.textColorLink),
             const SizedBox(width: 8),
             const Text('发现新版本'),
           ],
@@ -95,7 +97,7 @@ class UpdateService {
               const SizedBox(height: 4),
               Text(
                 '发布于 ${info.publishedAt.split('T').first}',
-                style: TextStyle(fontSize: 12, color: Colors.grey[500]),
+                style: TextStyle(fontSize: 12, color: tdTheme.textColorPlaceholder),
               ),
               if (info.releaseNotes.isNotEmpty) ...[
                 const SizedBox(height: 16),
@@ -107,7 +109,7 @@ class UpdateService {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Colors.grey[100],
+                    color: tdTheme.bgColorSecondaryContainer,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(

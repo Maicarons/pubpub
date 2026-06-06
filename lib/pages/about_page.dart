@@ -10,7 +10,6 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final tdTheme = TDTheme.of(context);
 
     return Scaffold(
@@ -32,13 +31,13 @@ class AboutPage extends StatelessWidget {
                       width: 80,
                       height: 80,
                       decoration: BoxDecoration(
-                        color: theme.colorScheme.primary,
+                        color: tdTheme.brandNormalColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         TDIcons.logo_github,
                         size: 40,
-                        color: Colors.white,
+                        color: tdTheme.textColorAnti,
                       ),
                     ),
                   ),
