@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:chinese_font_library/chinese_font_library.dart';
@@ -11,26 +12,65 @@ import 'controllers/settings_controller.dart';
 import 'l10n/app_localizations.dart';
 import 'layouts/adaptive_builder.dart';
 
-/// 根据用户选择的主色生成 TDesign 品牌色表
-Map<String, Color> _generateBrandColors(Color primary) {
-  final hsl = HSLColor.fromColor(primary);
-  return {
-    'brandColor1': hsl.withLightness(0.95).toColor(),
-    'brandColor2': hsl.withLightness(0.90).toColor(),
-    'brandColor3': hsl.withLightness(0.80).toColor(),
-    'brandColor4': hsl.withLightness(0.70).toColor(),
-    'brandColor5': hsl.withLightness(0.60).toColor(),
-    'brandColor6': hsl.withLightness(0.50).toColor(),
-    'brandColor7': primary,
-    'brandColor8': hsl.withLightness(0.35).toColor(),
-    'brandColor9': hsl.withLightness(0.25).toColor(),
-    'brandColor10': hsl.withLightness(0.15).toColor(),
-  };
-}
+/// TDesign 主题名称映射
+const Map<String, String> _tdThemeNames = {
+  'blue': 'blue',
+  'indigo': 'indigo',
+  'purple': 'purple',
+  'deepPurple': 'deepPurple',
+  'teal': 'teal',
+  'green': 'green',
+  'orange': 'orange',
+  'red': 'red',
+  'pink': 'pink',
+  'brown': 'brown',
+};
 
 /// 应用入口 Widget
-class PubPubApp extends StatelessWidget {
+class PubPubApp extends StatefulWidget {
   const PubPubApp({super.key});
+
+  @override
+  State<PubPubApp> createState() => _PubPubAppState();
+}
+
+class _PubPubAppState extends State<PubPubApp> {
+  String? _themeJson;
+  final Map<String, TDThemeData> _themeCache = {};
+
+  @override
+  void initState() {
+    super.initState();
+    _loadThemeJson();
+  }
+
+  Future<void> _loadThemeJson() async {
+    final json = await rootBundle.loadString('assets/td_theme.json');
+    setState(() => _themeJson = json);
+  }
+
+  TDThemeData _getThemeData(String colorKey, {bool isDark = false}) {
+    final themeName = _tdThemeNames[colorKey] ?? 'blue';
+    final darkName = '${themeName}Dark';
+    final cacheKey = '${themeName}_$isDark';
+
+    if (_themeCache.containsKey(cacheKey)) return _themeCache[cacheKey]!;
+
+    if (_themeJson != null) {
+      final tdTheme = TDThemeData.fromJson(
+        themeName,
+        _themeJson!,
+        darkName: darkName,
+        recoverDefault: false,
+      );
+      if (tdTheme != null) {
+        _themeCache[cacheKey] = tdTheme;
+        return tdTheme;
+      }
+    }
+
+    return TDThemeData.defaultData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,28 +80,17 @@ class PubPubApp extends StatelessWidget {
     Get.put(AppSearchController());
     Get.put(FavoritesController());
 
-    // TDesign 默认主题
-    final defaultTdTheme = TDThemeData.defaultData();
-
     return Obx(() {
       final isDark = settingsCtrl.themeMode.value == ThemeMode.dark;
-      final seedColor = settingsCtrl.primaryColor;
+      final colorKey = settingsCtrl.colorSchemeKey.value;
 
-      // 根据用户选择的主色自定义 TDesign 品牌色
-      final brandColors = _generateBrandColors(seedColor);
-      final customTdTheme = defaultTdTheme.copyWith(
-        name: 'custom',
-        colorMap: brandColors,
-      ) as TDThemeData;
-      customTdTheme.light = customTdTheme;
-      customTdTheme.dark = defaultTdTheme.dark;
-
-      // 获取当前模式的 TDesign 主题
-      final currentTdTheme = isDark ? customTdTheme.dark ?? customTdTheme : customTdTheme;
+      // 获取 TDesign 主题
+      final tdTheme = _getThemeData(colorKey);
+      final currentTdTheme = isDark ? (tdTheme.dark ?? tdTheme) : tdTheme;
 
       // 生成 Flutter ThemeData
-      var lightTheme = customTdTheme.systemThemeDataLight!;
-      var darkTheme = (customTdTheme.dark ?? customTdTheme).systemThemeDataDark!;
+      var lightTheme = tdTheme.systemThemeDataLight!;
+      var darkTheme = (tdTheme.dark ?? tdTheme).systemThemeDataDark!;
 
       // Web 端不支持 chinese_font_library（文件系统访问），跳过字体加载
       if (!kIsWeb) {
