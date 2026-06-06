@@ -2,6 +2,13 @@
 
 本项目遵循 [Semantic Versioning](https://semver.org/lang/zh-CN/)。
 
+## [0.2.2] - 2026-06-06
+
+### 修复
+
+- 🐛 修复 Web 端 CORS 跨域导致无法获取数据的问题
+- ⚡ 添加 dio_web_adapter 支持 Web 端 HTTP 请求
+
 ## [0.2.1] - 2026-06-06
 
 ### 新增
