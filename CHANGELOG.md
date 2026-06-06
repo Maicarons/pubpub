@@ -2,6 +2,20 @@
 
 本项目遵循 [Semantic Versioning](https://semver.org/lang/zh-CN/)。
 
+## [0.2.1] - 2026-06-06
+
+### 新增
+
+- 🔧 Pub 镜像源支持自定义添加/删除
+- 🔧 GitHub Raw 镜像源支持自定义添加/删除
+- 🌐 新增 Pub 镜像源：南京工业 NJTech、教育网 CERNET
+- 🌐 新增 9 个 GitHub Raw 镜像源
+- 🔍 镜像源搜索支持检测：不支持搜索时显示友好提示
+
+### 优化
+
+- 📖 分离中英文 README（README.md / README.zh.md）
+
 ## [0.2.0] - 2026-06-06
 
 ### 新增
