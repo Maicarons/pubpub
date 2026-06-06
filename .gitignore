@@ -78,3 +78,6 @@ app.*.map.json
 # Environment
 .env
 .env.local
+
+# Playwright MCP
+.playwright-mcp/
