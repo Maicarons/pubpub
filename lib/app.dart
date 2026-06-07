@@ -1,9 +1,6 @@
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 import 'controllers/layout_controller.dart';
 import 'controllers/search_controller.dart';
@@ -11,6 +8,7 @@ import 'controllers/favorites_controller.dart';
 import 'controllers/settings_controller.dart';
 import 'l10n/app_localizations.dart';
 import 'layouts/adaptive_builder.dart';
+import 'themes/app_theme.dart';
 
 /// 应用入口 Widget
 class PubPubApp extends StatefulWidget {
@@ -20,18 +18,35 @@ class PubPubApp extends StatefulWidget {
   State<PubPubApp> createState() => _PubPubAppState();
 }
 
-class _PubPubAppState extends State<PubPubApp> {
+class _PubPubAppState extends State<PubPubApp> with WidgetsBindingObserver {
   TDThemeData? _tdTheme;
+
+  /// 跟踪系统亮度变化，用于 system 模式下正确切换 TDTheme
+  final _platformBrightness = Brightness.light.obs;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    _platformBrightness.value =
+        WidgetsBinding.instance.platformDispatcher.platformBrightness;
     _loadTheme();
   }
 
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    _platformBrightness.value =
+        WidgetsBinding.instance.platformDispatcher.platformBrightness;
+  }
+
   Future<void> _loadTheme() async {
-    final json = await rootBundle.loadString('assets/td_theme.json');
-    final theme = TDThemeData.fromJson('default', json, darkName: 'defaultDark');
+    final theme = await AppTheme.loadTDTheme();
     setState(() => _tdTheme = theme);
   }
 
@@ -44,72 +59,72 @@ class _PubPubAppState extends State<PubPubApp> {
     Get.put(FavoritesController());
 
     // 主题未加载时使用默认主题
-    final tdTheme = _tdTheme ?? TDThemeData.defaultData();
-    final darkTdTheme = tdTheme.dark ?? tdTheme;
+    final baseTheme = _tdTheme ?? TDThemeData.defaultData();
 
     return Obx(() {
-      final isDark = settingsCtrl.themeMode.value == ThemeMode.dark;
+      final isDark =
+          AppTheme.isDarkMode(settingsCtrl.themeMode.value, _platformBrightness.value);
+
+      // 应用用户选择的品牌色
+      final brandColor = settingsCtrl.primaryColor;
+      final tdTheme = AppTheme.applyBrandColor(baseTheme, brandColor);
+      final darkBase = baseTheme.dark ?? baseTheme;
+      final darkTdTheme = AppTheme.applyBrandColor(darkBase, brandColor);
+
       final currentTdTheme = isDark ? darkTdTheme : tdTheme;
-
-      // 生成 Flutter ThemeData
-      var lightTheme = tdTheme.systemThemeDataLight ?? ThemeData();
-      var darkTheme = darkTdTheme.systemThemeDataDark ?? ThemeData();
-
-      // Web 端不支持 chinese_font_library（文件系统访问），跳过字体加载
-      if (!kIsWeb) {
-        lightTheme = lightTheme.useSystemChineseFont(Brightness.light);
-        darkTheme = darkTheme.useSystemChineseFont(Brightness.dark);
-      }
+      final lightTheme = AppTheme.buildLightTheme(tdTheme);
+      final darkTheme = AppTheme.buildDarkTheme(darkTdTheme);
 
       return TDTheme(
         data: currentTdTheme,
         systemData: isDark ? darkTheme : lightTheme,
         child: GetMaterialApp(
-        title: 'PubPub',
-        debugShowCheckedModeBanner: false,
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        themeMode: settingsCtrl.themeMode.value,
-        locale: settingsCtrl.locale.value,
-        localeResolutionCallback: (locale, supportedLocales) {
-          for (final supported in supportedLocales) {
-            if (supported.languageCode == settingsCtrl.locale.value.languageCode) {
-              return supported;
+          title: 'PubPub',
+          debugShowCheckedModeBanner: false,
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: settingsCtrl.themeMode.value,
+          locale: settingsCtrl.locale.value,
+          localeResolutionCallback: (locale, supportedLocales) {
+            for (final supported in supportedLocales) {
+              if (supported.languageCode ==
+                  settingsCtrl.locale.value.languageCode) {
+                return supported;
+              }
             }
-          }
-          return supportedLocales.first;
-        },
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('ar'),
-          Locale('bn'),
-          Locale('de'),
-          Locale('en'),
-          Locale('es'),
-          Locale('fa'),
-          Locale('fr'),
-          Locale('hi'),
-          Locale('it'),
-          Locale('ja'),
-          Locale('jv'),
-          Locale('ko'),
-          Locale('mr'),
-          Locale('pa'),
-          Locale('pt'),
-          Locale('ru'),
-          Locale('sw'),
-          Locale('te'),
-          Locale('tr'),
-          Locale('ur'),
-          Locale('zh'),
-        ],
-        home: const _ResponsiveRoot(),
-      ),
+            return supportedLocales.first;
+          },
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('ar'),
+            Locale('bn'),
+            Locale('de'),
+            Locale('en'),
+            Locale('es'),
+            Locale('fa'),
+            Locale('fr'),
+            Locale('hi'),
+            Locale('it'),
+            Locale('ja'),
+            Locale('jv'),
+            Locale('ko'),
+            Locale('mr'),
+            Locale('pa'),
+            Locale('pt'),
+            Locale('ru'),
+            Locale('sw'),
+            Locale('te'),
+            Locale('tr'),
+            Locale('ur'),
+            Locale('zh'),
+          ],
+          home: const _ResponsiveRoot(),
+        ),
       );
     });
   }
@@ -131,10 +146,8 @@ class _ResponsiveRootState extends State<_ResponsiveRoot> {
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
-        // 仅当宽度变化时才更新，避免不必要的重建
         if (width != _lastWidth) {
           _lastWidth = width;
-          // 使用微任务延迟更新，避免在 build 阶段触发 setState
           Future.microtask(() {
             if (mounted) {
               final layoutCtrl = Get.find<LayoutController>();

@@ -2,6 +2,23 @@
 
 本项目遵循 [Semantic Versioning](https://semver.org/lang/zh-CN/)。
 
+## [0.2.5] - 2026-06-07
+
+### 修复
+
+- 🐛 修复"跟随系统"模式下暗色主题不生效：TDesign 组件始终显示亮色而 Material 跟随系统暗色
+- 🐛 添加 `WidgetsBindingObserver` 监听操作系统主题切换，实时响应亮度变化
+- 🐛 补全 Material 暗色主题：`scaffoldBackgroundColor`、`cardColor`、`dividerColor`、`textTheme`、`inputDecorationTheme`、`bottomNavigationBarTheme` 等
+- 🐛 补全 Material 亮色主题：确保与 TDesign 主题颜色一致
+- 🐛 修复搜索页输入框暗色模式下文字不可见
+- 🐛 修复搜索页回到顶部按钮始终使用亮色主题
+- 🐛 修复主题色选择功能无效：选择颜色后实际应用到 TDTheme
+
+### 优化
+
+- ⚡ 主题逻辑解耦：从 `app.dart` 提取至 `lib/themes/app_theme.dart`
+- ⚡ `AppTheme` 类统一管理主题加载、品牌色生成、Material ThemeData 构建
+
 ## [0.2.4] - 2026-06-07
 
 ### 修复

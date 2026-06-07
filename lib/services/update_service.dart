@@ -10,7 +10,7 @@ class UpdateService {
   static const String _tag = 'UpdateService';
   static const String _owner = 'Maicarons';
   static const String _repo = 'pubpub';
-  static const String currentVersion = '0.1.0';
+  static const String currentVersion = '0.2.5';
 
   /// 检查是否有新版本
   static Future<UpdateInfo?> checkForUpdate() async {

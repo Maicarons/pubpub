@@ -52,9 +52,11 @@ class _HomePageState extends State<HomePage> {
         Padding(
           padding: const EdgeInsets.all(16),
           child: TextField(
+            style: TextStyle(color: tdTheme.textColorPrimary),
             decoration: InputDecoration(
               hintText: context.l10n.searchHint,
-              prefixIcon: const Icon(TDIcons.search, size: 20),
+              hintStyle: TextStyle(color: tdTheme.textColorPlaceholder),
+              prefixIcon: Icon(TDIcons.search, size: 20, color: tdTheme.textColorSecondary),
               filled: true,
               fillColor: tdTheme.bgColorSecondaryContainer,
               border: OutlineInputBorder(
@@ -161,8 +163,8 @@ class _HomePageState extends State<HomePage> {
                     bottom: 16,
                     child: TDBackTop(
                       controller: _scrollController,
-                      theme: TDTheme.of(context).brandNormalColor == tdTheme.brandNormalColor
-                          ? TDBackTopTheme.light
+                      theme: Theme.of(context).brightness == Brightness.dark
+                          ? TDBackTopTheme.dark
                           : TDBackTopTheme.light,
                     ),
                   ),
