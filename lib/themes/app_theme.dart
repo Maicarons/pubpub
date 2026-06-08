@@ -65,9 +65,27 @@ class AppTheme {
     return theme.copyWithTDThemeData(theme.name, colorMap: newColorMap);
   }
 
+  /// 安全获取 systemThemeData，避免 TDThemeData.light 未初始化时的 LateError
+  static ThemeData _safeSystemThemeLight(TDThemeData td) {
+    try {
+      return td.systemThemeDataLight ?? ThemeData();
+    } catch (_) {
+      return ThemeData();
+    }
+  }
+
+  /// 安全获取暗色 systemThemeData
+  static ThemeData _safeSystemThemeDark(TDThemeData td) {
+    try {
+      return td.systemThemeDataDark ?? ThemeData.dark();
+    } catch (_) {
+      return ThemeData.dark();
+    }
+  }
+
   /// 构建完整的亮色 Material ThemeData
   static ThemeData buildLightTheme(TDThemeData td) {
-    final base = td.systemThemeDataLight ?? ThemeData();
+    final base = _safeSystemThemeLight(td);
     var theme = base.copyWith(
       scaffoldBackgroundColor: td.bgColorPage,
       cardColor: td.bgColorContainer,
@@ -103,7 +121,7 @@ class AppTheme {
 
   /// 构建完整的暗色 Material ThemeData
   static ThemeData buildDarkTheme(TDThemeData td) {
-    final base = td.systemThemeDataDark ?? ThemeData.dark();
+    final base = _safeSystemThemeDark(td);
     var theme = base.copyWith(
       scaffoldBackgroundColor: td.bgColorPage,
       cardColor: td.bgColorContainer,
