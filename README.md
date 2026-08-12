@@ -26,7 +26,7 @@
 - 💾 **Local Cache** — Hive cache + offline fallback, browse without network
 - 🌐 **Mirror Sources** — Switch between different Pub mirrors
 - 🎨 **Theme Support** — System / Light / Dark mode with 10 theme colors
-- 🌍 **Multi-language** — 22 languages supported, including RTL layout
+- 🌍 **Multi-language** — 21 languages supported, including RTL layout
 
 ## Supported Languages
 
@@ -49,7 +49,7 @@
 
 ```bash
 # Clone repository
-git clone https://github.com/your-username/pubpub.git
+git clone https://github.com/Maicarons/pubpub.git
 cd pubpub
 
 # Install dependencies
@@ -122,3 +122,17 @@ Apache 2.0 — See [LICENSE](LICENSE)
 - [Flutter](https://flutter.dev)
 - [pub.dev](https://pub.dev)
 - [TDesign Flutter](https://github.com/Tencent/tdesign-flutter)
+
+## Documentation
+
+The official documentation site is built with VitePress and deployed on GitHub Pages: https://maicarons.github.io/pubpub/
+
+Preview locally:
+
+```bash
+npm install
+npm run docs:dev
+```
+
+Documentation sources live in the `docs/` directory of this repository.
+

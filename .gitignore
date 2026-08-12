@@ -81,3 +81,8 @@ app.*.map.json
 
 # Playwright MCP
 .playwright-mcp/
+
+# VitePress / Node (docs site)
+node_modules/
+docs/.vitepress/dist/
+docs/.vitepress/cache/

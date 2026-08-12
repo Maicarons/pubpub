@@ -49,7 +49,7 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/your-username/pubpub.git
+git clone https://github.com/Maicarons/pubpub.git
 cd pubpub
 
 # 安装依赖
@@ -122,3 +122,17 @@ Apache 2.0 — 详见 [LICENSE](LICENSE)
 - [Flutter](https://flutter.dev)
 - [pub.dev](https://pub.dev)
 - [TDesign Flutter](https://github.com/Tencent/tdesign-flutter)
+
+## 文档站点
+
+官方文档站基于 VitePress 构建并部署在 GitHub Pages：https://maicarons.github.io/pubpub/
+
+本地预览文档：
+
+```bash
+npm install
+npm run docs:dev
+```
+
+文档源码位于仓库 `docs/` 目录。
+

@@ -12,7 +12,7 @@
 
 ```bash
 # 克隆
-git clone https://github.com/your-username/pubpub.git
+git clone https://github.com/Maicarons/pubpub.git
 cd pubpub
 
 # 依赖
