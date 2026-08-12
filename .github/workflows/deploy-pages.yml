@@ -51,7 +51,16 @@ jobs:
         run: npm run docs:build
 
       - name: 合并文档到 Web 产物
-        run: cp -r docs/.vitepress/dist build/web/docs
+        run: |
+          rm -rf build/web/docs
+          cp -r docs/.vitepress/dist build/web/docs
+          echo "--- verify docs merged into build/web/docs ---"
+          if [ -f build/web/docs/index.html ] && grep -q "VitePress" build/web/docs/index.html; then
+            echo "OK: docs/index.html present and contains VitePress markers"
+          else
+            echo "ERROR: docs were not merged correctly into build/web/docs" >&2
+            exit 1
+          fi
 
       - name: 上传 Pages 产物
         uses: actions/upload-pages-artifact@v3
