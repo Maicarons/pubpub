@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  base: '/pubpub/',
+  base: '/pubpub/docs/',
   title: 'PubPub',
   description: '跨平台 Pub 包浏览器 —— 搜索、浏览、收藏 Flutter/Dart 包',
   lastUpdated: true,

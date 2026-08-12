@@ -125,7 +125,7 @@ Apache 2.0 — 详见 [LICENSE](LICENSE)
 
 ## 文档站点
 
-官方文档站基于 VitePress 构建并部署在 GitHub Pages：https://maicarons.github.io/pubpub/
+官方文档站基于 VitePress 构建并部署在 GitHub Pages：https://maicarons.github.io/pubpub/docs/
 
 本地预览文档：
 
