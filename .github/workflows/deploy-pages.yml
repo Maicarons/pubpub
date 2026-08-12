@@ -3,6 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+    paths:
+      - 'docs/**'
+      - 'package.json'
+      - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
 
 permissions:
@@ -19,24 +23,10 @@ env:
 
 jobs:
   build:
-    name: 构建 Web 与文档
+    name: 构建文档 (VitePress)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.41.x'
-          channel: stable
-
-      - name: 安装依赖 (Flutter)
-        run: flutter pub get
-
-      - name: 生成代码
-        run: flutter pub run build_runner build
-
-      - name: 构建 Web
-        run: flutter build web --release --base-href "/pubpub/"
 
       - name: 设置 Node.js
         uses: actions/setup-node@v4
@@ -47,25 +37,13 @@ jobs:
       - name: 安装文档依赖
         run: npm ci
 
-      - name: 构建文档 (VitePress)
+      - name: 构建文档
         run: npm run docs:build
-
-      - name: 合并文档到 Web 产物
-        run: |
-          rm -rf build/web/docs
-          cp -r docs/.vitepress/dist build/web/docs
-          echo "--- verify docs merged into build/web/docs ---"
-          if [ -f build/web/docs/index.html ] && grep -q "VitePress" build/web/docs/index.html; then
-            echo "OK: docs/index.html present and contains VitePress markers"
-          else
-            echo "ERROR: docs were not merged correctly into build/web/docs" >&2
-            exit 1
-          fi
 
       - name: 上传 Pages 产物
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build/web
+          path: docs/.vitepress/dist
 
   deploy:
     name: 部署到 GitHub Pages

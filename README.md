@@ -125,7 +125,7 @@ Apache 2.0 — See [LICENSE](LICENSE)
 
 ## Documentation
 
-The official documentation site is built with VitePress and deployed on GitHub Pages: https://maicarons.github.io/pubpub/docs/
+The official documentation site is built with VitePress and deployed on GitHub Pages: https://maicarons.github.io/pubpub/
 
 Preview locally:
 
