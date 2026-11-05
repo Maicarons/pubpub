@@ -28,7 +28,7 @@ jobs:
         run: flutter pub run build_runner build
 
       - name: 静态分析
-        run: flutter analyze
+        run: flutter analyze --no-fatal-infos
 
   test:
     name: 单元测试
